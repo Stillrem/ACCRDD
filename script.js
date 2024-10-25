@@ -64,6 +64,13 @@
                         declinedCount++;
                     }
 
+                    updateDisplayCounts(); // ÐÐ±Ð½Ð¾Ð²Ð»ÑÐµÐ¼ Ð¾ÑÐ¾Ð±ÑÐ°Ð¶ÐµÐ½Ð¸Ðµ Ð¿Ð¾ÑÐ»Ðµ Ð¸Ð·Ð¼ÐµÐ½ÐµÐ½Ð¸Ñ ÑÐ²ÐµÑÐ°
+                    localStorage.setItem('cellColors', JSON.stringify(cellColors));
+                    updateAcceptanceRate();
+                }
+            }
+        }
+                        
         function toggleCellColor(cellIndex) {
             if (!Locked) {
                 const currentColor = cellColors[cellIndex];
@@ -81,7 +88,6 @@
                         declinedCount++;
                     }
 
-                        
                     updateDisplayCounts(); // ÐÐ±Ð½Ð¾Ð²Ð»ÑÐµÐ¼ Ð¾ÑÐ¾Ð±ÑÐ°Ð¶ÐµÐ½Ð¸Ðµ Ð¿Ð¾ÑÐ»Ðµ Ð¸Ð·Ð¼ÐµÐ½ÐµÐ½Ð¸Ñ ÑÐ²ÐµÑÐ°
                     localStorage.setItem('cellColors', JSON.stringify(cellColors));
                     updateAcceptanceRate();
