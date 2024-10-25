@@ -103,3 +103,43 @@
             color: #fff;
             opacity: 0.5;
         }
+
+.cell.green {
+    background-color: rgba(76, 175, 80, 0.8); /* Зеленый цвет для нажатых ячеек */
+    animation: pulse 1s infinite alternate; /* Анимация для зеленых ячеек */
+}
+
+.cell.red {
+    background-color: rgba(244, 67, 54, 0.8); /* Красный цвет для не нажатых ячеек */
+}
+
+@keyframes pulse {
+    from {
+        transform: scale(1);
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.5), inset 0 0 15px rgba(255, 255, 255, 0.2);
+    }
+    to {
+        transform: scale(1.1);
+        box-shadow: 0 0 10px rgba(76, 175, 80, 0.5), inset 0 0 20px rgba(255, 255, 255, 0.3);
+    }
+}
+
+.intro {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 2em;
+    color: #ffffff;
+    opacity: 0;
+    animation: fadeIn 3s forwards;
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
