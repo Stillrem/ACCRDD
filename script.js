@@ -64,6 +64,24 @@
                         declinedCount++;
                     }
 
+        function toggleCellColor(cellIndex) {
+            if (!Locked) {
+                const currentColor = cellColors[cellIndex];
+                const newColor = currentColor === '#00FF00' ? '#FF0000' : '#00FF00';
+
+                if (currentColor !== newColor) {
+                    cellColors[cellIndex] = newColor;
+                    document.getElementById(`cell-${cellIndex}`).style.backgroundColor = newColor;
+
+                    if (newColor === '#00FF00') {
+                        acceptedCount++;
+                        declinedCount--;
+                    } else {
+                        acceptedCount--;
+                        declinedCount++;
+                    }
+
+                        
                     updateDisplayCounts(); // ÐÐ±Ð½Ð¾Ð²Ð»ÑÐµÐ¼ Ð¾ÑÐ¾Ð±ÑÐ°Ð¶ÐµÐ½Ð¸Ðµ Ð¿Ð¾ÑÐ»Ðµ Ð¸Ð·Ð¼ÐµÐ½ÐµÐ½Ð¸Ñ ÑÐ²ÐµÑÐ°
                     localStorage.setItem('cellColors', JSON.stringify(cellColors));
                     updateAcceptanceRate();
