@@ -1,49 +1,94 @@
 body {
-    font-family: Arial, sans-serif;
-    background-color: #FFEB3B;
-    color: #5D4037;
+    font-family: 'San Francisco', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
-    margin: 0;
     height: 100vh;
+    margin: 0;
+    background-color: #121212;
+    padding: 20px 0;
 }
 
-.container {
-    text-align: center;
-    max-width: 600px;
+.display-container {
+    display: flex;
+    justify-content: space-between;
+    width: 380px;
+    margin-bottom: 20px;
+    gap: 10px
+}
+
+.calculator {
+    width: 350px;
+    background-color: rgba(30, 30, 30, 0.8);
     padding: 20px;
-    background-color: #FFF8E1;
-    border-radius: 8px;
+    border-radius: 20px;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.5), inset 0 0 10px rgba(255, 255, 255, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    backdrop-filter: blur(10px);
 }
 
-input {
-    margin: 5px;
-}
-
-.dots-container {
-    display: grid;
-    grid-template-columns: repeat(10, 20px);
-    gap: 5px;
-    justify-content: center;
-    margin-top: 20px;
-}
-
-.dot {
-    width: 15px;
-    height: 15px;
-    border-radius: 50%;
-}
-
-.accepted {
-    background-color: #4CAF50;
-}
-
-.declined {
-    background-color: #F44336;
-}
-
-#result {
-    margin-top: 20px;
+.display {
+    margin-bottom: 20px;
     font-size: 1.5em;
+    text-align: center;
+    width: 93%;
+    background: rgba(44, 44, 44, 0.8);
+    color: #ffffff;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.2);
+}
+
+.cells {
+    display: grid;
+    grid-template-columns: repeat(10, 30px);
+    gap: 5px;
+    margin-bottom: 20px;
+    justify-content: center;
+}
+
+.cell {
+    width: 30px;
+    height: 30px;
+    background-color: rgba(30, 30, 30, 0.8);
+    border-radius: 5px;
+    border: 1px solid #333333;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5), inset 0 0 5px rgba(255, 255, 255, 0.1);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.cell:active, .button:active {
+    transform: translateY(2px);
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5), inset 0 0 15px rgba(255, 255, 255, 0.2);
+}
+
+.buttons {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.button {
+    padding: 10px 20px;
+    font-size: 1em;
+    cursor: pointer;
+    border: none;
+    border-radius: 10px;
+    flex: 1;
+    margin: 0 5px;
+    color: white;
+    background-color: rgba(76, 175, 80, 0.8);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5), inset 0 0 5px rgba(255, 255, 255, 0.1);
+    transition: transform 0.2s, box-shadow 0.2s;
+    backdrop-filter: blur(5px);
+}
+
+.accept {
+    background-color: rgba(76, 175, 80, 0.8);
+}
+
+.decline {
+    background-color: rgba(244, 67, 54, 0.8);
 }
