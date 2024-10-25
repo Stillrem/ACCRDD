@@ -155,8 +155,8 @@
                 });
             }
             function toggleUnLock() {
-                Locked = false;
-                localStorage.setItem('Locked', Locked ? 'false' : 'true');
+                upLocked = false;
+                localStorage.setItem('upLocked', upLocked ? 'false' : 'true');
 
                 const cells = document.querySelectorAll('.cell');
                 cells.forEach((cell, index) => {
@@ -171,14 +171,14 @@
 
             document.getElementById('toggle-switch').addEventListener('click', () => {
                 toggleUnLock();
-                document.getElementById('toggle-switch').textContent = Locked ? 'Unlock Cells' : Lock Cells';
+                document.getElementById('toggle-switch').textContent = upLocked ? 'Unlock Cells' : Lock Cells';
             });
                 
             // Lock cells if initially set to locked
             if (isLocked) {
                 toggleLock();
                 document.getElementById('toggle-switch').textContent = 'Unlock Cells';
-            } else (Locked) {
+            } else (upLocked) {
                 toggleUnLock();
                 document.getElementById('toggle-switch').textContent = 'Lock Cells';
             }
