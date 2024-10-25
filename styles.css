@@ -132,7 +132,7 @@
     font-size: 2em;
     color: #ffffff;
     opacity: 0;
-    animation: fadeInOut 5s forwards;
+    animation: fadeInOut 7s forwards;
 }
 
 @keyframes fadeInOut {
