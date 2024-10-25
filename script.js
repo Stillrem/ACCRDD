@@ -4,7 +4,6 @@
         let acceptedCount = cellColors.filter(color => color === '#00FF00').length;
         let declinedCount = cellColors.filter(color => color === '#FF0000').length;
         let isLocked = localStorage.getItem('isLocked') === 'true' ? true : false;
-        let upLocked = localStorage.getItem('Locked') === 'false' ? false : true;
 
         function updateAcceptanceRate() {
             const acceptanceRate = (acceptedCount / 100) * 100;
@@ -50,30 +49,6 @@
 
         function toggleCellColor(cellIndex) {
             if (!isLocked) {
-                const currentColor = cellColors[cellIndex];
-                const newColor = currentColor === '#00FF00' ? '#FF0000' : '#00FF00';
-
-                if (currentColor !== newColor) {
-                    cellColors[cellIndex] = newColor;
-                    document.getElementById(`cell-${cellIndex}`).style.backgroundColor = newColor;
-
-                    if (newColor === '#00FF00') {
-                        acceptedCount++;
-                        declinedCount--;
-                    } else {
-                        acceptedCount--;
-                        declinedCount++;
-                    }
-
-                    updateDisplayCounts(); // ÐÐ±Ð½Ð¾Ð²Ð»ÑÐµÐ¼ Ð¾ÑÐ¾Ð±ÑÐ°Ð¶ÐµÐ½Ð¸Ðµ Ð¿Ð¾ÑÐ»Ðµ Ð¸Ð·Ð¼ÐµÐ½ÐµÐ½Ð¸Ñ ÑÐ²ÐµÑÐ°
-                    localStorage.setItem('cellColors', JSON.stringify(cellColors));
-                    updateAcceptanceRate();
-                }
-            }
-        }
-                        
-        function toggleCellColor(cellIndex) {
-            if (!upLocked) {
                 const currentColor = cellColors[cellIndex];
                 const newColor = currentColor === '#00FF00' ? '#FF0000' : '#00FF00';
 
@@ -145,7 +120,7 @@
                 event.preventDefault();
             }, { passive: false });
 
-                function toggleLock() {
+            function toggleLock() {
                 isLocked = true;
                 localStorage.setItem('isLocked', isLocked ? 'true' : 'false');
 
@@ -155,8 +130,8 @@
                 });
             }
             function toggleUnLock() {
-                upLocked = false;
-                localStorage.setItem('upLocked', upLocked ? 'false' : 'true');
+                isLocked = false;
+                localStorage.setItem('isLocked', isLocked ? 'false' : 'true');
 
                 const cells = document.querySelectorAll('.cell');
                 cells.forEach((cell, index) => {
@@ -171,14 +146,14 @@
 
             document.getElementById('toggle-switch').addEventListener('click', () => {
                 toggleUnLock();
-                document.getElementById('toggle-switch').textContent = upLocked ? 'Unlock Cells' : Lock Cells';
+                document.getElementById('toggle-switch').textContent = isLocked ? 'Unlock Cells' : 'Lock Cells';
             });
-                
+                
             // Lock cells if initially set to locked
             if (isLocked) {
                 toggleLock();
                 document.getElementById('toggle-switch').textContent = 'Unlock Cells';
-            } else (upLocked) {
+            } else {
                 toggleUnLock();
                 document.getElementById('toggle-switch').textContent = 'Lock Cells';
             }
