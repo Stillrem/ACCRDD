@@ -1,0 +1,49 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #FFEB3B;
+    color: #5D4037;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    height: 100vh;
+}
+
+.container {
+    text-align: center;
+    max-width: 600px;
+    padding: 20px;
+    background-color: #FFF8E1;
+    border-radius: 8px;
+}
+
+input {
+    margin: 5px;
+}
+
+.dots-container {
+    display: grid;
+    grid-template-columns: repeat(10, 20px);
+    gap: 5px;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.dot {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+}
+
+.accepted {
+    background-color: #4CAF50;
+}
+
+.declined {
+    background-color: #F44336;
+}
+
+#result {
+    margin-top: 20px;
+    font-size: 1.5em;
+}
