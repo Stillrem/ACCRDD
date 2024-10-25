@@ -121,39 +121,22 @@
             }, { passive: false });
 
     function toggleLock() {
-    isLocked = true;
-    localStorage.setItem('isLocked', isLocked ? 'true' : 'false');
+    isLocked = !isLocked; // Toggle the lock state
+    localStorage.setItem('isLocked', isLocked);
 
     const cells = document.querySelectorAll('.cell');
     cells.forEach((cell) => {
-        cell.style.pointerEvents = 'none';
+        cell.style.pointerEvents = isLocked ? 'none' : 'auto';
     });
-}
 
-    function toggleUnLock() {
-    isLocked = false;
-    localStorage.setItem('isLocked', isLocked ? 'true' : 'false');
-
-    const cells = document.querySelectorAll('.cell');
-    cells.forEach((cell) => {
-        cell.style.pointerEvents = 'auto';
-    });
-}
-
-document.getElementById('toggle-switch').addEventListener('click', () => {
-    if (isLocked) {
-        toggleUnLock();
-    } else {
-        toggleLock();
-    }
     document.getElementById('toggle-switch').textContent = isLocked ? 'Unlock Cells' : 'Lock Cells';
-});
+}
 
-// Установка начального состояния
+document.getElementById('toggle-switch').addEventListener('click', toggleLock); // Only one listener needed
+
+// Initial state
 if (isLocked) {
-    toggleLock();
     document.getElementById('toggle-switch').textContent = 'Unlock Cells';
 } else {
-    toggleUnLock();
     document.getElementById('toggle-switch').textContent = 'Lock Cells';
 }
