@@ -120,9 +120,9 @@
                 event.preventDefault();
             }, { passive: false });
 
-    function toggleLock() {
-    isLocked = !isLocked; // Toggle the lock state
-    localStorage.setItem('isLocked', isLocked);
+    function toggleCells() {
+    isLocked = !isLocked;
+    localStorage.setItem('isLocked', isLocked ? 'true' : 'false');
 
     const cells = document.querySelectorAll('.cell');
     cells.forEach((cell) => {
@@ -132,11 +132,7 @@
     document.getElementById('toggle-switch').textContent = isLocked ? 'Unlock Cells' : 'Lock Cells';
 }
 
-document.getElementById('toggle-switch').addEventListener('click', toggleLock); // Only one listener needed
+document.getElementById('toggle-switch').addEventListener('click', toggleCells);
 
-// Initial state
-if (isLocked) {
-    document.getElementById('toggle-switch').textContent = 'Unlock Cells';
-} else {
-    document.getElementById('toggle-switch').textContent = 'Lock Cells';
-}
+// Инициализируем состояние при загрузке страницы
+toggleCells();
