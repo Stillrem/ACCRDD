@@ -14,7 +14,7 @@ body {
     justify-content: space-between;
     width: 380px;
     margin-bottom: 20px;
-    gap: 10px
+    gap: 10px;
 }
 
 .calculator {
@@ -62,6 +62,27 @@ body {
 .cell:active, .button:active {
     transform: translateY(2px);
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.5), inset 0 0 15px rgba(255, 255, 255, 0.2);
+}
+
+.cell.active {
+    background-color: rgba(76, 175, 80, 0.8);
+    animation: pulse 0.5s infinite alternate;
+}
+
+.cell.inactive {
+    background-color: rgba(244, 67, 54, 0.8);
+    animation: shake 0.5s;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    100% { transform: scale(1.1); }
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    20%, 60% { transform: translateX(-2px); }
+    40%, 80% { transform: translateX(2px); }
 }
 
 .buttons {
