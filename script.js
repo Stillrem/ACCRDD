@@ -144,17 +144,17 @@
                 document.getElementById('toggle-switch').textContent = isLocked ? 'Lock Cells' : 'Unlock Cells';
             });
 
-            //document.getElementById('toggle-switch').addEventListener('click', () => {
-                //toggleUnLock();
-                //document.getElementById('toggle-switch').textContent = isLocked ? 'Unlock Cells' : 'Lock Cells';
-            //});
+            document.getElementById('toggle-switch').addEventListener('click', () => {
+                toggleUnLock();
+                document.getElementById('toggle-switch').textContent = isLocked ? 'Unlock Cells' : 'Lock Cells';
+            });
                 
             // Lock cells if initially set to locked
             if (isLocked) {
                 toggleLock();
                 document.getElementById('toggle-switch').textContent = 'Unlock Cells';
             } else {
-                toggleunUnLock();
+                toggleUnLock();
                 document.getElementById('toggle-switch').textContent = 'Lock Cells';
             }
         };
