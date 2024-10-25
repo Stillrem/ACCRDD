@@ -3,7 +3,7 @@
         const cellColors = JSON.parse(localStorage.getItem('cellColors')) || Array(100).fill('#00FF00');
         let acceptedCount = cellColors.filter(color => color === '#00FF00').length;
         let declinedCount = cellColors.filter(color => color === '#FF0000').length;
-        let isLocked = localStorage.getItem('isLocked') === 'true' ? true : false;
+        let isLocked = localStorage.getItem('isLocked') === 'true';
 
         function updateAcceptanceRate() {
             const acceptanceRate = (acceptedCount / 100) * 100;
