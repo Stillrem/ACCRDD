@@ -149,7 +149,7 @@ document.getElementById('toggle-switch').addEventListener('click', () => {
     document.getElementById('toggle-switch').textContent = isLocked ? 'Unlock Cells' : 'Lock Cells';
 });
 
-// Lock cells if initially set to locked
+// Инициализация состояния при загрузке страницы
 if (isLocked) {
     toggleLock();
     document.getElementById('toggle-switch').textContent = 'Unlock Cells';
