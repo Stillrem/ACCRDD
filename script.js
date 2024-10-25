@@ -139,14 +139,14 @@
                 });
             }
 
-            //document.getElementById('toggle-switch').addEventListener('click', () => {
-                //toggleLock();
-                //document.getElementById('toggle-switch').textContent = isLocked ? 'Lock Cells' : 'Unlock Cells';
-            //});
+            document.getElementById('toggle-switch').addEventListener('click', () => {
+                toggleLock();
+                document.getElementById('toggle-switch').textContent = isLocked ? 'Unlock Cells' : 'Lock Cells';
+            });
 
             document.getElementById('toggle-switch').addEventListener('click', () => {
                 toggleUnLock();
-                document.getElementById('toggle-switch').textContent = isLocked ? 'Unlock Cells' : 'Lock Cells';
+                document.getElementById('toggle-switch').textContent = isLocked ? 'Lock Cells' : 'Unlock Cells';
             });
                 
             // Lock cells if initially set to locked
