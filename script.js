@@ -120,19 +120,40 @@
                 event.preventDefault();
             }, { passive: false });
 
-            function toggleCells() {
-            isLocked = !isLocked;
-            localStorage.setItem('isLocked', isLocked ? 'true' : 'false');
+function toggleLock() {
+    isLocked = true;
+    localStorage.setItem('isLocked', 'true');
 
-            const cells = document.querySelectorAll('.cell');
-            cells.forEach((cell) => {
-            cell.style.pointerEvents = isLocked ? 'none' : 'auto';
-            });
+    const cells = document.querySelectorAll('.cell');
+    cells.forEach((cell) => {
+        cell.style.pointerEvents = 'none';
+    });
+}
 
-            document.getElementById('toggle-switch').textContent = isLocked ? 'Unlock Cells' : 'Lock Cells';
-           }
+function toggleUnLock() {
+    isLocked = false;
+    localStorage.setItem('isLocked', 'false');
 
-            document.getElementById('toggle-switch').addEventListener('click', toggleCells);
+    const cells = document.querySelectorAll('.cell');
+    cells.forEach((cell) => {
+        cell.style.pointerEvents = 'auto';
+    });
+}
 
-            // Инициализируем состояние при загрузке страницы
-            toggleCells();
+document.getElementById('toggle-switch').addEventListener('click', () => {
+    if (isLocked) {
+        toggleUnLock();
+    } else {
+        toggleLock();
+    }
+    document.getElementById('toggle-switch').textContent = isLocked ? 'Unlock Cells' : 'Lock Cells';
+});
+
+// Устанавливаем начальное состояние
+if (isLocked) {
+    toggleLock();
+    document.getElementById('toggle-switch').textContent = 'Unlock Cells';
+} else {
+    toggleUnLock();
+    document.getElementById('toggle-switch').textContent = 'Lock Cells';
+}
