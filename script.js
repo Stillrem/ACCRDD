@@ -4,6 +4,7 @@
         let acceptedCount = cellColors.filter(color => color === '#00FF00').length;
         let declinedCount = cellColors.filter(color => color === '#FF0000').length;
         let isLocked = localStorage.getItem('isLocked') === 'true' ? true : false;
+        let Locked = localStorage.getItem('Locked') === 'false' ? false : true;
 
         function updateAcceptanceRate() {
             const acceptanceRate = (acceptedCount / 100) * 100;
