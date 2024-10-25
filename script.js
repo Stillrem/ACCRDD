@@ -140,9 +140,9 @@
             }
 
             //document.getElementById('toggle-switch').addEventListener('click', () => {
-                toggleLock();
-                document.getElementById('toggle-switch').textContent = isLocked ? 'Lock Cells' : 'Unlock Cells';
-            });
+                //toggleLock();
+                //document.getElementById('toggle-switch').textContent = isLocked ? 'Lock Cells' : 'Unlock Cells';
+            //});
 
             document.getElementById('toggle-switch').addEventListener('click', () => {
                 toggleUnLock();
