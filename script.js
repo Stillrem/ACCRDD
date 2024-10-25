@@ -120,19 +120,19 @@
                 event.preventDefault();
             }, { passive: false });
 
-    function toggleCells() {
-    isLocked = !isLocked;
-    localStorage.setItem('isLocked', isLocked ? 'true' : 'false');
+            function toggleCells() {
+            isLocked = !isLocked;
+            localStorage.setItem('isLocked', isLocked ? 'true' : 'false');
 
-    const cells = document.querySelectorAll('.cell');
-    cells.forEach((cell) => {
-        cell.style.pointerEvents = isLocked ? 'none' : 'auto';
-    });
+            const cells = document.querySelectorAll('.cell');
+            cells.forEach((cell) => {
+            cell.style.pointerEvents = isLocked ? 'none' : 'auto';
+            });
 
-    document.getElementById('toggle-switch').textContent = isLocked ? 'Unlock Cells' : 'Lock Cells';
-}
+            document.getElementById('toggle-switch').textContent = isLocked ? 'Unlock Cells' : 'Lock Cells';
+           }
 
-document.getElementById('toggle-switch').addEventListener('click', toggleCells);
+            document.getElementById('toggle-switch').addEventListener('click', toggleCells);
 
-// Инициализируем состояние при загрузке страницы
-toggleCells();
+            // Инициализируем состояние при загрузке страницы
+            toggleCells();
