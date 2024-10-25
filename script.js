@@ -120,41 +120,40 @@
                 event.preventDefault();
             }, { passive: false });
 
-            function toggleLock() {
-                isLocked = true;
-                localStorage.setItem('isLocked', isLocked ? 'true' : 'false');
+    function toggleLock() {
+    isLocked = true;
+    localStorage.setItem('isLocked', isLocked ? 'true' : 'false');
 
-                const cells = document.querySelectorAll('.cell');
-                cells.forEach((cell, index) => {
-                    cell.style.pointerEvents = 'none';
-                });
-            }
-            function toggleUnLock() {
-                isLocked = false;
-                localStorage.setItem('isLocked', isLocked ? 'false' : 'true');
+    const cells = document.querySelectorAll('.cell');
+    cells.forEach((cell) => {
+        cell.style.pointerEvents = 'none';
+    });
+}
 
-                const cells = document.querySelectorAll('.cell');
-                cells.forEach((cell, index) => {
-                    cell.style.pointerEvents = 'auto';
-                });
-            }
+    function toggleUnLock() {
+    isLocked = false;
+    localStorage.setItem('isLocked', isLocked ? 'true' : 'false');
 
-            document.getElementById('toggle-switch').addEventListener('click', () => {
-                toggleLock();
-                document.getElementById('toggle-switch').textContent = isLocked ? 'Lock Cells' : 'Unlock Cells';
-            });
+    const cells = document.querySelectorAll('.cell');
+    cells.forEach((cell) => {
+        cell.style.pointerEvents = 'auto';
+    });
+}
 
-            document.getElementById('toggle-switch').addEventListener('click', () => {
-                toggleUnLock();
-                document.getElementById('toggle-switch').textContent = isLocked ? 'Unlock Cells' : 'Lock Cells';
-            });
-                
-            // Lock cells if initially set to locked
-            if (isLocked) {
-                toggleLock();
-                document.getElementById('toggle-switch').textContent = 'Unlock Cells';
-            } else {
-                toggleunUnLock();
-                document.getElementById('toggle-switch').textContent = 'Lock Cells';
-            }
-        };
+document.getElementById('toggle-switch').addEventListener('click', () => {
+    if (isLocked) {
+        toggleUnLock();
+    } else {
+        toggleLock();
+    }
+    document.getElementById('toggle-switch').textContent = isLocked ? 'Unlock Cells' : 'Lock Cells';
+});
+
+// Установка начального состояния
+if (isLocked) {
+    toggleLock();
+    document.getElementById('toggle-switch').textContent = 'Unlock Cells';
+} else {
+    toggleUnLock();
+    document.getElementById('toggle-switch').textContent = 'Lock Cells';
+}
