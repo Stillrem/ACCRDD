@@ -140,16 +140,18 @@ function toggleUnLock() {
     });
 }
 
-document.getElementById('toggle-switch').addEventListener('click', () => {
+function toggleCells() {
     if (isLocked) {
         toggleUnLock();
     } else {
         toggleLock();
     }
     document.getElementById('toggle-switch').textContent = isLocked ? 'Unlock Cells' : 'Lock Cells';
-});
+}
 
-// Инициализация состояния при загрузке страницы
+    document.getElementById('toggle-switch').addEventListener('click', toggleCells);
+
+// Устанавливаем начальное состояние кнопки и ячеек
 if (isLocked) {
     toggleLock();
     document.getElementById('toggle-switch').textContent = 'Unlock Cells';
