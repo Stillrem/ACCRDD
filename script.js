@@ -4,6 +4,7 @@
         let acceptedCount = cellColors.filter(color => color === '#00FF00').length;
         let declinedCount = cellColors.filter(color => color === '#FF0000').length;
         let isLocked = localStorage.getItem('isLocked') === 'true' ? true : false;
+        let Locked = localStorage.getItem('Locked') === 'false' ? false : true;
 
         function updateAcceptanceRate() {
             const acceptanceRate = (acceptedCount / 100) * 100;
@@ -154,8 +155,8 @@
                 });
             }
             function toggleUnLock() {
-                isLocked = false;
-                localStorage.setItem('isLocked', isLocked ? 'false' : 'true');
+                Locked = false;
+                localStorage.setItem('Locked', Locked ? 'false' : 'true');
 
                 const cells = document.querySelectorAll('.cell');
                 cells.forEach((cell, index) => {
@@ -170,14 +171,14 @@
 
             document.getElementById('toggle-switch').addEventListener('click', () => {
                 toggleUnLock();
-                document.getElementById('toggle-switch').textContent = isLocked ? 'Unlock Cells' : Lock Cells';
+                document.getElementById('toggle-switch').textContent = Locked ? 'Unlock Cells' : Lock Cells';
             });
                 
             // Lock cells if initially set to locked
             if (isLocked) {
                 toggleLock();
                 document.getElementById('toggle-switch').textContent = 'Unlock Cells';
-            } else {
+            } else (Locked) {
                 toggleUnLock();
                 document.getElementById('toggle-switch').textContent = 'Lock Cells';
             }
