@@ -128,6 +128,8 @@ function toggleLock() {
     cells.forEach((cell) => {
         cell.style.pointerEvents = 'none';
     });
+
+    document.getElementById('toggle-switch').textContent = 'Unlock Cells';
 }
 
 function toggleUnLock() {
@@ -138,24 +140,22 @@ function toggleUnLock() {
     cells.forEach((cell) => {
         cell.style.pointerEvents = 'auto';
     });
+
+    document.getElementById('toggle-switch').textContent = 'Lock Cells';
 }
 
-function toggleCells() {
+document.getElementById('toggle-switch').addEventListener('click', () => {
     if (isLocked) {
         toggleUnLock();
     } else {
         toggleLock();
     }
-    document.getElementById('toggle-switch').textContent = isLocked ? 'Unlock Cells' : 'Lock Cells';
-}
+});
 
-    document.getElementById('toggle-switch').addEventListener('click', toggleCells);
-
-// Устанавливаем начальное состояние кнопки и ячеек
+// Initial setup based on stored state
 if (isLocked) {
     toggleLock();
-    document.getElementById('toggle-switch').textContent = 'Unlock Cells';
 } else {
     toggleUnLock();
-    document.getElementById('toggle-switch').textContent = 'Lock Cells';
 }
+};
