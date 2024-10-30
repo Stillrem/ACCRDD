@@ -6,7 +6,7 @@ let declinedCount = cellColors.filter(color => color === '#FF0000').length;
 let isLocked = localStorage.getItem('isLocked') === 'true';
 
 function updateAcceptanceRate() {
-    const acceptanceRate = (acceptedCount / (acceptedCount + declinedCount)) * 100;
+    const acceptanceRate = (acceptedCount / 100) * 100;
     document.getElementById('acceptance-rate').textContent = `Acceptance Rate: ${acceptanceRate.toFixed(2)}%`;
     updateOrdersNeeded();
 }
@@ -22,8 +22,13 @@ function updateOrdersNeeded() {
     const totalOrders = acceptedCount + declinedCount;
     const currentRate = (acceptedCount / totalOrders) * 100;
     const targetRate = currentRate + 1;
-    const ordersNeeded = Math.ceil(((declinedCount * targetRate) - (acceptedCount * 100)) / (100 - targetRate));
-    document.getElementById('orders-needed').textContent = `Orders Needed for +1%: ${ordersNeeded}`;
+
+    let ordersNeeded = 0;
+    while (((acceptedCount + ordersNeeded) / (totalOrders + ordersNeeded)) * 100 < targetRate) {
+        ordersNeeded++;
+    }
+
+    document.getElementById('orders-needed').textContent = `Orders needed to increase rate by 1%: ${ordersNeeded}`;
 }
 
 function paint(color) {
