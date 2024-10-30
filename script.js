@@ -8,6 +8,7 @@ let isLocked = localStorage.getItem('isLocked') === 'true';
 function updateAcceptanceRate() {
     const acceptanceRate = (acceptedCount / 100) * 100;
     document.getElementById('acceptance-rate').textContent = `Acceptance Rate: ${acceptanceRate.toFixed(2)}%`;
+    updateOrdersNeeded();
 }
 
 function updateDisplayCounts() {
@@ -18,7 +19,7 @@ function updateDisplayCounts() {
 }
 
 function updateOrdersNeeded() {
-    const ordersNeeded = 100 - acceptedCount;
+    let ordersNeeded = Math.max(0, 100 - acceptedCount);
     document.getElementById('orders-needed').textContent = `Orders Needed for 100%: ${ordersNeeded}`;
 }
 
@@ -48,9 +49,8 @@ function paint(color) {
     }
 
     updateDisplayCounts();
-    updateAcceptanceRate();
-    updateOrdersNeeded();
     localStorage.setItem('cellColors', JSON.stringify(cellColors));
+    updateAcceptanceRate();
 }
 
 function toggleCellColor(cellIndex) {
@@ -71,9 +71,8 @@ function toggleCellColor(cellIndex) {
             }
 
             updateDisplayCounts();
-            updateAcceptanceRate();
-            updateOrdersNeeded();
             localStorage.setItem('cellColors', JSON.stringify(cellColors));
+            updateAcceptanceRate();
         }
     }
 }
