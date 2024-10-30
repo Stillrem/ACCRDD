@@ -1,5 +1,4 @@
-javascript
-function calculateOrdersToIncreaseRate() {
+    function calculateOrdersToIncreaseRate() {
     const currentAcceptanceRate = (acceptedCount / 100) * 100;
     const targetAcceptanceRate = currentAcceptanceRate + 1;
     const totalOrders = acceptedCount + declinedCount;
