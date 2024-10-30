@@ -13,9 +13,8 @@ function updateAcceptanceRate() {
 
 function updateOrdersNeeded() {
     const targetAcceptanceRate = 1; // Целевой прирост accept rate на 1%
-    const totalOrders = 100;
-    const currentAcceptanceRate = (acceptedCount / totalOrders) * 100;
-    const ordersNeeded = Math.ceil(((targetAcceptanceRate + currentAcceptanceRate) * totalOrders / 100) - acceptedCount);
+    const currentAcceptanceRate = (acceptedCount / (acceptedCount + declinedCount)) * 100 || 0;
+    const ordersNeeded = Math.ceil(((targetAcceptanceRate + currentAcceptanceRate) * (acceptedCount + declinedCount) / 100) - acceptedCount);
 
     document.getElementById('orders-needed').textContent = `Orders Needed: ${ordersNeeded}`;
 }
