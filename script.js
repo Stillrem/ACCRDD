@@ -7,7 +7,7 @@ let isLocked = localStorage.getItem('isLocked') === 'true';
 
 function updateAcceptanceRate() {
     const acceptanceRate = (acceptedCount / 100) * 100;
-    document.getElementById('acceptance-rate').textContent = `Acceptance Rate: ${acceptanceRate.toFixed(2)}%`;
+    document.getElementById('acceptance-rate').textContent = `Acceptance Rate: ${acceptanceRate.toFixed(1)}%`;
     calculateOrdersForNextAcceptance();
 }
 
