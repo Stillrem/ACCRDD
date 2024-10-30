@@ -13,7 +13,7 @@ function updateAcceptanceRate() {
 
 function updateDisplayCounts() {
     document.getElementById('accept-count').textContent = acceptCount;
-    document.getElementById('decline-count').textContent = declinedCount;
+    document.getElementById('decline-count').textContent = declineCount;
     localStorage.setItem('acceptCount', acceptCount);
     localStorage.setItem('declineCount', declineCount);
 }
@@ -83,8 +83,14 @@ function resetCount(type) {
 
 function calculateOrdersNeeded() {
     const totalOrders = acceptedCount + declinedCount;
-    const ordersNeeded = 100 - acceptedCount;
-    document.getElementById('orders-needed').textContent = `Orders Needed for 100%: ${ordersNeeded}`;
+    const currentRate = (acceptedCount / totalOrders) * 100;
+    let ordersNeeded = 0;
+
+    while (((acceptedCount + ordersNeeded) / (totalOrders + ordersNeeded)) * 100 < currentRate + 1) {
+        ordersNeeded++;
+    }
+
+    document.getElementById('orders-needed').textContent = `Orders Needed for +1%: ${ordersNeeded}`;
 }
 
 window.onload = function() {
