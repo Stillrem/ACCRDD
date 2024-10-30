@@ -19,34 +19,19 @@ function updateDisplayCounts() {
 }
 
 function updateOrdersNeeded() {
+    // Находим количество заказов, необходимых для повышения уровня принятия на 1%
     const totalOrders = acceptedCount + declinedCount;
-    const currentRate = (acceptedCount / totalOrders) * 100;
-    const targetRate = currentRate + 1;
-
-    let ordersNeeded = 0;
-    while (((acceptedCount + ordersNeeded) / (totalOrders + ordersNeeded)) * 100 < targetRate) {
-        ordersNeeded++;
-    }
-
-    document.getElementById('orders-needed').textContent = `Orders needed to increase rate by 1%: ${ordersNeeded}`;
+    const ordersNeeded = Math.ceil((100 - acceptedCount) / (1 - (acceptedCount / totalOrders)));
+    document.getElementById('orders-needed').textContent = `Orders Needed for 100%: ${ordersNeeded}`;
 }
 
 function paint(color) {
     const colorCode = color === 'red' ? '#FF0000' : '#00FF00';
 
-    if (cellColors[99] === '#00FF00') {
-        acceptedCount--;
-    } else if (cellColors[99] === '#FF0000') {
-        declinedCount--;
-    }
-
-    for (let i = cellColors.length - 1; i > 0; i--) {
-        cellColors[i] = cellColors[i - 1];
-        document.getElementById(`cell-${i}`).style.backgroundColor = cellColors[i];
-    }
-
-    cellColors[0] = colorCode;
-    document.getElementById('cell-0').style.backgroundColor = colorCode;
+    // Изменяем логику сдвига ячеек
+    cellColors.pop();  // Удаляем последнюю ячейку
+    cellColors.unshift(colorCode);  // Добавляем новую ячейку в начало
+    updateCellsDisplay();
 
     if (colorCode === '#00FF00') {
         acceptCount++;
@@ -59,6 +44,12 @@ function paint(color) {
     updateDisplayCounts();
     localStorage.setItem('cellColors', JSON.stringify(cellColors));
     updateAcceptanceRate();
+}
+
+function updateCellsDisplay() {
+    for (let i = 0; i < cellColors.length; i++) {
+        document.getElementById(`cell-${i}`).style.backgroundColor = cellColors[i];
+    }
 }
 
 function toggleCellColor(cellIndex) {
