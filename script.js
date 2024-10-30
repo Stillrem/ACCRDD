@@ -8,15 +8,14 @@ let isLocked = localStorage.getItem('isLocked') === 'true';
 function updateAcceptanceRate() {
     const acceptanceRate = (acceptedCount / 100) * 100;
     document.getElementById('acceptance-rate').textContent = `Acceptance Rate: ${acceptanceRate.toFixed(2)}%`;
-    updateOrdersNeeded();
+    calculateOrdersForNextAcceptance();
 }
 
-function updateOrdersNeeded() {
-    const currentAcceptanceRate = (acceptedCount / (acceptedCount + declinedCount)) * 100;
-    const targetAcceptanceRate = currentAcceptanceRate + 1;
-    const ordersNeeded = Math.ceil((targetAcceptanceRate * (acceptedCount + declinedCount) - 100 * acceptedCount) / (100 - targetAcceptanceRate));
-    
-    document.getElementById('orders-needed').textContent = `Orders needed for 1% increase: ${ordersNeeded}`;
+function calculateOrdersForNextAcceptance() {
+    const currentRate = (acceptedCount / 100) * 100;
+    const targetRate = currentRate + 1;
+    const requiredOrders = Math.ceil((targetRate * 100 - acceptedCount * 100) / (100 - targetRate));
+    document.getElementById('orders-needed').textContent = `Orders needed for next 1%: ${requiredOrders}`;
 }
 
 function updateDisplayCounts() {
