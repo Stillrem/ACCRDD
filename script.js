@@ -5,6 +5,20 @@
         let declinedCount = cellColors.filter(color => color === '#FF0000').length;
         let isLocked = localStorage.getItem('isLocked') === 'true';
 
+function calculateOrdersToIncreaseRate() {
+    const currentAcceptanceRate = (acceptedCount / 100) * 100;
+    const targetAcceptanceRate = currentAcceptanceRate + 1;
+    const totalOrders = acceptedCount + declinedCount;
+    
+    const neededAccepts = Math.ceil((targetAcceptanceRate * totalOrders - 100 * acceptedCount) / (100 - targetAcceptanceRate));
+    return neededAccepts;
+}
+
+function displayNeededOrders() {
+    const neededAccepts = calculateOrdersToIncreaseRate();
+    document.getElementById('needed-orders').textContent = `Orders needed to increase rate by 1%: ${neededAccepts}`;
+}
+
         function updateAcceptanceRate() {
             const acceptanceRate = (acceptedCount / 100) * 100;
             document.getElementById('acceptance-rate').textContent = `Acceptance Rate: ${acceptanceRate.toFixed(2)}%`;
@@ -151,7 +165,11 @@ document.getElementById('toggle-switch').addEventListener('click', () => {
         toggleLock();
     }
 });
-
+ 
+    const neededOrdersElement = document.createElement('div');
+    neededOrdersElement.id = 'needed-orders';
+    document.body.appendChild(neededOrdersElement);
+                
 // Initial setup based on stored state
 if (isLocked) {
     toggleLock();
