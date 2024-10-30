@@ -1,128 +1,123 @@
-        let acceptCount = parseInt(localStorage.getItem('acceptCount')) || 0;
-        let declineCount = parseInt(localStorage.getItem('declineCount')) || 0;
-        const cellColors = JSON.parse(localStorage.getItem('cellColors')) || Array(100).fill('#00FF00');
-        let acceptedCount = cellColors.filter(color => color === '#00FF00').length;
-        let declinedCount = cellColors.filter(color => color === '#FF0000').length;
-        let isLocked = localStorage.getItem('isLocked') === 'true';
+let acceptCount = parseInt(localStorage.getItem('acceptCount')) || 0;
+let declineCount = parseInt(localStorage.getItem('declineCount')) || 0;
+const cellColors = JSON.parse(localStorage.getItem('cellColors')) || Array(100).fill('#00FF00');
+let acceptedCount = cellColors.filter(color => color === '#00FF00').length;
+let declinedCount = cellColors.filter(color => color === '#FF0000').length;
+let isLocked = localStorage.getItem('isLocked') === 'true';
 
-function calculateOrdersToIncreaseRate() {
-    const currentAcceptanceRate = (acceptedCount / 100) * 100;
+function updateAcceptanceRate() {
+    const acceptanceRate = (acceptedCount / 100) * 100;
+    document.getElementById('acceptance-rate').textContent = `Acceptance Rate: ${acceptanceRate.toFixed(2)}%`;
+    updateOrdersNeeded();
+}
+
+function updateOrdersNeeded() {
+    const currentAcceptanceRate = (acceptedCount / (acceptedCount + declinedCount)) * 100;
     const targetAcceptanceRate = currentAcceptanceRate + 1;
-    const totalOrders = acceptedCount + declinedCount;
-    
-    const neededAccepts = Math.ceil((targetAcceptanceRate * totalOrders - 100 * acceptedCount) / (100 - targetAcceptanceRate));
-    return neededAccepts;
+    const ordersNeeded = Math.ceil((targetAcceptanceRate * (acceptedCount + declinedCount) - 100 * acceptedCount) / (100 - targetAcceptanceRate));
+    
+    document.getElementById('orders-needed').textContent = `Orders needed for 1% increase: ${ordersNeeded}`;
 }
 
-function displayNeededOrders() {
-    const neededAccepts = calculateOrdersToIncreaseRate();
-    document.getElementById('needed-orders').textContent = `Orders needed to increase rate by 1%: ${neededAccepts}`;
+function updateDisplayCounts() {
+    document.getElementById('accept-count').textContent = acceptCount;
+    document.getElementById('decline-count').textContent = declinedCount;
+    localStorage.setItem('acceptCount', acceptCount);
+    localStorage.setItem('declineCount', declineCount);
 }
 
-        function updateAcceptanceRate() {
-            const acceptanceRate = (acceptedCount / 100) * 100;
-            document.getElementById('acceptance-rate').textContent = `Acceptance Rate: ${acceptanceRate.toFixed(2)}%`;
-        }
+function paint(color) {
+    const colorCode = color === 'red' ? '#FF0000' : '#00FF00';
 
-        function updateDisplayCounts() {
-            document.getElementById('accept-count').textContent = acceptCount;
-            document.getElementById('decline-count').textContent = declinedCount;
-            localStorage.setItem('acceptCount', acceptCount);
-            localStorage.setItem('declineCount', declineCount);
-        }
+    if (cellColors[99] === '#00FF00') {
+        acceptedCount--;
+    } else if (cellColors[99] === '#FF0000') {
+        declinedCount--;
+    }
 
-        function paint(color) {
-            const colorCode = color === 'red' ? '#FF0000' : '#00FF00';
+    for (let i = cellColors.length - 1; i > 0; i--) {
+        cellColors[i] = cellColors[i - 1];
+        document.getElementById(`cell-${i}`).style.backgroundColor = cellColors[i];
+    }
 
-            if (cellColors[99] === '#00FF00') {
-                acceptedCount--;
-            } else if (cellColors[99] === '#FF0000') {
-                declinedCount--;
-            }
+    cellColors[0] = colorCode;
+    document.getElementById('cell-0').style.backgroundColor = colorCode;
 
-            for (let i = cellColors.length - 1; i > 0; i--) {
-                cellColors[i] = cellColors[i - 1];
-                document.getElementById(`cell-${i}`).style.backgroundColor = cellColors[i];
-            }
+    if (colorCode === '#00FF00') {
+        acceptCount++;
+        acceptedCount++;
+    } else {
+        declineCount++;
+        declinedCount++;
+    }
 
-            cellColors[0] = colorCode;
-            document.getElementById('cell-0').style.backgroundColor = colorCode;
+    updateDisplayCounts();
+    localStorage.setItem('cellColors', JSON.stringify(cellColors));
+    updateAcceptanceRate();
+}
 
-            if (colorCode === '#00FF00') {
-                acceptCount++;
+function toggleCellColor(cellIndex) {
+    if (!isLocked) {
+        const currentColor = cellColors[cellIndex];
+        const newColor = currentColor === '#00FF00' ? '#FF0000' : '#00FF00';
+
+        if (currentColor !== newColor) {
+            cellColors[cellIndex] = newColor;
+            document.getElementById(`cell-${cellIndex}`).style.backgroundColor = newColor;
+
+            if (newColor === '#00FF00') {
                 acceptedCount++;
+                declinedCount--;
             } else {
-                declineCount++;
+                acceptedCount--;
                 declinedCount++;
             }
 
-            updateDisplayCounts(); // ÐÐ±Ð½Ð¾Ð²Ð»ÑÐµÐ¼ Ð¾ÑÐ¾Ð±ÑÐ°Ð¶ÐµÐ½Ð¸Ðµ Ð¿Ð¾ÑÐ»Ðµ Ð¸Ð·Ð¼ÐµÐ½ÐµÐ½Ð¸Ñ ÑÐ²ÐµÑÐ°
+            updateDisplayCounts();
             localStorage.setItem('cellColors', JSON.stringify(cellColors));
             updateAcceptanceRate();
         }
+    }
+}
 
-        function toggleCellColor(cellIndex) {
-            if (!isLocked) {
-                const currentColor = cellColors[cellIndex];
-                const newColor = currentColor === '#00FF00' ? '#FF0000' : '#00FF00';
+function resetCount(type) {
+    if (type === 'accept') {
+        acceptCount = 0;
+    } else if (type === 'decline') {
+        declineCount = 0;
+    }
+    updateDisplayCounts();
+}
 
-                if (currentColor !== newColor) {
-                    cellColors[cellIndex] = newColor;
-                    document.getElementById(`cell-${cellIndex}`).style.backgroundColor = newColor;
+window.onload = function() {
+    const cellsContainer = document.querySelector('.cells');
+    for (let i = 0; i < cellColors.length; i++) {
+        const cell = document.createElement('div');
+        cell.className = 'cell';
+        cell.id = `cell-${i}`;
+        cell.style.backgroundColor = cellColors[i];
 
-                    if (newColor === '#00FF00') {
-                        acceptedCount++;
-                        declinedCount--;
-                    } else {
-                        acceptedCount--;
-                        declinedCount++;
-                    }
+        cell.addEventListener('click', () => toggleCellColor(i));
 
-                    updateDisplayCounts(); // ÐÐ±Ð½Ð¾Ð²Ð»ÑÐµÐ¼ Ð¾ÑÐ¾Ð±ÑÐ°Ð¶ÐµÐ½Ð¸Ðµ Ð¿Ð¾ÑÐ»Ðµ Ð¸Ð·Ð¼ÐµÐ½ÐµÐ½Ð¸Ñ ÑÐ²ÐµÑÐ°
-                    localStorage.setItem('cellColors', JSON.stringify(cellColors));
-                    updateAcceptanceRate();
-                }
-            }
-        }
+        cellsContainer.appendChild(cell);
 
-        function resetCount(type) {
-            if (type === 'accept') {
-                acceptCount = 0;
-            } else if (type === 'decline') {
-                declineCount = 0;
-            }
-            updateDisplayCounts();
-        }
+    }
+    updateAcceptanceRate();
+    updateDisplayCounts();
 
-        window.onload = function() {
-            const cellsContainer = document.querySelector('.cells');
-            for (let i = 0; i < cellColors.length; i++) {
-                const cell = document.createElement('div');
-                cell.className = 'cell';
-                cell.id = `cell-${i}`;
-                cell.style.backgroundColor = cellColors[i];
+    document.getElementById('accept-count').addEventListener('click', () => {
+        acceptCount++;
+        updateDisplayCounts();
+    });
 
-                cell.addEventListener('click', () => toggleCellColor(i));
+    document.getElementById('decline-count').addEventListener('click', () => {
+        declineCount++;
+        updateDisplayCounts();
+    });
 
-                cellsContainer.appendChild(cell);
-
-            }
-            updateAcceptanceRate();
-            updateDisplayCounts();
-
-            document.getElementById('accept-count').addEventListener('click', () => {
-                acceptCount++;
-                updateDisplayCounts();
-            });
-
-            document.getElementById('decline-count').addEventListener('click', () => {
-                declineCount++;
-                updateDisplayCounts();
-            });
-
-            if ('serviceWorker' in navigator) {
-                navigator.serviceWorker.register('/service-worker.js')
-                .then(registration => {
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('/service-worker.js')
+        .then(registration => {
                     console.log('Service Worker registered with scope:', registration.scope);
                 })
                 .catch(error => {
@@ -134,46 +129,42 @@ function displayNeededOrders() {
                 event.preventDefault();
             }, { passive: false });
 
-function toggleLock() {
-    isLocked = true;
-    localStorage.setItem('isLocked', 'true');
+        function toggleLock() {
+            isLocked = true;
+            localStorage.setItem('isLocked', 'true');
 
-    const cells = document.querySelectorAll('.cell');
-    cells.forEach((cell) => {
-        cell.style.pointerEvents = 'none';
-    });
+            const cells = document.querySelectorAll('.cell');
+            cells.forEach((cell) => {
+            cell.style.pointerEvents = 'none';
+            });
 
-    document.getElementById('toggle-switch').textContent = 'Unlock Cells';
-}
+            document.getElementById('toggle-switch').textContent = 'Unlock Cells';
+            }
 
-function toggleUnLock() {
-    isLocked = false;
-    localStorage.setItem('isLocked', 'false');
+        function toggleUnLock() {
+            isLocked = false;
+            localStorage.setItem('isLocked', 'false');
 
-    const cells = document.querySelectorAll('.cell');
-    cells.forEach((cell) => {
-        cell.style.pointerEvents = 'auto';
-    });
+            const cells = document.querySelectorAll('.cell');
+            cells.forEach((cell) => {
+            cell.style.pointerEvents = 'auto';
+        });
 
-    document.getElementById('toggle-switch').textContent = 'Lock Cells';
-}
+            document.getElementById('toggle-switch').textContent = 'Lock Cells';
+            }
 
-document.getElementById('toggle-switch').addEventListener('click', () => {
-    if (isLocked) {
-        toggleUnLock();
-    } else {
-        toggleLock();
-    }
-});
- 
-    const neededOrdersElement = document.createElement('div');
-    neededOrdersElement.id = 'needed-orders';
-    document.body.appendChild(neededOrdersElement);
-                
-// Initial setup based on stored state
-if (isLocked) {
-    toggleLock();
-} else {
-    toggleUnLock();
-}
-};
+            document.getElementById('toggle-switch').addEventListener('click', () => {
+            if (isLocked) {
+                toggleUnLock();
+            } else {
+                toggleLock();
+            }
+        });
+
+            // Initial setup based on stored state
+            if (isLocked) {
+                toggleLock();
+            } else {
+                toggleUnLock();
+            }
+         };
