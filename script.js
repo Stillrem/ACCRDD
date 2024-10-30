@@ -6,14 +6,14 @@ let declinedCount = cellColors.filter(color => color === '#FF0000').length;
 let isLocked = localStorage.getItem('isLocked') === 'true';
 
 function updateAcceptanceRate() {
-    const acceptanceRate = (acceptedCount / (acceptedCount + declinedCount)) * 100;
+    const acceptanceRate = (acceptedCount / 100) * 100;
     document.getElementById('acceptance-rate').textContent = `Acceptance Rate: ${acceptanceRate.toFixed(2)}%`;
-    calculateOrdersNeeded();
+    updateOrdersNeeded();
 }
 
 function updateDisplayCounts() {
     document.getElementById('accept-count').textContent = acceptCount;
-    document.getElementById('decline-count').textContent = declineCount;
+    document.getElementById('decline-count').textContent = declinedCount;
     localStorage.setItem('acceptCount', acceptCount);
     localStorage.setItem('declineCount', declineCount);
 }
@@ -72,6 +72,11 @@ function toggleCellColor(cellIndex) {
     }
 }
 
+function updateOrdersNeeded() {
+    const neededAcceptsForNextPercent = Math.ceil((0.01 * (100 + declinedCount)) - acceptedCount);
+    document.getElementById('orders-needed').textContent = `Orders Needed: ${neededAcceptsForNextPercent > 0 ? neededAcceptsForNextPercent : 0}`;
+}
+
 function resetCount(type) {
     if (type === 'accept') {
         acceptCount = 0;
@@ -79,18 +84,6 @@ function resetCount(type) {
         declineCount = 0;
     }
     updateDisplayCounts();
-}
-
-function calculateOrdersNeeded() {
-    const totalOrders = acceptedCount + declinedCount;
-    const currentRate = (acceptedCount / totalOrders) * 100;
-    let ordersNeeded = 0;
-
-    while (((acceptedCount + ordersNeeded) / (totalOrders + ordersNeeded)) * 100 < currentRate + 1) {
-        ordersNeeded++;
-    }
-
-    document.getElementById('orders-needed').textContent = `Orders Needed for +1%: ${ordersNeeded}`;
 }
 
 window.onload = function() {
