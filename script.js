@@ -1,3 +1,4 @@
+javascript
 let acceptCount = parseInt(localStorage.getItem('acceptCount')) || 0;
 let declineCount = parseInt(localStorage.getItem('declineCount')) || 0;
 const cellColors = JSON.parse(localStorage.getItem('cellColors')) || Array(100).fill('#00FF00');
@@ -125,7 +126,7 @@ window.onload = function() {
     document.addEventListener('dblclick', function(event) {
         event.preventDefault();
     }, { passive: false });
-
+    
         function toggleLock() {
             isLocked = true;
             localStorage.setItem('isLocked', 'true');
