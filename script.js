@@ -8,12 +8,16 @@ let isLocked = localStorage.getItem('isLocked') === 'true';
 function updateAcceptanceRate() {
     const acceptanceRate = (acceptedCount / 100) * 100;
     document.getElementById('acceptance-rate').textContent = `Acceptance Rate: ${acceptanceRate.toFixed(2)}%`;
-    updateRemainingAccepts();
+    updateOrdersNeeded();
 }
 
-function updateRemainingAccepts() {
-    const remainingAccepts = 100 - acceptedCount;
-    document.getElementById('remaining-accepts').textContent = `Remaining Accepts to 100%: ${remainingAccepts}`;
+function updateOrdersNeeded() {
+    const targetAcceptanceRate = 1; // Целевой прирост accept rate на 1%
+    const totalOrders = 100;
+    const currentAcceptanceRate = (acceptedCount / totalOrders) * 100;
+    const ordersNeeded = Math.ceil(((targetAcceptanceRate + currentAcceptanceRate) * totalOrders / 100) - acceptedCount);
+
+    document.getElementById('orders-needed').textContent = `Orders Needed: ${ordersNeeded}`;
 }
 
 function updateDisplayCounts() {
@@ -98,7 +102,6 @@ window.onload = function() {
 
         cellsContainer.appendChild(cell);
     }
-
     updateAcceptanceRate();
     updateDisplayCounts();
 
