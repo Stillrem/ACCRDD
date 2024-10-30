@@ -1,4 +1,4 @@
-let acceptCount = parseInt(localStorage.getItem('acceptCount')) || 0;
+        let acceptCount = parseInt(localStorage.getItem('acceptCount')) || 0;
 let declineCount = parseInt(localStorage.getItem('declineCount')) || 0;
 const cellColors = JSON.parse(localStorage.getItem('cellColors')) || Array(100).fill('#00FF00');
 let acceptedCount = cellColors.filter(color => color === '#00FF00').length;
@@ -6,25 +6,29 @@ let declinedCount = cellColors.filter(color => color === '#FF0000').length;
 let isLocked = localStorage.getItem('isLocked') === 'true';
 
 function updateAcceptanceRate() {
-    const acceptanceRate = (acceptedCount / (acceptedCount + declinedCount)) * 100;
+    const acceptanceRate = (acceptedCount / 100) * 100;
     document.getElementById('acceptance-rate').textContent = `Acceptance Rate: ${acceptanceRate.toFixed(2)}%`;
-    updateOrdersNeeded();
+    calculateOrdersNeeded();
 }
 
 function updateDisplayCounts() {
     document.getElementById('accept-count').textContent = acceptCount;
-    document.getElementById('decline-count').textContent = declineCount;
+    document.getElementById('decline-count').textContent = declinedCount;
     localStorage.setItem('acceptCount', acceptCount);
     localStorage.setItem('declineCount', declineCount);
 }
 
-function updateOrdersNeeded() {
+function calculateOrdersNeeded() {
     const currentAcceptanceRate = (acceptedCount / (acceptedCount + declinedCount)) * 100;
-    const targetRate = currentAcceptanceRate + 1; // Можно изменить на 2, чтобы поднять на 2%
-    const totalOrders = acceptedCount + declinedCount;
-    const neededAccepts = Math.ceil((targetRate * totalOrders / 100) - acceptedCount);
+    const targetAcceptanceRate = currentAcceptanceRate + 2;
 
-    document.getElementById('orders-needed').textContent = `Orders Needed to Accept: ${neededAccepts}`;
+    // Количество заказов, которые нужно принять, чтобы достичь целевого процентного уровня
+    let ordersNeeded = Math.ceil(((targetAcceptanceRate / 100) * (acceptedCount + declinedCount)) - acceptedCount);
+
+    // Убедитесь, что ordersNeeded не меньше текущих оставшихся заказов
+    ordersNeeded = Math.max(0, ordersNeeded);
+
+    document.getElementById('orders-needed').textContent = `Orders Needed: ${ordersNeeded}`;
 }
 
 function paint(color) {
@@ -103,30 +107,30 @@ window.onload = function() {
     updateAcceptanceRate();
     updateDisplayCounts();
 
-    document.getElementById('accept-count').addEventListener('click', () => {
-        acceptCount++;
-        updateDisplayCounts();
-    });
+            document.getElementById('accept-count').addEventListener('click', () => {
+                acceptCount++;
+                updateDisplayCounts();
+            });
 
-    document.getElementById('decline-count').addEventListener('click', () => {
-        declineCount++;
-        updateDisplayCounts();
-    });
+            document.getElementById('decline-count').addEventListener('click', () => {
+                declineCount++;
+                updateDisplayCounts();
+            });
 
-    if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.register('/service-worker.js')
-        .then(registration => {
-            console.log('Service Worker registered with scope:', registration.scope);
-        })
-        .catch(error => {
-            console.error('Service Worker registration failed:', error);
-        });
-    }
+            if ('serviceWorker' in navigator) {
+                navigator.serviceWorker.register('/service-worker.js')
+                .then(registration => {
+                    console.log('Service Worker registered with scope:', registration.scope);
+                })
+                .catch(error => {
+                    console.error('Service Worker registration failed:', error);
+                });
+            }
 
-    document.addEventListener('dblclick', function(event) {
-        event.preventDefault();
-    }, { passive: false });
-    
+            document.addEventListener('dblclick', function(event) {
+                event.preventDefault();
+            }, { passive: false });
+
         function toggleLock() {
             isLocked = true;
             localStorage.setItem('isLocked', 'true');
@@ -159,7 +163,7 @@ window.onload = function() {
             }
         });
 
-            // Initial setup based on stored state
+    // Initial setup based on stored state
             if (isLocked) {
                 toggleLock();
             } else {
