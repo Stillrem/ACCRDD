@@ -18,17 +18,30 @@ function updateDisplayCounts() {
     localStorage.setItem('declineCount', declineCount);
 }
 
-function calculateOrdersNeeded() {
-    const currentAcceptanceRate = (acceptedCount / (acceptedCount + declinedCount)) * 100;
-    const targetAcceptanceRate = currentAcceptanceRate + 2;
+function calculateOrdersNeededForIncrease() {
+    const totalOrders = acceptedCount + declinedCount;
+    const currentAcceptanceRate = (acceptedCount / totalOrders) * 100;
+    const targetAcceptanceRate = currentAcceptanceRate + 1;
 
-    // Количество заказов, которые нужно принять, чтобы достичь целевого процентного уровня
-    let ordersNeeded = Math.ceil(((targetAcceptanceRate / 100) * (acceptedCount + declinedCount)) - acceptedCount);
+    let ordersNeeded = 0;
+    let newAcceptanceRate = currentAcceptanceRate;
 
-    // Убедитесь, что ordersNeeded не меньше текущих оставшихся заказов
-    ordersNeeded = Math.max(0, ordersNeeded);
+    while (newAcceptanceRate < targetAcceptanceRate) {
+        ordersNeeded++;
+        newAcceptanceRate = ((acceptedCount + ordersNeeded) / (totalOrders + ordersNeeded)) * 100;
+    }
 
-    document.getElementById('orders-needed').textContent = `Orders Needed: ${ordersNeeded}`;
+    return ordersNeeded;
+}
+
+function updateDisplayCounts() {
+    document.getElementById('accept-count').textContent = acceptCount;
+    document.getElementById('decline-count').textContent = declinedCount;
+    localStorage.setItem('acceptCount', acceptCount);
+    localStorage.setItem('declineCount', declineCount);
+
+    const ordersNeeded = calculateOrdersNeededForIncrease();
+    document.getElementById('orders-needed').textContent = `Orders Needed for +1%: ${ordersNeeded}`;
 }
 
 function paint(color) {
