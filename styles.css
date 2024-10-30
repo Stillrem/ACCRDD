@@ -134,6 +134,8 @@
     opacity: 0;
     animation: fadeInOut 7s forwards;
 }
+.orders-needed {
+        color: #ffffff;
 
 @keyframes fadeInOut {
     0% 100% {
