@@ -59,7 +59,7 @@ window.onload = function() {
     const neededOrdersElement = document.createElement('div');
     neededOrdersElement.id = 'needed-orders';
     document.body.appendChild(neededOrdersElement);
-}
+};
 
 function toggleLock() {
     isLocked = true;
