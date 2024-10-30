@@ -1,3 +1,4 @@
+javascript
 let acceptCount = parseInt(localStorage.getItem('acceptCount')) || 0;
 let declineCount = parseInt(localStorage.getItem('declineCount')) || 0;
 const cellColors = JSON.parse(localStorage.getItem('cellColors')) || Array(100).fill('#00FF00');
@@ -7,15 +8,13 @@ let isLocked = localStorage.getItem('isLocked') === 'true';
 
 function updateAcceptanceRate() {
     const acceptanceRate = (acceptedCount / 100) * 100;
-    document.getElementById('acceptance-rate').textContent = `Acceptance Rate: ${acceptanceRate.toFixed(1)}%`;
-    calculateOrdersForNextAcceptance();
+    document.getElementById('acceptance-rate').textContent = `Acceptance Rate: ${acceptanceRate.toFixed(2)}%`;
+    updateRemainingAccepts();
 }
 
-function calculateOrdersForNextAcceptance() {
-    const currentRate = (acceptedCount / 100) * 100;
-    const targetRate = currentRate + 1;
-    const requiredOrders = Math.ceil((targetRate * 100 - acceptedCount * 100) / (100 - targetRate));
-    document.getElementById('orders-needed').textContent = `Orders needed for next 1%: ${requiredOrders}`;
+function updateRemainingAccepts() {
+    const remainingAccepts = 100 - acceptedCount;
+    document.getElementById('remaining-accepts').textContent = `Remaining Accepts to 100%: ${remainingAccepts}`;
 }
 
 function updateDisplayCounts() {
@@ -99,8 +98,8 @@ window.onload = function() {
         cell.addEventListener('click', () => toggleCellColor(i));
 
         cellsContainer.appendChild(cell);
-
     }
+
     updateAcceptanceRate();
     updateDisplayCounts();
 
@@ -117,16 +116,16 @@ window.onload = function() {
     if ('serviceWorker' in navigator) {
         navigator.serviceWorker.register('/service-worker.js')
         .then(registration => {
-                    console.log('Service Worker registered with scope:', registration.scope);
-                })
-                .catch(error => {
-                    console.error('Service Worker registration failed:', error);
-                });
-            }
+            console.log('Service Worker registered with scope:', registration.scope);
+        })
+        .catch(error => {
+            console.error('Service Worker registration failed:', error);
+        });
+    }
 
-            document.addEventListener('dblclick', function(event) {
-                event.preventDefault();
-            }, { passive: false });
+    document.addEventListener('dblclick', function(event) {
+        event.preventDefault();
+    }, { passive: false });
 
         function toggleLock() {
             isLocked = true;
