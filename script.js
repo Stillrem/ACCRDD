@@ -8,40 +8,13 @@ let isLocked = localStorage.getItem('isLocked') === 'true';
 function updateAcceptanceRate() {
     const acceptanceRate = (acceptedCount / 100) * 100;
     document.getElementById('acceptance-rate').textContent = `Acceptance Rate: ${acceptanceRate.toFixed(2)}%`;
-    calculateOrdersNeeded();
 }
 
 function updateDisplayCounts() {
     document.getElementById('accept-count').textContent = acceptCount;
-    document.getElementById('decline-count').textContent = declinedCount;
+    document.getElementById('decline-count').textContent = declineCount;
     localStorage.setItem('acceptCount', acceptCount);
     localStorage.setItem('declineCount', declineCount);
-}
-
-function calculateOrdersNeededForIncrease() {
-    const totalOrders = acceptedCount + declinedCount;
-    const currentAcceptanceRate = (acceptedCount / totalOrders) * 100;
-    const targetAcceptanceRate = currentAcceptanceRate + 1;
-
-    let ordersNeeded = 0;
-    let newAcceptanceRate = currentAcceptanceRate;
-
-    while (newAcceptanceRate < targetAcceptanceRate) {
-        ordersNeeded++;
-        newAcceptanceRate = ((acceptedCount + ordersNeeded) / (totalOrders + ordersNeeded)) * 100;
-    }
-
-    return ordersNeeded;
-}
-
-function updateDisplayCounts() {
-    document.getElementById('accept-count').textContent = acceptCount;
-    document.getElementById('decline-count').textContent = declinedCount;
-    localStorage.setItem('acceptCount', acceptCount);
-    localStorage.setItem('declineCount', declineCount);
-
-    const ordersNeeded = calculateOrdersNeededForIncrease();
-    document.getElementById('orders-needed').textContent = `Orders Needed for +1%: ${ordersNeeded}`;
 }
 
 function paint(color) {
@@ -117,32 +90,33 @@ window.onload = function() {
         cell.addEventListener('click', () => toggleCellColor(i));
         cellsContainer.appendChild(cell);
     }
+
     updateAcceptanceRate();
     updateDisplayCounts();
 
-            document.getElementById('accept-count').addEventListener('click', () => {
-                acceptCount++;
-                updateDisplayCounts();
+    document.getElementById('accept-count').addEventListener('click', () => {
+        acceptCount++;
+        updateDisplayCounts();
+    });
+
+    document.getElementById('decline-count').addEventListener('click', () => {
+        declineCount++;
+        updateDisplayCounts();
+    });
+
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('/service-worker.js')
+            .then(registration => {
+                console.log('Service Worker registered with scope:', registration.scope);
+            })
+            .catch(error => {
+                console.error('Service Worker registration failed:', error);
             });
+    }
 
-            document.getElementById('decline-count').addEventListener('click', () => {
-                declineCount++;
-                updateDisplayCounts();
-            });
-
-            if ('serviceWorker' in navigator) {
-                navigator.serviceWorker.register('/service-worker.js')
-                .then(registration => {
-                    console.log('Service Worker registered with scope:', registration.scope);
-                })
-                .catch(error => {
-                    console.error('Service Worker registration failed:', error);
-                });
-            }
-
-            document.addEventListener('dblclick', function(event) {
-                event.preventDefault();
-            }, { passive: false });
+    document.addEventListener('dblclick', function(event) {
+        event.preventDefault();
+    }, { passive: false });
 
         function toggleLock() {
             isLocked = true;
