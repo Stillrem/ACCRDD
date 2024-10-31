@@ -29,24 +29,18 @@ function paint(color) {
 
     for (let i = cellColors.length - 1; i > 0; i--) {
         cellColors[i] = cellColors[i - 1];
-        const cell = document.getElementById(`cell-${i}`);
-        cell.style.backgroundColor = cellColors[i];
-        cell.textContent = '';
+        document.getElementById(`cell-${i}`).style.backgroundColor = cellColors[i];
+        document.getElementById(`cell-${i}`).textContent = cellColors[i] === '#00FF00' ? counter : '';
     }
 
     cellColors[0] = colorCode;
-    const firstCell = document.getElementById('cell-0');
-    firstCell.style.backgroundColor = colorCode;
-    firstCell.textContent = colorCode === '#00FF00' ? counter : '';
+    document.getElementById('cell-0').style.backgroundColor = colorCode;
+    document.getElementById('cell-0').textContent = colorCode === '#00FF00' ? counter : '';
 
     if (colorCode === '#00FF00') {
+        counter++;
         acceptCount++;
         acceptedCount++;
-        if (counter < 100) {
-            counter++;
-        } else {
-            counter = 1;
-        }
     } else {
         declineCount++;
         declinedCount++;
@@ -64,9 +58,8 @@ function toggleCellColor(cellIndex) {
 
         if (currentColor !== newColor) {
             cellColors[cellIndex] = newColor;
-            const cell = document.getElementById(`cell-${cellIndex}`);
-            cell.style.backgroundColor = newColor;
-            cell.textContent = newColor === '#00FF00' ? counter : '';
+            document.getElementById(`cell-${cellIndex}`).style.backgroundColor = newColor;
+            document.getElementById(`cell-${cellIndex}`).textContent = newColor === '#00FF00' ? counter : '';
 
             if (newColor === '#00FF00') {
                 acceptedCount++;
@@ -99,7 +92,7 @@ window.onload = function() {
         cell.className = 'cell';
         cell.id = `cell-${i}`;
         cell.style.backgroundColor = cellColors[i];
-        cell.textContent = cellColors[i] === '#00FF00' ? counter : '';
+        cell.textContent = cellColors[i] === '#00FF00' ? i + 1 : '';
 
         cell.addEventListener('click', () => toggleCellColor(i));
 
@@ -109,13 +102,11 @@ window.onload = function() {
     updateDisplayCounts();
 
     document.getElementById('accept-count').addEventListener('click', () => {
-        acceptCount++;
-        updateDisplayCounts();
+        paint('green');
     });
 
     document.getElementById('decline-count').addEventListener('click', () => {
-        declineCount++;
-        updateDisplayCounts();
+        paint('red');
     });
 
     if ('serviceWorker' in navigator) {
