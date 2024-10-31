@@ -2,12 +2,10 @@ let acceptCount = parseInt(localStorage.getItem('acceptCount')) || 0;
 let declineCount = parseInt(localStorage.getItem('declineCount')) || 0;
 const cellColors = JSON.parse(localStorage.getItem('cellColors')) || Array(100).fill('#00FF00');
 const cellCounters = JSON.parse(localStorage.getItem('cellCounters')) || Array(100).fill(0);
-let acceptedCount = cellColors.filter(color => color === '#00FF00').length;
-let declinedCount = cellColors.filter(color => color === '#FF0000').length;
 let isLocked = localStorage.getItem('isLocked') === 'true';
 
 function updateAcceptanceRate() {
-    const acceptanceRate = (acceptedCount / 100) * 100;
+    const acceptanceRate = (acceptCount / (acceptCount + declineCount) * 100) || 0;
     document.getElementById('acceptance-rate').textContent = `Acceptance Rate: ${acceptanceRate.toFixed(2)}%`;
 }
 
@@ -22,9 +20,9 @@ function paint(color) {
     const colorCode = color === 'red' ? '#FF0000' : '#00FF00';
 
     if (cellColors[99] === '#00FF00') {
-        acceptedCount--;
+        acceptCount--;
     } else if (cellColors[99] === '#FF0000') {
-        declinedCount--;
+        declineCount--;
     }
 
     for (let i = cellColors.length - 1; i > 0; i--) {
@@ -36,7 +34,7 @@ function paint(color) {
 
     cellColors[0] = colorCode;
     if (colorCode === '#00FF00') {
-        cellCounters[0] = (cellCounters[0] % 100) + 1;
+        cellCounters[0] = (cellCounters[0] + 1) || 1; // Увеличиваем счёт, начиная с 1
     } else {
         cellCounters[0] = 0;
     }
@@ -45,10 +43,8 @@ function paint(color) {
 
     if (colorCode === '#00FF00') {
         acceptCount++;
-        acceptedCount++;
     } else {
         declineCount++;
-        declinedCount++;
     }
 
     updateDisplayCounts();
@@ -67,12 +63,12 @@ function toggleCellColor(cellIndex) {
             document.getElementById(`cell-${cellIndex}`).style.backgroundColor = newColor;
 
             if (newColor === '#00FF00') {
-                acceptedCount++;
-                declinedCount--;
-                cellCounters[cellIndex] = (cellCounters[cellIndex] % 100) + 1;
+                acceptCount++;
+                declineCount--;
+                cellCounters[cellIndex] = (cellCounters[cellIndex] + 1) || 1; // Увеличиваем счёт, начиная с 1
             } else {
-                acceptedCount--;
-                declinedCount++;
+                acceptCount--;
+                declineCount++;
                 cellCounters[cellIndex] = 0;
             }
             document.getElementById(`cell-${cellIndex}`).textContent = cellCounters[cellIndex] !== 0 ? cellCounters[cellIndex] : '';
