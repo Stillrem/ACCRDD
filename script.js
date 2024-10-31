@@ -1,68 +1,112 @@
-let acceptCount = 0;
-        let declineCount = 0;
-        const cellColors = Array(100).fill('#00FF00');
-        let acceptedCount = cellColors.filter(color => color === '#00FF00').length;
-        let declinedCount = cellColors.filter(color => color === '#FF0000').length;
-        let isLocked = false;
+let acceptCount = parseInt(localStorage.getItem('acceptCount')) || 0;
+let declineCount = parseInt(localStorage.getItem('declineCount')) || 0;
+const cellColors = JSON.parse(localStorage.getItem('cellColors')) || Array(100).fill('#00FF00');
+let acceptedCount = cellColors.filter(color => color === '#00FF00').length;
+let declinedCount = cellColors.filter(color => color === '#FF0000').length;
+let isLocked = localStorage.getItem('isLocked') === 'true';
+let currentCount = parseInt(localStorage.getItem('currentCount')) || 1;
 
-        function updateAcceptanceRate() {
-            const acceptanceRate = (acceptedCount / 100) * 100;
-            document.getElementById('acceptance-rate').textContent = `Acceptance Rate: ${acceptanceRate.toFixed(2)}%`;
-        }
+function updateAcceptanceRate() {
+    const acceptanceRate = (acceptedCount / 100) * 100;
+    document.getElementById('acceptance-rate').textContent = `Acceptance Rate: ${acceptanceRate.toFixed(2)}%`;
+}
 
-        function updateDisplayCounts() {
-            document.getElementById('accept-count').textContent = acceptCount;
-            document.getElementById('decline-count').textContent = declineCount;
-        }
+function updateDisplayCounts() {
+    document.getElementById('accept-count').textContent = acceptCount;
+    document.getElementById('decline-count').textContent = declinedCount;
+    localStorage.setItem('acceptCount', acceptCount);
+    localStorage.setItem('declineCount', declineCount);
+    localStorage.setItem('currentCount', currentCount);
+}
 
-        function paint(color) {
-            const colorCode = color === 'red' ? '#FF0000' : '#00FF00';
+function paint(color) {
+    const colorCode = color === 'red' ? '#FF0000' : '#00FF00';
 
-            if (cellColors[0] === '#00FF00') {
-                acceptCount++;
-            } else if (cellColors[0] === '#FF0000') {
-                declineCount++;
-            }
+    if (cellColors[99] === '#00FF00') {
+        acceptedCount--;
+    } else if (cellColors[99] === '#FF0000') {
+        declinedCount--;
+    }
 
-            for (let i = cellColors.length - 1; i > 0; i--) {
-                cellColors[i] = cellColors[i - 1];
-                document.getElementById(`cell-${i}`).style.backgroundColor = cellColors[i];
-                document.getElementById(`cell-${i}`).textContent = document.getElementById(`cell-${i-1}`).textContent;
-            }
+    for (let i = cellColors.length - 1; i > 0; i--) {
+        cellColors[i] = cellColors[i - 1];
+        const cell = document.getElementById(`cell-${i}`);
+        cell.style.backgroundColor = cellColors[i];
+        cell.textContent = ''; // Очистка текста в ячейках
+    }
 
-            cellColors[0] = colorCode;
-            document.getElementById('cell-0').style.backgroundColor = colorCode;
-            document.getElementById('cell-0').textContent = colorCode === '#00FF00' ? acceptCount : '';
+    cellColors[0] = colorCode;
+    const firstCell = document.getElementById('cell-0');
+    firstCell.style.backgroundColor = colorCode;
 
-            updateAcceptanceRate();
-            updateDisplayCounts();
-        }
+    if (colorCode === '#00FF00') {
+        acceptCount++;
+        acceptedCount++;
+        firstCell.textContent = currentCount;
+        currentCount = (currentCount % 100) + 1; // Увеличиваем счетчик
+    } else {
+        declineCount++;
+        declinedCount++;
+        firstCell.textContent = ''; // Не отображаем счетчик для красной ячейки
+    }
 
-        function resetCount(type) {
-            if (type === 'accept') {
-                acceptCount = 0;
-            } else if (type === 'decline') {
-                declineCount = 0;
-            }
-            updateDisplayCounts();
-        }
+    updateDisplayCounts();
+    localStorage.setItem('cellColors', JSON.stringify(cellColors));
+    updateAcceptanceRate();
+}
 
-        window.onload = function() {
-            const cellsContainer = document.querySelector('.cells');
-            for (let i = 0; i < cellColors.length; i++) {
-                const cell = document.createElement('div');
-                cell.className = 'cell';
-                cell.id = `cell-${i}`;
-                cell.style.backgroundColor = cellColors[i];
+function toggleCellColor(cellIndex) {
+    if (!isLocked) {
+        const currentColor = cellColors[cellIndex];
+        const newColor = currentColor === '#00FF00' ? '#FF0000' : '#00FF00';
+
+        if (currentColor !== newColor) {
+            cellColors[cellIndex] = newColor;
+            const cell = document.getElementById(`cell-${cellIndex}`);
+            cell.style.backgroundColor = newColor;
+
+            if (newColor === '#00FF00') {
+                acceptedCount++;
+                declinedCount--;
+                cell.textContent = currentCount;
+                currentCount = (currentCount % 100) + 1;
+            } else {
+                acceptedCount--;
+                declinedCount++;
                 cell.textContent = '';
-
-                cell.addEventListener('click', () => toggleCellColor(i));
-
-                cellsContainer.appendChild(cell);
             }
-            updateAcceptanceRate();
+
             updateDisplayCounts();
+            localStorage.setItem('cellColors', JSON.stringify(cellColors));
+            updateAcceptanceRate();
         }
+    }
+}
+
+function resetCount(type) {
+    if (type === 'accept') {
+        acceptCount = 0;
+    } else if (type === 'decline') {
+        declineCount = 0;
+    }
+    updateDisplayCounts();
+}
+
+window.onload = function() {
+    const cellsContainer = document.querySelector('.cells');
+    for (let i = 0; i < cellColors.length; i++) {
+        const cell = document.createElement('div');
+        cell.className = 'cell';
+        cell.id = `cell-${i}`;
+        cell.style.backgroundColor = cellColors[i];
+        cell.textContent = ''; // Начальная очистка текста
+        cell.addEventListener('click', () => toggleCellColor(i));
+        cellsContainer.appendChild(cell);
+    }
+    updateAcceptanceRate();
+    updateDisplayCounts();
+
+    }
 
     document.getElementById('accept-count').addEventListener('click', () => {
         acceptCount++;
