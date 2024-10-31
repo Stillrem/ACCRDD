@@ -1,26 +1,30 @@
 let acceptCount = parseInt(localStorage.getItem('acceptCount')) || 0;
 let declineCount = parseInt(localStorage.getItem('declineCount')) || 0;
-const cellColors = JSON.parse(localStorage.getItem('cellColors')) || Array(100).fill(null);
+const cellColors = JSON.parse(localStorage.getItem('cellColors')) || Array(100).fill('#00FF00');
 let isLocked = localStorage.getItem('isLocked') === 'true';
 
+// Load the counter from localStorage or start from 1
+let currentCounter = parseInt(localStorage.getItem('currentCounter')) || 1;
+
 function updateAcceptanceRate() {
-    const acceptanceRate = ((acceptCount - declineCount) / 100) * 100;
+    const acceptanceRate = (acceptCount / (acceptCount + declineCount) * 100);
     document.getElementById('acceptance-rate').textContent = `Acceptance Rate: ${acceptanceRate.toFixed(2)}%`;
 }
 
 function updateDisplayCounts() {
-    document.getElementById('accept-count').textContent = acceptCount || '';
-    document.getElementById('decline-count').textContent = declineCount || '';
+    document.getElementById('accept-count').textContent = acceptCount;
+    document.getElementById('decline-count').textContent = declineCount;
     localStorage.setItem('acceptCount', acceptCount);
     localStorage.setItem('declineCount', declineCount);
+    localStorage.setItem('currentCounter', currentCounter);
 }
 
 function paint(color) {
     const colorCode = color === 'red' ? '#FF0000' : '#00FF00';
-    
+
     for (let i = cellColors.length - 1; i > 0; i--) {
         cellColors[i] = cellColors[i - 1];
-        document.getElementById(`cell-${i}`).style.backgroundColor = cellColors[i] || '#FFFFFF';
+        document.getElementById(`cell-${i}`).style.backgroundColor = cellColors[i];
     }
 
     cellColors[0] = colorCode;
@@ -28,8 +32,14 @@ function paint(color) {
 
     if (colorCode === '#00FF00') {
         acceptCount++;
+        currentCounter++;
+        document.getElementById('cell-0').textContent = currentCounter;
     } else {
         declineCount++;
+    }
+
+    if (currentCounter > 100) {
+        currentCounter = 1;
     }
 
     updateDisplayCounts();
@@ -48,9 +58,8 @@ function toggleCellColor(cellIndex) {
 
             if (newColor === '#00FF00') {
                 acceptCount++;
-                declineCount--;
+                document.getElementById(`cell-${cellIndex}`).textContent = ++currentCounter;
             } else {
-                acceptCount--;
                 declineCount++;
             }
 
@@ -67,6 +76,7 @@ function resetCount(type) {
     } else if (type === 'decline') {
         declineCount = 0;
     }
+    currentCounter = 1;
     updateDisplayCounts();
 }
 
@@ -76,7 +86,11 @@ window.onload = function() {
         const cell = document.createElement('div');
         cell.className = 'cell';
         cell.id = `cell-${i}`;
-        cell.style.backgroundColor = cellColors[i] || '#FFFFFF';
+        cell.style.backgroundColor = cellColors[i];
+
+        if (cellColors[i] === '#00FF00') {
+            cell.textContent = currentCounter++;
+        }
 
         cell.addEventListener('click', () => toggleCellColor(i));
 
