@@ -4,7 +4,6 @@ const cellColors = JSON.parse(localStorage.getItem('cellColors')) || Array(100).
 let acceptedCount = cellColors.filter(color => color === '#00FF00').length;
 let declinedCount = cellColors.filter(color => color === '#FF0000').length;
 let isLocked = localStorage.getItem('isLocked') === 'true';
-let counter = 1;
 
 function updateAcceptanceRate() {
     const acceptanceRate = (acceptedCount / 100) * 100;
@@ -13,7 +12,7 @@ function updateAcceptanceRate() {
 
 function updateDisplayCounts() {
     document.getElementById('accept-count').textContent = acceptCount;
-    document.getElementById('decline-count').textContent = declineCount;
+    document.getElementById('decline-count').textContent = declinedCount;
     localStorage.setItem('acceptCount', acceptCount);
     localStorage.setItem('declineCount', declineCount);
 }
@@ -29,16 +28,17 @@ function paint(color) {
 
     for (let i = cellColors.length - 1; i > 0; i--) {
         cellColors[i] = cellColors[i - 1];
-        document.getElementById(`cell-${i}`).style.backgroundColor = cellColors[i];
-        document.getElementById(`cell-${i}`).textContent = cellColors[i] === '#00FF00' ? counter : '';
+        const cell = document.getElementById(`cell-${i}`);
+        cell.style.backgroundColor = cellColors[i];
+        cell.textContent = i + 1; // Обновление текста в ячейке
     }
 
     cellColors[0] = colorCode;
-    document.getElementById('cell-0').style.backgroundColor = colorCode;
-    document.getElementById('cell-0').textContent = colorCode === '#00FF00' ? counter : '';
+    const firstCell = document.getElementById('cell-0');
+    firstCell.style.backgroundColor = colorCode;
+    firstCell.textContent = '1'; // Обновление текста в первой ячейке
 
     if (colorCode === '#00FF00') {
-        counter++;
         acceptCount++;
         acceptedCount++;
     } else {
@@ -58,8 +58,8 @@ function toggleCellColor(cellIndex) {
 
         if (currentColor !== newColor) {
             cellColors[cellIndex] = newColor;
-            document.getElementById(`cell-${cellIndex}`).style.backgroundColor = newColor;
-            document.getElementById(`cell-${cellIndex}`).textContent = newColor === '#00FF00' ? counter : '';
+            const cell = document.getElementById(`cell-${cellIndex}`);
+            cell.style.backgroundColor = newColor;
 
             if (newColor === '#00FF00') {
                 acceptedCount++;
@@ -92,7 +92,7 @@ window.onload = function() {
         cell.className = 'cell';
         cell.id = `cell-${i}`;
         cell.style.backgroundColor = cellColors[i];
-        cell.textContent = cellColors[i] === '#00FF00' ? i + 1 : '';
+        cell.textContent = i + 1; // Установка текста внутри каждой ячейки
 
         cell.addEventListener('click', () => toggleCellColor(i));
 
@@ -102,11 +102,13 @@ window.onload = function() {
     updateDisplayCounts();
 
     document.getElementById('accept-count').addEventListener('click', () => {
-        paint('green');
+        acceptCount++;
+        updateDisplayCounts();
     });
 
     document.getElementById('decline-count').addEventListener('click', () => {
-        paint('red');
+        declineCount++;
+        updateDisplayCounts();
     });
 
     if ('serviceWorker' in navigator) {
