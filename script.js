@@ -1,103 +1,68 @@
-let acceptCount = parseInt(localStorage.getItem('acceptCount')) || 0;
-let declineCount = parseInt(localStorage.getItem('declineCount')) || 0;
-const cellColors = JSON.parse(localStorage.getItem('cellColors')) || Array(100).fill('#00FF00');
-let acceptedCount = cellColors.filter(color => color === '#00FF00').length;
-let declinedCount = cellColors.filter(color => color === '#FF0000').length;
-let isLocked = localStorage.getItem('isLocked') === 'true';
+let acceptCount = 0;
+        let declineCount = 0;
+        const cellColors = Array(100).fill('#00FF00');
+        let acceptedCount = cellColors.filter(color => color === '#00FF00').length;
+        let declinedCount = cellColors.filter(color => color === '#FF0000').length;
+        let isLocked = false;
 
-function updateAcceptanceRate() {
-    const acceptanceRate = (acceptedCount / 100) * 100;
-    document.getElementById('acceptance-rate').textContent = `Acceptance Rate: ${acceptanceRate.toFixed(2)}%`;
-}
+        function updateAcceptanceRate() {
+            const acceptanceRate = (acceptedCount / 100) * 100;
+            document.getElementById('acceptance-rate').textContent = `Acceptance Rate: ${acceptanceRate.toFixed(2)}%`;
+        }
 
-function updateDisplayCounts() {
-    document.getElementById('accept-count').textContent = acceptCount;
-    document.getElementById('decline-count').textContent = declinedCount;
-    localStorage.setItem('acceptCount', acceptCount);
-    localStorage.setItem('declineCount', declineCount);
-}
+        function updateDisplayCounts() {
+            document.getElementById('accept-count').textContent = acceptCount;
+            document.getElementById('decline-count').textContent = declineCount;
+        }
 
-function paint(color) {
-    const colorCode = color === 'red' ? '#FF0000' : '#00FF00';
+        function paint(color) {
+            const colorCode = color === 'red' ? '#FF0000' : '#00FF00';
 
-    if (cellColors[99] === '#00FF00') {
-        acceptedCount--;
-    } else if (cellColors[99] === '#FF0000') {
-        declinedCount--;
-    }
-
-    for (let i = cellColors.length - 1; i > 0; i--) {
-        cellColors[i] = cellColors[i - 1];
-        document.getElementById(`cell-${i}`).style.backgroundColor = cellColors[i];
-        document.getElementById(`cell-${i}`).textContent = ''; // Убираем текст счетчика
-    }
-
-    cellColors[0] = colorCode;
-    document.getElementById('cell-0').style.backgroundColor = colorCode;
-    document.getElementById('cell-0').textContent = colorCode === '#00FF00' ? '1' : ''; // Добавляем счетчик только в зеленую ячейку
-
-    if (colorCode === '#00FF00') {
-        acceptCount++;
-        acceptedCount++;
-    } else {
-        declineCount++;
-        declinedCount++;
-    }
-
-    updateDisplayCounts();
-    localStorage.setItem('cellColors', JSON.stringify(cellColors));
-    updateAcceptanceRate();
-}
-
-function toggleCellColor(cellIndex) {
-    if (!isLocked) {
-        const currentColor = cellColors[cellIndex];
-        const newColor = currentColor === '#00FF00' ? '#FF0000' : '#00FF00';
-
-        if (currentColor !== newColor) {
-            cellColors[cellIndex] = newColor;
-            document.getElementById(`cell-${cellIndex}`).style.backgroundColor = newColor;
-            document.getElementById(`cell-${cellIndex}`).textContent = newColor === '#00FF00' ? cellIndex + 1 : ''; // Добавляем текст
-
-            if (newColor === '#00FF00') {
-                acceptedCount++;
-                declinedCount--;
-            } else {
-                acceptedCount--;
-                declinedCount++;
+            if (cellColors[0] === '#00FF00') {
+                acceptCount++;
+            } else if (cellColors[0] === '#FF0000') {
+                declineCount++;
             }
 
-            updateDisplayCounts();
-            localStorage.setItem('cellColors', JSON.stringify(cellColors));
+            for (let i = cellColors.length - 1; i > 0; i--) {
+                cellColors[i] = cellColors[i - 1];
+                document.getElementById(`cell-${i}`).style.backgroundColor = cellColors[i];
+                document.getElementById(`cell-${i}`).textContent = document.getElementById(`cell-${i-1}`).textContent;
+            }
+
+            cellColors[0] = colorCode;
+            document.getElementById('cell-0').style.backgroundColor = colorCode;
+            document.getElementById('cell-0').textContent = colorCode === '#00FF00' ? acceptCount : '';
+
             updateAcceptanceRate();
+            updateDisplayCounts();
         }
-    }
-}
 
-function resetCount(type) {
-    if (type === 'accept') {
-        acceptCount = 0;
-    } else if (type === 'decline') {
-        declineCount = 0;
-    }
-    updateDisplayCounts();
-}
+        function resetCount(type) {
+            if (type === 'accept') {
+                acceptCount = 0;
+            } else if (type === 'decline') {
+                declineCount = 0;
+            }
+            updateDisplayCounts();
+        }
 
-window.onload = function() {
-    const cellsContainer = document.querySelector('.cells');
-    for (let i = 0; i < cellColors.length; i++) {
-        const cell = document.createElement('div');
-        cell.className = 'cell';
-        cell.id = `cell-${i}`;
-        cell.style.backgroundColor = cellColors[i];
-        cell.textContent = cellColors[i] === '#00FF00' ? i + 1 : ''; // Добавляем текст счетчика
+        window.onload = function() {
+            const cellsContainer = document.querySelector('.cells');
+            for (let i = 0; i < cellColors.length; i++) {
+                const cell = document.createElement('div');
+                cell.className = 'cell';
+                cell.id = `cell-${i}`;
+                cell.style.backgroundColor = cellColors[i];
+                cell.textContent = '';
 
-        cell.addEventListener('click', () => toggleCellColor(i));
+                cell.addEventListener('click', () => toggleCellColor(i));
 
-        cellsContainer.appendChild(cell);
-    }
-    updateAcceptanceRate();
-    updateDisplayCounts();
+                cellsContainer.appendChild(cell);
+            }
+            updateAcceptanceRate();
+            updateDisplayCounts();
+        }
 
     document.getElementById('accept-count').addEventListener('click', () => {
         acceptCount++;
