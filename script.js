@@ -106,8 +106,6 @@ window.onload = function() {
     updateAcceptanceRate();
     updateDisplayCounts();
 
-    }
-
     document.getElementById('accept-count').addEventListener('click', () => {
         acceptCount++;
         updateDisplayCounts();
