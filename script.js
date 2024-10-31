@@ -5,7 +5,7 @@
         let declinedCount = cellColors.filter(color => color === '#FF0000').length;
         let isLocked = localStorage.getItem('isLocked') === 'true';
 
-                function updateDisplayCounts() {
+        function updateDisplayCounts() {
             document.getElementById('acceptedCount').textContent = acceptedCount;
             document.getElementById('declinedCount').textContent = declinedCount;
         }
@@ -79,7 +79,7 @@
                 updateAcceptanceRate();
                 updateCellText();
             }
-
+        }
         window.onload = function() {
             const cellsContainer = document.querySelector('.cells');
             for (let i = 0; i < cellColors.length; i++) {
