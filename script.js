@@ -31,13 +31,17 @@ function paint(color) {
         cellColors[i] = cellColors[i - 1];
         cellCounters[i] = cellCounters[i - 1];
         document.getElementById(`cell-${i}`).style.backgroundColor = cellColors[i];
-        document.getElementById(`cell-${i}`).textContent = cellCounters[i];
+        document.getElementById(`cell-${i}`).textContent = cellCounters[i] !== 0 ? cellCounters[i] : '';
     }
 
     cellColors[0] = colorCode;
-    cellCounters[0] = (cellCounters[0] % 100) + 1;
+    if (colorCode === '#00FF00') {
+        cellCounters[0] = (cellCounters[0] % 100) + 1;
+    } else {
+        cellCounters[0] = 0;
+    }
     document.getElementById('cell-0').style.backgroundColor = colorCode;
-    document.getElementById('cell-0').textContent = cellCounters[0];
+    document.getElementById('cell-0').textContent = cellCounters[0] !== 0 ? cellCounters[0] : '';
 
     if (colorCode === '#00FF00') {
         acceptCount++;
@@ -65,10 +69,13 @@ function toggleCellColor(cellIndex) {
             if (newColor === '#00FF00') {
                 acceptedCount++;
                 declinedCount--;
+                cellCounters[cellIndex] = (cellCounters[cellIndex] % 100) + 1;
             } else {
                 acceptedCount--;
                 declinedCount++;
+                cellCounters[cellIndex] = 0;
             }
+            document.getElementById(`cell-${cellIndex}`).textContent = cellCounters[cellIndex] !== 0 ? cellCounters[cellIndex] : '';
 
             updateDisplayCounts();
             localStorage.setItem('cellColors', JSON.stringify(cellColors));
