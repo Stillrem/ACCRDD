@@ -79,7 +79,6 @@
                 updateAcceptanceRate();
                 updateCellText();
             }
-        }
 
         window.onload = function() {
             const cellsContainer = document.querySelector('.cells');
