@@ -1,42 +1,30 @@
 let acceptCount = parseInt(localStorage.getItem('acceptCount')) || 0;
 let declineCount = parseInt(localStorage.getItem('declineCount')) || 0;
-const cellColors = JSON.parse(localStorage.getItem('cellColors')) || Array(100).fill('#00FF00');
-const cellCounters = JSON.parse(localStorage.getItem('cellCounters')) || Array(100).fill(0);
+const cellColors = JSON.parse(localStorage.getItem('cellColors')) || Array(100).fill(null);
 let isLocked = localStorage.getItem('isLocked') === 'true';
 
 function updateAcceptanceRate() {
-    const acceptanceRate = (acceptCount / (acceptCount + declineCount)) * 100;
+    const acceptanceRate = ((acceptCount - declineCount) / 100) * 100;
     document.getElementById('acceptance-rate').textContent = `Acceptance Rate: ${acceptanceRate.toFixed(2)}%`;
 }
 
 function updateDisplayCounts() {
-    document.getElementById('accept-count').textContent = acceptCount;
-    document.getElementById('decline-count').textContent = declineCount;
+    document.getElementById('accept-count').textContent = acceptCount || '';
+    document.getElementById('decline-count').textContent = declineCount || '';
     localStorage.setItem('acceptCount', acceptCount);
     localStorage.setItem('declineCount', declineCount);
 }
 
 function paint(color) {
     const colorCode = color === 'red' ? '#FF0000' : '#00FF00';
-
+    
     for (let i = cellColors.length - 1; i > 0; i--) {
         cellColors[i] = cellColors[i - 1];
-        cellCounters[i] = cellCounters[i - 1];
-        document.getElementById(`cell-${i}`).style.backgroundColor = cellColors[i];
-        document.getElementById(`cell-${i}`).textContent = cellCounters[i] !== 0 ? cellCounters[i] : '';
+        document.getElementById(`cell-${i}`).style.backgroundColor = cellColors[i] || '#FFFFFF';
     }
 
     cellColors[0] = colorCode;
-    
-    // Увеличиваем счетчик если ячейка зеленая
-    if (colorCode === '#00FF00') {
-        cellCounters[0] = (cellCounters[0] || 0) + 1;
-    } else {
-        cellCounters[0] = 0;
-    }
-    
     document.getElementById('cell-0').style.backgroundColor = colorCode;
-    document.getElementById('cell-0').textContent = cellCounters[0] !== 0 ? cellCounters[0] : '';
 
     if (colorCode === '#00FF00') {
         acceptCount++;
@@ -46,7 +34,6 @@ function paint(color) {
 
     updateDisplayCounts();
     localStorage.setItem('cellColors', JSON.stringify(cellColors));
-    localStorage.setItem('cellCounters', JSON.stringify(cellCounters));
     updateAcceptanceRate();
 }
 
@@ -62,13 +49,10 @@ function toggleCellColor(cellIndex) {
             if (newColor === '#00FF00') {
                 acceptCount++;
                 declineCount--;
-                cellCounters[cellIndex] = (cellCounters[cellIndex] || 0) + 1;
             } else {
                 acceptCount--;
                 declineCount++;
-                cellCounters[cellIndex] = 0;
             }
-            document.getElementById(`cell-${cellIndex}`).textContent = cellCounters[cellIndex] !== 0 ? cellCounters[cellIndex] : '';
 
             updateDisplayCounts();
             localStorage.setItem('cellColors', JSON.stringify(cellColors));
@@ -92,14 +76,15 @@ window.onload = function() {
         const cell = document.createElement('div');
         cell.className = 'cell';
         cell.id = `cell-${i}`;
-        cell.style.backgroundColor = cellColors[i];
-        cell.textContent = cellCounters[i] !== 0 ? cellCounters[i] : '';
+        cell.style.backgroundColor = cellColors[i] || '#FFFFFF';
+
+        cell.addEventListener('click', () => toggleCellColor(i));
+
         cellsContainer.appendChild(cell);
     }
-
-    updateDisplayCounts();
     updateAcceptanceRate();
-    
+    updateDisplayCounts();
+
     document.getElementById('accept-count').addEventListener('click', () => {
         acceptCount++;
         updateDisplayCounts();
@@ -112,12 +97,12 @@ window.onload = function() {
 
     if ('serviceWorker' in navigator) {
         navigator.serviceWorker.register('/service-worker.js')
-            .then(registration => {
-                console.log('Service Worker registered with scope:', registration.scope);
-            })
-            .catch(error => {
-                console.error('Service Worker registration failed:', error);
-            });
+        .then(registration => {
+            console.log('Service Worker registered with scope:', registration.scope);
+        })
+        .catch(error => {
+            console.error('Service Worker registration failed:', error);
+        });
     }
 
     document.addEventListener('dblclick', function(event) {
