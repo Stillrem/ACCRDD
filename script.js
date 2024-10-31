@@ -5,16 +5,28 @@
         let declinedCount = cellColors.filter(color => color === '#FF0000').length;
         let isLocked = localStorage.getItem('isLocked') === 'true';
 
-        function updateAcceptanceRate() {
-            const acceptanceRate = (acceptedCount / 100) * 100;
-            document.getElementById('acceptance-rate').textContent = `Acceptance Rate: ${acceptanceRate.toFixed(2)}%`;
+                function updateDisplayCounts() {
+            document.getElementById('acceptedCount').textContent = acceptedCount;
+            document.getElementById('declinedCount').textContent = declinedCount;
         }
 
-        function updateDisplayCounts() {
-            document.getElementById('accept-count').textContent = acceptCount;
-            document.getElementById('decline-count').textContent = declinedCount;
-            localStorage.setItem('acceptCount', acceptCount);
-            localStorage.setItem('declineCount', declineCount);
+        function updateAcceptanceRate() {
+            const total = acceptedCount + declinedCount;
+            const rate = total > 0 ? ((acceptedCount / total) * 100).toFixed(2) : 0;
+            document.getElementById('acceptanceRate').textContent = `${rate}%`;
+        }
+
+        function updateCellText() {
+            for (let i = 0; i < cellColors.length; i++) {
+                const cell = document.getElementById(`cell-${i}`);
+                cell.textContent = '';
+                if (cellColors[i] === '#00FF00') {
+                    cell.textContent = i + 1;
+                    cell.style.color = 'black';
+                    cell.style.textAlign = 'center';
+                    cell.style.lineHeight = '30px'; // Центрирование текста
+                }
+            }
         }
 
         function paint(color) {
@@ -35,49 +47,38 @@
             document.getElementById('cell-0').style.backgroundColor = colorCode;
 
             if (colorCode === '#00FF00') {
-                acceptCount++;
                 acceptedCount++;
             } else {
-                declineCount++;
                 declinedCount++;
             }
 
             updateDisplayCounts();
             localStorage.setItem('cellColors', JSON.stringify(cellColors));
             updateAcceptanceRate();
+            updateCellText();
         }
 
         function toggleCellColor(cellIndex) {
-            if (!isLocked) {
-                const currentColor = cellColors[cellIndex];
-                const newColor = currentColor === '#00FF00' ? '#FF0000' : '#00FF00';
+            const currentColor = cellColors[cellIndex];
+            const newColor = currentColor === '#00FF00' ? '#FF0000' : '#00FF00';
 
-                if (currentColor !== newColor) {
-                    cellColors[cellIndex] = newColor;
-                    document.getElementById(`cell-${cellIndex}`).style.backgroundColor = newColor;
+            if (currentColor !== newColor) {
+                cellColors[cellIndex] = newColor;
+                document.getElementById(`cell-${cellIndex}`).style.backgroundColor = newColor;
 
-                    if (newColor === '#00FF00') {
-                        acceptedCount++;
-                        declinedCount--;
-                    } else {
-                        acceptedCount--;
-                        declinedCount++;
-                    }
-
- updateDisplayCounts();
- localStorage.setItem('cellColors', JSON.stringify(cellColors));
-updateAcceptanceRate();
+                if (newColor === '#00FF00') {
+                    acceptedCount++;
+                    declinedCount--;
+                } else {
+                    acceptedCount--;
+                    declinedCount++;
                 }
-            }
-        }
 
-        function resetCount(type) {
-            if (type === 'accept') {
-                acceptCount = 0;
-            } else if (type === 'decline') {
-                declineCount = 0;
+                updateDisplayCounts();
+                localStorage.setItem('cellColors', JSON.stringify(cellColors));
+                updateAcceptanceRate();
+                updateCellText();
             }
-            updateDisplayCounts();
         }
 
         window.onload = function() {
