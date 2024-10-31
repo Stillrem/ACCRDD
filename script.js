@@ -22,32 +22,32 @@ function updateDisplayCounts() {
 function paint(color) {
     const colorCode = color === 'red' ? '#FF0000' : '#00FF00';
 
-    if (cellColors[99] === '#00FF00') {
+    if (cellColors[0] === '#00FF00') {
         acceptedCount--;
-    } else if (cellColors[99] === '#FF0000') {
+    } else if (cellColors[0] === '#FF0000') {
         declinedCount--;
     }
 
-    for (let i = cellColors.length - 1; i > 0; i--) {
-        cellColors[i] = cellColors[i - 1];
+    for (let i = 0; i < cellColors.length - 1; i++) {
+        cellColors[i] = cellColors[i + 1];
         const cell = document.getElementById(`cell-${i}`);
         cell.style.backgroundColor = cellColors[i];
         cell.textContent = ''; // Очистка текста в ячейках
     }
 
-    cellColors[0] = colorCode;
-    const firstCell = document.getElementById('cell-0');
-    firstCell.style.backgroundColor = colorCode;
+    cellColors[cellColors.length - 1] = colorCode;
+    const lastCell = document.getElementById(`cell-${cellColors.length - 1}`);
+    lastCell.style.backgroundColor = colorCode;
 
     if (colorCode === '#00FF00') {
         acceptCount++;
         acceptedCount++;
-        firstCell.textContent = currentCount;
+        lastCell.textContent = currentCount;
         currentCount = (currentCount % 100) + 1; // Увеличиваем счетчик
     } else {
         declineCount++;
         declinedCount++;
-        firstCell.textContent = ''; // Не отображаем счетчик для красной ячейки
+        lastCell.textContent = ''; // Не отображаем счетчик для красной ячейки
     }
 
     updateDisplayCounts();
