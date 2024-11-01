@@ -54,13 +54,7 @@ function paint(color) {
         currentNumber = 1;
     }
 
-    localStorage.setItem('currentNumber', currentNumber);
-    updateDisplayCounts();
-    localStorage.setItem('cellColors', JSON.stringify(cellColors));
-    updateAcceptanceRate();
-}
-
-function toggleCellColor(cellIndex) {
+    function toggleCellColor(cellIndex) {
             if (!isLocked) {
                 const currentColor = cellColors[cellIndex];
                 const newColor = currentColor === '#00FF00' ? '#FF0000' : '#00FF00';
@@ -76,13 +70,14 @@ function toggleCellColor(cellIndex) {
                         acceptedCount--;
                         declinedCount++;
                     }
-
- updateDisplayCounts();
- localStorage.setItem('cellColors', JSON.stringify(cellColors));
-updateAcceptanceRate();
+ 
+    localStorage.setItem('currentNumber', currentNumber);
+    updateDisplayCounts();
+    localStorage.setItem('cellColors', JSON.stringify(cellColors));
+    updateAcceptanceRate();
                 }
             }
-}
+    }
                 
 function resetAll() {
     acceptCount = 0;
