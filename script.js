@@ -1,8 +1,8 @@
 let acceptCount = parseInt(localStorage.getItem('acceptCount')) || 0;
 let declineCount = parseInt(localStorage.getItem('declineCount')) || 0;
-const cellData = JSON.parse(localStorage.getItem('cellData')) || Array(100).fill({ color: '#00FF00', number: null });
-let acceptedCount = cellData.filter(cell => cell.color === '#00FF00').length;
-let declinedCount = cellData.filter(cell => cell.color === '#FF0000').length;
+const cellColors = JSON.parse(localStorage.getItem('cellColors')) || Array(100).fill('#00FF00');
+let acceptedCount = cellColors.filter(color => color === '#00FF00').length;
+let declinedCount = cellColors.filter(color => color === '#FF0000').length;
 let isLocked = localStorage.getItem('isLocked') === 'true';
 
 // Переменная для отслеживания номера
@@ -23,72 +23,62 @@ function updateDisplayCounts() {
 function paint(color) {
     const colorCode = color === 'red' ? '#FF0000' : '#00FF00';
 
-    if (cellData[99].color === '#00FF00') {
+    if (cellColors[99] === '#00FF00') {
         acceptedCount--;
-    } else if (cellData[99].color === '#FF0000') {
+    } else if (cellColors[99] === '#FF0000') {
         declinedCount--;
     }
 
-    for (let i = cellData.length - 1; i > 0; i--) {
-        cellData[i].color = cellData[i - 1].color;
-        cellData[i].number = cellData[i - 1].number;
-        document.getElementById(`cell-${i}`).style.backgroundColor = cellData[i].color;
-        document.getElementById(`cell-${i}`).textContent = cellData[i].number;
+    for (let i = cellColors.length - 1; i > 0; i--) {
+        cellColors[i] = cellColors[i - 1];
+        document.getElementById(`cell-${i}`).style.backgroundColor = cellColors[i];
+        document.getElementById(`cell-${i}`).textContent = document.getElementById(`cell-${i-1}`).textContent; // Перемещение номера
     }
 
-    cellData[0].color = colorCode;
+    cellColors[0] = colorCode;
     document.getElementById('cell-0').style.backgroundColor = colorCode;
-    
+    document.getElementById('cell-0').textContent = currentNumber; // Установка номера в первую ячейку
+
     if (colorCode === '#00FF00') {
-        cellData[0].number = currentNumber; // Установка номера в первую ячейку
         acceptCount++;
         acceptedCount++;
-
-        // Увеличение номера, если он меньше 100
-        if (currentNumber < 100) {
-            currentNumber++;
-        } else {
-            currentNumber = 1; // Сброс номера после 100
-        }
     } else {
-        cellData[0].number = null; // Удаление номера в красной ячейке
         declineCount++;
         declinedCount++;
     }
 
+    // Увеличение номера, если он меньше 100
+    if (currentNumber < 100) {
+        currentNumber++;
+    } else {
+        currentNumber = 1; // Сброс номера после 100
+    }
     localStorage.setItem('currentNumber', currentNumber);
 
     updateDisplayCounts();
-    localStorage.setItem('cellData', JSON.stringify(cellData));
+    localStorage.setItem('cellColors', JSON.stringify(cellColors));
     updateAcceptanceRate();
 }
 
 function toggleCellColor(cellIndex) {
     if (!isLocked) {
-        const currentColor = cellData[cellIndex].color;
+        const currentColor = cellColors[cellIndex];
         const newColor = currentColor === '#00FF00' ? '#FF0000' : '#00FF00';
 
         if (currentColor !== newColor) {
-            cellData[cellIndex].color = newColor;
+            cellColors[cellIndex] = newColor;
             document.getElementById(`cell-${cellIndex}`).style.backgroundColor = newColor;
 
             if (newColor === '#00FF00') {
                 acceptedCount++;
                 declinedCount--;
-                cellData[cellIndex].number = currentNumber;
-                if (currentNumber < 100) {
-                    currentNumber++;
-                } else {
-                    currentNumber = 1;
-                }
             } else {
                 acceptedCount--;
                 declinedCount++;
-                cellData[cellIndex].number = null;
             }
 
             updateDisplayCounts();
-            localStorage.setItem('cellData', JSON.stringify(cellData));
+            localStorage.setItem('cellColors', JSON.stringify(cellColors));
             updateAcceptanceRate();
         }
     }
