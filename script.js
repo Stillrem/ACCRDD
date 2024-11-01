@@ -53,8 +53,14 @@ function paint(color) {
     if (currentNumber > 100) {
         currentNumber = 1;
     }
+ 
+    localStorage.setItem('currentNumber', currentNumber);
+    updateDisplayCounts();
+    localStorage.setItem('cellColors', JSON.stringify(cellColors));
+    updateAcceptanceRate();
+    }
 
-    function toggleCellColor(cellIndex) {
+        function toggleCellColor(cellIndex) {
             if (!isLocked) {
                 const currentColor = cellColors[cellIndex];
                 const newColor = currentColor === '#00FF00' ? '#FF0000' : '#00FF00';
@@ -70,29 +76,22 @@ function paint(color) {
                         acceptedCount--;
                         declinedCount++;
                     }
- 
-    localStorage.setItem('currentNumber', currentNumber);
-    updateDisplayCounts();
-    localStorage.setItem('cellColors', JSON.stringify(cellColors));
-    updateAcceptanceRate();
+
+ updateDisplayCounts();
+ localStorage.setItem('cellColors', JSON.stringify(cellColors));
+updateAcceptanceRate();
                 }
             }
-    }
+        }
                 
-function resetAll() {
-    acceptCount = 0;
-    declineCount = 0;
-    currentNumber = 1;
-    cellColors.fill('#00FF00');
-    acceptedCount = 100;
-    declinedCount = 0;
-    localStorage.setItem('acceptCount', acceptCount);
-    localStorage.setItem('declineCount', declineCount);
-    localStorage.setItem('currentNumber', currentNumber);
-    localStorage.setItem('cellColors', JSON.stringify(cellColors));
-    updateDisplayCounts();
-    updateAcceptanceRate();
-}
+        function resetCount(type) {
+            if (type === 'accept') {
+                acceptCount = 0;
+            } else if (type === 'decline') {
+                declineCount = 0;
+            }
+            updateDisplayCounts();
+        }
 
 window.onload = function() {
     const cellsContainer = document.querySelector('.cells');
