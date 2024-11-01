@@ -1,3 +1,25 @@
+let acceptCount = parseInt(localStorage.getItem('acceptCount')) || 0;
+let declineCount = parseInt(localStorage.getItem('declineCount')) || 0;
+const cellColors = JSON.parse(localStorage.getItem('cellColors')) || Array(100).fill('#00FF00');
+let acceptedCount = cellColors.filter(color => color === '#00FF00').length;
+let declinedCount = cellColors.filter(color => color === '#FF0000').length;
+let isLocked = localStorage.getItem('isLocked') === 'true';
+
+// Переменная для отслеживания номера
+let currentNumber = parseInt(localStorage.getItem('currentNumber')) || 1;
+
+function updateAcceptanceRate() {
+    const acceptanceRate = (acceptedCount / 100) * 100;
+    document.getElementById('acceptance-rate').textContent = `Acceptance Rate: ${acceptanceRate.toFixed(2)}%`;
+}
+
+function updateDisplayCounts() {
+    document.getElementById('accept-count').textContent = acceptCount;
+    document.getElementById('decline-count').textContent = declineCount;
+    localStorage.setItem('acceptCount', acceptCount);
+    localStorage.setItem('declineCount', declineCount);
+}
+
 function paint(color) {
     const colorCode = color === 'red' ? '#FF0000' : '#00FF00';
 
