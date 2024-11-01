@@ -87,8 +87,8 @@ updateAcceptanceRate();
         function resetCount(type) {
             if (type === 'accept') {
                 acceptCount = 0;
-            } else if (type === 'decline') {
-                //declineCount = 0;
+            } //else if (type === 'decline') {
+                declineCount = 0;
             }
             updateDisplayCounts();
         }
