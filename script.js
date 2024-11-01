@@ -55,18 +55,24 @@
     updateDisplayCounts();
     localStorage.setItem('cellColors', JSON.stringify(cellColors));
     updateAcceptanceRate();
-        }
+}
 
-        function resetCount(type) {
-            if (type === 'accept') {
-                acceptCount = 0;
-            } else if (type === 'decline') {
-                declineCount = 0;
-            }
-            updateDisplayCounts();
-        }
+function resetAll() {
+    acceptCount = 0;
+    declineCount = 0;
+    currentNumber = 1;
+    cellColors.fill('#00FF00');
+    acceptedCount = 100;
+    declinedCount = 0;
+    localStorage.setItem('acceptCount', acceptCount);
+    localStorage.setItem('declineCount', declineCount);
+    localStorage.setItem('currentNumber', currentNumber);
+    localStorage.setItem('cellColors', JSON.stringify(cellColors));
+    updateDisplayCounts();
+    updateAcceptanceRate();
+}
 
-        window.onload = function() {
+window.onload = function() {
     const cellsContainer = document.querySelector('.cells');
     for (let i = 0; i < cellColors.length; i++) {
         const cell = document.createElement('div');
