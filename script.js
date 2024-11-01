@@ -56,8 +56,6 @@
     localStorage.setItem('cellColors', JSON.stringify(cellColors));
     updateAcceptanceRate();
         }
-            }
-        }
 
         function resetCount(type) {
             if (type === 'accept') {
