@@ -5,6 +5,9 @@ let acceptedCount = cellColors.filter(color => color === '#00FF00').length;
 let declinedCount = cellColors.filter(color => color === '#FF0000').length;
 let isLocked = localStorage.getItem('isLocked') === 'true';
 
+// Переменная для отслеживания номера
+let currentNumber = parseInt(localStorage.getItem('currentNumber')) || 1;
+
 function updateAcceptanceRate() {
     const acceptanceRate = (acceptedCount / 100) * 100;
     document.getElementById('acceptance-rate').textContent = `Acceptance Rate: ${acceptanceRate.toFixed(2)}%`;
@@ -12,7 +15,7 @@ function updateAcceptanceRate() {
 
 function updateDisplayCounts() {
     document.getElementById('accept-count').textContent = acceptCount;
-    document.getElementById('decline-count').textContent = declinedCount;
+    document.getElementById('decline-count').textContent = declineCount;
     localStorage.setItem('acceptCount', acceptCount);
     localStorage.setItem('declineCount', declineCount);
 }
@@ -20,15 +23,21 @@ function updateDisplayCounts() {
 function paint(color) {
     const colorCode = color === 'red' ? '#FF0000' : '#00FF00';
 
-    for (let i = 0; i < cellColors.length - 1; i++) {
-        cellColors[i] = cellColors[i + 1];
-        document.getElementById(`cell-${i}`).style.backgroundColor = cellColors[i];
-        document.getElementById(`cell-${i}`).textContent = i + 1;
+    if (cellColors[99] === '#00FF00') {
+        acceptedCount--;
+    } else if (cellColors[99] === '#FF0000') {
+        declinedCount--;
     }
 
-    cellColors[99] = colorCode;
-    document.getElementById('cell-99').style.backgroundColor = colorCode;
-    document.getElementById('cell-99').textContent = 100;
+    for (let i = cellColors.length - 1; i > 0; i--) {
+        cellColors[i] = cellColors[i - 1];
+        document.getElementById(`cell-${i}`).style.backgroundColor = cellColors[i];
+        document.getElementById(`cell-${i}`).textContent = document.getElementById(`cell-${i-1}`).textContent; // Перемещение номера
+    }
+
+    cellColors[0] = colorCode;
+    document.getElementById('cell-0').style.backgroundColor = colorCode;
+    document.getElementById('cell-0').textContent = currentNumber; // Установка номера в первую ячейку
 
     if (colorCode === '#00FF00') {
         acceptCount++;
@@ -37,6 +46,14 @@ function paint(color) {
         declineCount++;
         declinedCount++;
     }
+
+    // Увеличение номера, если он меньше 100
+    if (currentNumber < 100) {
+        currentNumber++;
+    } else {
+        currentNumber = 1; // Сброс номера после 100
+    }
+    localStorage.setItem('currentNumber', currentNumber);
 
     updateDisplayCounts();
     localStorage.setItem('cellColors', JSON.stringify(cellColors));
@@ -83,14 +100,11 @@ window.onload = function() {
         cell.className = 'cell';
         cell.id = `cell-${i}`;
         cell.style.backgroundColor = cellColors[i];
-        cell.textContent = i + 1;
-
-        cell.addEventListener('click', () => toggleCellColor(i));
-
+        cell.style.textAlign = 'center'; // Центрирование текста в ячейке
         cellsContainer.appendChild(cell);
     }
-    updateAcceptanceRate();
     updateDisplayCounts();
+    updateAcceptanceRate();
 
     document.getElementById('accept-count').addEventListener('click', () => {
         acceptCount++;
