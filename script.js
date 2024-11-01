@@ -38,6 +38,8 @@ function paint(color) {
     cellColors[0] = colorCode;
     document.getElementById('cell-0').style.backgroundColor = colorCode;
     document.getElementById('cell-0').textContent = currentNumber; // Установка номера в первую ячейку
+    document.getElementById('cell-0').textContent = colorCode === '#FF0000' ? '' : currentNumber;
+
 
     if (colorCode === '#00FF00') {
         acceptCount++;
