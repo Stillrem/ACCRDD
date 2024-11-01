@@ -38,8 +38,7 @@ function paint(color) {
     cellColors[0] = colorCode;
     document.getElementById('cell-0').style.backgroundColor = colorCode;
     document.getElementById('cell-0').textContent = currentNumber; // Установка номера в первую ячейку
-    document.getElementById('cell-0').textContent = colorCode === '#FF0000' ? currentNumber: ";
-
+    document.getElementById('cell-0').textContent = colorCode === '#FF0000' ? '' : currentNumber;
 
     if (colorCode === '#00FF00') {
         acceptCount++;
@@ -103,6 +102,10 @@ window.onload = function() {
         cell.id = `cell-${i}`;
         cell.style.backgroundColor = cellColors[i];
         cell.style.textAlign = 'center'; // Центрирование текста в ячейке
+        // Заполняем номером, если ячейка зеленая
+        if (cellColors[i] === '#00FF00') {
+            cell.textContent = i + 1;
+        }
         cellsContainer.appendChild(cell);
     }
     updateDisplayCounts();
