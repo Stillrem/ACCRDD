@@ -32,29 +32,29 @@ function paint(color) {
     for (let i = cellColors.length - 1; i > 0; i--) {
         cellColors[i] = cellColors[i - 1];
         document.getElementById(`cell-${i}`).style.backgroundColor = cellColors[i];
-        document.getElementById(`cell-${i}`).textContent = document.getElementById(`cell-${i-1}`).textContent;
+        document.getElementById(`cell-${i}`).textContent = document.getElementById(`cell-${i-1}`).textContent; // Перемещение номера
     }
 
     cellColors[0] = colorCode;
     document.getElementById('cell-0').style.backgroundColor = colorCode;
+    document.getElementById('cell-0').textContent = currentNumber; // Установка номера в первую ячейку
 
     if (colorCode === '#00FF00') {
-        document.getElementById('cell-0').textContent = currentNumber;
         acceptCount++;
         acceptedCount++;
-
-        if (currentNumber < 100) {
-            currentNumber++;
-        } else {
-            currentNumber = 1; // Сброс номера после 100
-        }
     } else {
-        document.getElementById('cell-0').textContent = ''; // Очистка номера для красной ячейки
         declineCount++;
         declinedCount++;
     }
 
+    // Увеличение номера, если он меньше 100
+    if (currentNumber < 100) {
+        currentNumber++;
+    } else {
+        currentNumber = 1; // Сброс номера после 100
+    }
     localStorage.setItem('currentNumber', currentNumber);
+
     updateDisplayCounts();
     localStorage.setItem('cellColors', JSON.stringify(cellColors));
     updateAcceptanceRate();
@@ -100,17 +100,9 @@ window.onload = function() {
         cell.className = 'cell';
         cell.id = `cell-${i}`;
         cell.style.backgroundColor = cellColors[i];
-        cell.style.textAlign = 'center'; 
-
-        if (cellColors[i] === '#00FF00') {
-            cell.textContent = (i < acceptedCount) ? (i + 1) : ''; // Нумерация только для зелёных
-        } else {
-            cell.textContent = ''; // Пусто для красных
-        }
-
+        cell.style.textAlign = 'center'; // Центрирование текста в ячейке
         cellsContainer.appendChild(cell);
     }
-
     updateDisplayCounts();
     updateAcceptanceRate();
 
