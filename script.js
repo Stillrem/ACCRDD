@@ -1,23 +1,26 @@
-        let acceptCount = parseInt(localStorage.getItem('acceptCount')) || 0;
-        let declineCount = parseInt(localStorage.getItem('declineCount')) || 0;
-        const cellColors = JSON.parse(localStorage.getItem('cellColors')) || Array(100).fill('#00FF00');
-        let acceptedCount = cellColors.filter(color => color === '#00FF00').length;
-        let declinedCount = cellColors.filter(color => color === '#FF0000').length;
-        let isLocked = localStorage.getItem('isLocked') === 'true';
+let acceptCount = parseInt(localStorage.getItem('acceptCount')) || 0;
+let declineCount = parseInt(localStorage.getItem('declineCount')) || 0;
+const cellColors = JSON.parse(localStorage.getItem('cellColors')) || Array(100).fill('#00FF00');
+let acceptedCount = cellColors.filter(color => color === '#00FF00').length;
+let declinedCount = cellColors.filter(color => color === '#FF0000').length;
+let isLocked = localStorage.getItem('isLocked') === 'true';
 
-        function updateAcceptanceRate() {
-            const acceptanceRate = (acceptedCount / 100) * 100;
-            document.getElementById('acceptance-rate').textContent = `Acceptance Rate: ${acceptanceRate.toFixed(2)}%`;
-        }
+// Переменная для отслеживания номера
+let currentNumber = parseInt(localStorage.getItem('currentNumber')) || 1;
 
-        function updateDisplayCounts() {
-            document.getElementById('accept-count').textContent = acceptCount;
-            document.getElementById('decline-count').textContent = declinedCount;
-            localStorage.setItem('acceptCount', acceptCount);
-            localStorage.setItem('declineCount', declineCount);
-        }
+function updateAcceptanceRate() {
+    const acceptanceRate = (acceptedCount / 100) * 100;
+    document.getElementById('acceptance-rate').textContent = `Acceptance Rate: ${acceptanceRate.toFixed(2)}%`;
+}
 
-        function paint(color) {
+function updateDisplayCounts() {
+    document.getElementById('accept-count').textContent = acceptCount;
+    document.getElementById('decline-count').textContent = declineCount;
+    localStorage.setItem('acceptCount', acceptCount);
+    localStorage.setItem('declineCount', declineCount);
+}
+
+function paint(color) {
     const colorCode = color === 'red' ? '#FF0000' : '#00FF00';
 
     if (cellColors[99] === '#00FF00') {
@@ -29,47 +32,65 @@
     for (let i = cellColors.length - 1; i > 0; i--) {
         cellColors[i] = cellColors[i - 1];
         document.getElementById(`cell-${i}`).style.backgroundColor = cellColors[i];
-        document.getElementById(`cell-${i}`).textContent = document.getElementById(`cell-${i-1}`).textContent;
+        document.getElementById(`cell-${i}`).textContent = document.getElementById(`cell-${i-1}`).textContent; // Перемещение номера
     }
 
     cellColors[0] = colorCode;
     document.getElementById('cell-0').style.backgroundColor = colorCode;
+    document.getElementById('cell-0').textContent = currentNumber; // Установка номера в первую ячейку
 
-    // Пропуск нумерации красной ячейки
     if (colorCode === '#00FF00') {
-        document.getElementById('cell-0').textContent = currentNumber;
         acceptCount++;
         acceptedCount++;
-        currentNumber++;
     } else {
-        document.getElementById('cell-0').textContent = ''; // Оставить пустым для красной
         declineCount++;
         declinedCount++;
     }
 
-    if (currentNumber > 100) {
-        currentNumber = 1;
+    // Увеличение номера, если он меньше 100
+    if (currentNumber < 100) {
+        currentNumber++;
+    } else {
+        currentNumber = 1; // Сброс номера после 100
     }
-
     localStorage.setItem('currentNumber', currentNumber);
+
     updateDisplayCounts();
     localStorage.setItem('cellColors', JSON.stringify(cellColors));
     updateAcceptanceRate();
 }
 
-function resetAll() {
-    acceptCount = 0;
-    declineCount = 0;
-    currentNumber = 1;
-    cellColors.fill('#00FF00');
-    acceptedCount = 100;
-    declinedCount = 0;
-    localStorage.setItem('acceptCount', acceptCount);
-    localStorage.setItem('declineCount', declineCount);
-    localStorage.setItem('currentNumber', currentNumber);
-    localStorage.setItem('cellColors', JSON.stringify(cellColors));
+function toggleCellColor(cellIndex) {
+    if (!isLocked) {
+        const currentColor = cellColors[cellIndex];
+        const newColor = currentColor === '#00FF00' ? '#FF0000' : '#00FF00';
+
+        if (currentColor !== newColor) {
+            cellColors[cellIndex] = newColor;
+            document.getElementById(`cell-${cellIndex}`).style.backgroundColor = newColor;
+
+            if (newColor === '#00FF00') {
+                acceptedCount++;
+                declinedCount--;
+            } else {
+                acceptedCount--;
+                declinedCount++;
+            }
+
+            updateDisplayCounts();
+            localStorage.setItem('cellColors', JSON.stringify(cellColors));
+            updateAcceptanceRate();
+        }
+    }
+}
+
+function resetCount(type) {
+    if (type === 'accept') {
+        acceptCount = 0;
+    } else if (type === 'decline') {
+        declineCount = 0;
+    }
     updateDisplayCounts();
-    updateAcceptanceRate();
 }
 
 window.onload = function() {
@@ -79,8 +100,7 @@ window.onload = function() {
         cell.className = 'cell';
         cell.id = `cell-${i}`;
         cell.style.backgroundColor = cellColors[i];
-        cell.style.textAlign = 'center';
-        cell.onclick = () => toggleCellColor(i); // Установка обработчика клика
+        cell.style.textAlign = 'center'; // Центрирование текста в ячейке
         cellsContainer.appendChild(cell);
     }
     updateDisplayCounts();
