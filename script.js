@@ -1,26 +1,23 @@
-let acceptCount = parseInt(localStorage.getItem('acceptCount')) || 0;
-let declineCount = parseInt(localStorage.getItem('declineCount')) || 0;
-const cellColors = JSON.parse(localStorage.getItem('cellColors')) || Array(100).fill('#00FF00');
-let acceptedCount = cellColors.filter(color => color === '#00FF00').length;
-let declinedCount = cellColors.filter(color => color === '#FF0000').length;
-let isLocked = localStorage.getItem('isLocked') === 'true';
+        let acceptCount = parseInt(localStorage.getItem('acceptCount')) || 0;
+        let declineCount = parseInt(localStorage.getItem('declineCount')) || 0;
+        const cellColors = JSON.parse(localStorage.getItem('cellColors')) || Array(100).fill('#00FF00');
+        let acceptedCount = cellColors.filter(color => color === '#00FF00').length;
+        let declinedCount = cellColors.filter(color => color === '#FF0000').length;
+        let isLocked = localStorage.getItem('isLocked') === 'true';
 
-// Переменная для отслеживания номера
-let currentNumber = parseInt(localStorage.getItem('currentNumber')) || 1;
+        function updateAcceptanceRate() {
+            const acceptanceRate = (acceptedCount / 100) * 100;
+            document.getElementById('acceptance-rate').textContent = `Acceptance Rate: ${acceptanceRate.toFixed(2)}%`;
+        }
 
-function updateAcceptanceRate() {
-    const acceptanceRate = (acceptedCount / 100) * 100;
-    document.getElementById('acceptance-rate').textContent = `Acceptance Rate: ${acceptanceRate.toFixed(2)}%`;
-}
+        function updateDisplayCounts() {
+            document.getElementById('accept-count').textContent = acceptCount;
+            document.getElementById('decline-count').textContent = declinedCount;
+            localStorage.setItem('acceptCount', acceptCount);
+            localStorage.setItem('declineCount', declineCount);
+        }
 
-function updateDisplayCounts() {
-    document.getElementById('accept-count').textContent = acceptCount;
-    document.getElementById('decline-count').textContent = declineCount;
-    localStorage.setItem('acceptCount', acceptCount);
-    localStorage.setItem('declineCount', declineCount);
-}
-
-function paint(color) {
+        function paint(color) {
     const colorCode = color === 'red' ? '#FF0000' : '#00FF00';
 
     if (cellColors[99] === '#00FF00') {
@@ -58,24 +55,20 @@ function paint(color) {
     updateDisplayCounts();
     localStorage.setItem('cellColors', JSON.stringify(cellColors));
     updateAcceptanceRate();
-}
+        }
+            }
+        }
 
-function resetAll() {
-    acceptCount = 0;
-    declineCount = 0;
-    currentNumber = 1;
-    cellColors.fill('#00FF00');
-    acceptedCount = 100;
-    declinedCount = 0;
-    localStorage.setItem('acceptCount', acceptCount);
-    localStorage.setItem('declineCount', declineCount);
-    localStorage.setItem('currentNumber', currentNumber);
-    localStorage.setItem('cellColors', JSON.stringify(cellColors));
-    updateDisplayCounts();
-    updateAcceptanceRate();
-}
+        function resetCount(type) {
+            if (type === 'accept') {
+                acceptCount = 0;
+            } else if (type === 'decline') {
+                declineCount = 0;
+            }
+            updateDisplayCounts();
+        }
 
-window.onload = function() {
+        window.onload = function() {
     const cellsContainer = document.querySelector('.cells');
     for (let i = 0; i < cellColors.length; i++) {
         const cell = document.createElement('div');
@@ -89,15 +82,15 @@ window.onload = function() {
     updateDisplayCounts();
     updateAcceptanceRate();
 
-    document.getElementById('accept-count').addEventListener('click', () => {
-        acceptCount++;
-        updateDisplayCounts();
-    });
+            document.getElementById('accept-count').addEventListener('click', () => {
+                acceptCount++;
+                updateDisplayCounts();
+            });
 
-    document.getElementById('decline-count').addEventListener('click', () => {
-        declineCount++;
-        updateDisplayCounts();
-    });
+            document.getElementById('decline-count').addEventListener('click', () => {
+                declineCount++;
+                updateDisplayCounts();
+            });
 
             if ('serviceWorker' in navigator) {
                 navigator.serviceWorker.register('/service-worker.js')
