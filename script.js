@@ -88,7 +88,7 @@ updateAcceptanceRate();
             if (type === 'accept') {
                 acceptCount = 0;
             } else if (type === 'decline') {
-                declineCount = null;
+                declineCount = 0;
             }
             updateDisplayCounts();
         }
