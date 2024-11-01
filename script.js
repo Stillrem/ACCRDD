@@ -60,6 +60,30 @@ function paint(color) {
     updateAcceptanceRate();
 }
 
+function toggleCellColor(cellIndex) {
+            if (!isLocked) {
+                const currentColor = cellColors[cellIndex];
+                const newColor = currentColor === '#00FF00' ? '#FF0000' : '#00FF00';
+
+                if (currentColor !== newColor) {
+                    cellColors[cellIndex] = newColor;
+                    document.getElementById(`cell-${cellIndex}`).style.backgroundColor = newColor;
+
+                    if (newColor === '#00FF00') {
+                        acceptedCount++;
+                        declinedCount--;
+                    } else {
+                        acceptedCount--;
+                        declinedCount++;
+                    }
+
+ updateDisplayCounts();
+ localStorage.setItem('cellColors', JSON.stringify(cellColors));
+updateAcceptanceRate();
+                }
+            }
+}
+                
 function resetAll() {
     acceptCount = 0;
     declineCount = 0;
