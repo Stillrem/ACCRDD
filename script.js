@@ -102,13 +102,6 @@ window.onload = function() {
         cell.style.backgroundColor = cellColors[i];
         cell.style.textAlign = 'center';
         cell.onclick = () => toggleCellColor(i); // Установка обработчика клика
-        if (cellColors[i] === '#00FF00') {
-            cell.textContent = currentNumber;
-            currentNumber++;
-        } else {
-            cell.textContent = ''; // Оставить пустым для красной ячейки
-        }
-        cell.onclick = () => toggleCellColor(i); // Установка обработчика клика
         cellsContainer.appendChild(cell);
     }
     updateDisplayCounts();
