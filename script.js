@@ -109,8 +109,6 @@ window.onload = function() {
     const cellTexts = JSON.parse(localStorage.getItem('cellTexts')) || Array(100).fill('');
     for (let i = 0; i < cellColors.length; i++) {
         const cell = document.createElement('div');
-        const cells = document.querySelectorAll('.cell');
-        cells.forEach((cell, index) => {
         cell.className = 'cell';
         cell.id = `cell-${i}`;
         cell.style.backgroundColor = cellColors[i];
@@ -119,7 +117,7 @@ window.onload = function() {
         cell.onclick = () => toggleCellColor(i); // Установка обработчика клика
         cellsContainer.appendChild(cell);
     }
-                      }
+                      
     updateDisplayCounts();
     updateAcceptanceRate();
 
