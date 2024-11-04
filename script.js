@@ -4,7 +4,7 @@ const cellColors = JSON.parse(localStorage.getItem('cellColors')) || Array(100).
 let acceptedCount = cellColors.filter(color => color === '#00FF00').length;
 let declinedCount = cellColors.filter(color => color === '#FF0000').length;
 let isLocked = localStorage.getItem('isLocked') === 'true';
-
+let cellTexts = localStorage.setItem('cellTexts', JSON.stringify(cellTexts));
 // Переменная для отслеживания номера
 let currentNumber = parseInt(localStorage.getItem('currentNumber')) || 1;
 
