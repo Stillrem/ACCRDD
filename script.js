@@ -96,10 +96,11 @@ function paint(color) {
                 declineCount = 0;
             }
             updateDisplayCounts();
-                // Очистка всех ячеек от текста
+    // Очистка всех ячеек от текста
     const cells = document.querySelectorAll('.cell');
     cells.forEach((cell) => {
         cell.textContent = '';
+        cellTexts[index] = '';
     });
 
         }
