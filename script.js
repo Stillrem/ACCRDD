@@ -44,11 +44,13 @@ function paint(color) {
     // Пропуск нумерации красной ячейки
     if (colorCode === '#00FF00') {
         document.getElementById('cell-0').textContent = currentNumber;
+        cellContents[0] = currentNumber.toString();
         acceptCount++;
         acceptedCount++;
         currentNumber++;
     } else {
         document.getElementById('cell-0').textContent = ''; // Оставить пустым для красной
+        cellContents[0] = 'decline';
         declineCount++;
         declinedCount++;
     }
