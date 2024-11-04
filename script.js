@@ -60,7 +60,6 @@ function paint(color) {
     // Сохранение текстов ячеек
     const cellTexts = Array.from(document.querySelectorAll('.cell')).map(cell => cell.textContent);
     localStorage.setItem('cellTexts', JSON.stringify(cellTexts));
-        localStorage.removeItem('cellTexts'); // Удаление сохраненных текстов ячеек
     updateAcceptanceRate();
     }
 
