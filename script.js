@@ -82,10 +82,7 @@ function paint(color) {
 
  updateDisplayCounts();
  localStorage.setItem('cellColors', JSON.stringify(cellColors));
-updateAcceptanceRate();
- localStorage.setItem('cellContents', JSON.stringify(cellContents));
-    updateDisplayCounts();
-    updateAcceptanceRate();
+ updateAcceptanceRate();
                 }
             }
         }
