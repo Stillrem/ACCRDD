@@ -4,10 +4,10 @@ const cellColors = JSON.parse(localStorage.getItem('cellColors')) || Array(100).
 let acceptedCount = cellColors.filter(color => color === '#00FF00').length;
 let declinedCount = cellColors.filter(color => color === '#FF0000').length;
 let isLocked = localStorage.getItem('isLocked') === 'true';
-let cellTexts = JSON.parse(localStorage.getItem('cellTexts')) || Array(100).fill(");
 
 // Переменная для отслеживания номера
 let currentNumber = parseInt(localStorage.getItem('currentNumber')) || 1;
+let cellTexts = JSON.parse(localStorage.getItem('cellTexts')) || Array(100).fill(");
 
 function updateAcceptanceRate() {
     const acceptanceRate = (acceptedCount / 100) * 100;
