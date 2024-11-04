@@ -91,9 +91,9 @@ updateAcceptanceRate();
         }
 
     // Функция для сброса счетчиков в ячейках
-    function resetCellCounters() {
+    function resetCellText() {
         // Предположим, что ваши ячейки имеют класс 'cell-counter'
-        const cells = document.querySelectorAll('.cell-counter');
+        const cells = document.querySelectorAll('.cellText');
         cells.forEach(cell => {
             cell.textContent = '0'; // или другое значение по умолчанию
         });
