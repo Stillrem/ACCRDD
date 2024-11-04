@@ -7,7 +7,7 @@ let isLocked = localStorage.getItem('isLocked') === 'true';
 
 // Переменная для отслеживания номера
 let currentNumber = parseInt(localStorage.getItem('currentNumber')) || 1;
-let cellTexts = JSON.parse(localStorage.getItem('cellTexts')) || Array(100).fill(");
+let cellTexts = JSON.parse(localStorage.getItem('cellTexts')) || Array(100).fill('');
 
 function updateAcceptanceRate() {
     const acceptanceRate = (acceptedCount / 100) * 100;
