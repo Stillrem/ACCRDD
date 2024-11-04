@@ -5,6 +5,7 @@ let acceptedCount = cellColors.filter(color => color === '#00FF00').length;
 let declinedCount = cellColors.filter(color => color === '#FF0000').length;
 let isLocked = localStorage.getItem('isLocked') === 'true';
 let cellTexts = JSON.parse(localStorage.getItem('cellTexts')) || Array(100).fill(");
+
 // Переменная для отслеживания номера
 let currentNumber = parseInt(localStorage.getItem('currentNumber')) || 1;
 
