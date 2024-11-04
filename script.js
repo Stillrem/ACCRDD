@@ -92,6 +92,7 @@ function paint(color) {
                 acceptCount = 0;
             } else if (type === 'decline') {
                 declineCount = 0;
+                currentNumber = 1;
             }
             updateDisplayCounts();
         }
