@@ -89,6 +89,15 @@ updateAcceptanceRate();
                 }
             }
         }
+
+    // Функция для сброса счетчиков в ячейках
+    function resetCellCounters() {
+        // Предположим, что ваши ячейки имеют класс 'cell-counter'
+        const cells = document.querySelectorAll('.cell-counter');
+        cells.forEach(cell => {
+            cell.textContent = '0'; // или другое значение по умолчанию
+        });
+    }
                 
         function resetCount(type) {
             if (type === 'accept') {
