@@ -1,7 +1,6 @@
 let acceptCount = parseInt(localStorage.getItem('acceptCount')) || 0;
 let declineCount = parseInt(localStorage.getItem('declineCount')) || 0;
 const cellColors = JSON.parse(localStorage.getItem('cellColors')) || Array(100).fill('#00FF00');
-const cellContents = JSON.parse(localStorage.getItem('cellContents')) || Array(100).fill('');
 let acceptedCount = cellColors.filter(color => color === '#00FF00').length;
 let declinedCount = cellColors.filter(color => color === '#FF0000').length;
 let isLocked = localStorage.getItem('isLocked') === 'true';
@@ -32,10 +31,8 @@ function paint(color) {
 
     for (let i = cellColors.length - 1; i > 0; i--) {
         cellColors[i] = cellColors[i - 1];
-        cellContents[i] = cellContents[i - 1];
         document.getElementById(`cell-${i}`).style.backgroundColor = cellColors[i];
         document.getElementById(`cell-${i}`).textContent = document.getElementById(`cell-${i-1}`).textContent;
-        document.getElementById(`cell-${i}`).textContent = cellContents[i];
     }
 
     cellColors[0] = colorCode;
@@ -44,13 +41,11 @@ function paint(color) {
     // Пропуск нумерации красной ячейки
     if (colorCode === '#00FF00') {
         document.getElementById('cell-0').textContent = currentNumber;
-        cellContents[0] = currentNumber.toString();
         acceptCount++;
         acceptedCount++;
         currentNumber++;
     } else {
         document.getElementById('cell-0').textContent = ''; // Оставить пустым для красной
-        cellContents[0] = 'decline';
         declineCount++;
         declinedCount++;
     }
@@ -62,6 +57,9 @@ function paint(color) {
     localStorage.setItem('currentNumber', currentNumber);
     updateDisplayCounts();
     localStorage.setItem('cellColors', JSON.stringify(cellColors));
+    // Сохранение текстов ячеек
+    const cellTexts = Array.from(document.querySelectorAll('.cell')).map(cell => cell.textContent);
+    localStorage.setItem('cellTexts', JSON.stringify(cellTexts));
     updateAcceptanceRate();
     }
 
@@ -103,13 +101,14 @@ updateAcceptanceRate();
 
 window.onload = function() {
     const cellsContainer = document.querySelector('.cells');
+    const cellTexts = JSON.parse(localStorage.getItem('cellTexts')) || Array(100).fill('');
     for (let i = 0; i < cellColors.length; i++) {
         const cell = document.createElement('div');
         cell.className = 'cell';
         cell.id = `cell-${i}`;
         cell.style.backgroundColor = cellColors[i];
-        cell.textContent = cellContents[i];
         cell.style.textAlign = 'center';
+        cell.textContent = cellTexts[i]; // Восстановление текста ячейки
         cell.onclick = () => toggleCellColor(i); // Установка обработчика клика
         cellsContainer.appendChild(cell);
     }
