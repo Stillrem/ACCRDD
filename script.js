@@ -111,7 +111,6 @@ window.onload = function() {
         const cell = document.createElement('div');
         const cells = document.querySelectorAll('.cell');
         cells.forEach((cell, index) => {
-        cell.textContent = cellTexts[index] || '';  // Восстанавливаем текст ячеек
         cell.className = 'cell';
         cell.id = `cell-${i}`;
         cell.style.backgroundColor = cellColors[i];
