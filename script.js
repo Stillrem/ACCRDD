@@ -1,6 +1,7 @@
 let acceptCount = parseInt(localStorage.getItem('acceptCount')) || 0;
 let declineCount = parseInt(localStorage.getItem('declineCount')) || 0;
 const cellColors = JSON.parse(localStorage.getItem('cellColors')) || Array(100).fill('#00FF00');
+const cellContents = JSON.parse(localStorage.getItem('cellContents')) || Array(100).fill('');
 let acceptedCount = cellColors.filter(color => color === '#00FF00').length;
 let declinedCount = cellColors.filter(color => color === '#FF0000').length;
 let isLocked = localStorage.getItem('isLocked') === 'true';
@@ -80,6 +81,9 @@ function paint(color) {
  updateDisplayCounts();
  localStorage.setItem('cellColors', JSON.stringify(cellColors));
 updateAcceptanceRate();
+ localStorage.setItem('cellContents', JSON.stringify(cellContents));
+    updateDisplayCounts();
+    updateAcceptanceRate();
                 }
             }
         }
@@ -100,6 +104,7 @@ window.onload = function() {
         cell.className = 'cell';
         cell.id = `cell-${i}`;
         cell.style.backgroundColor = cellColors[i];
+        cell.textContent = cellContents[i];
         cell.style.textAlign = 'center';
         cell.onclick = () => toggleCellColor(i); // Установка обработчика клика
         cellsContainer.appendChild(cell);
