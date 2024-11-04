@@ -100,7 +100,6 @@ function paint(color) {
     const cells = document.querySelectorAll('.cell');
     cells.forEach((cell) => {
         cell.textContent = '';
-        cellTexts[index] = '';
     });
 
         }
