@@ -99,7 +99,7 @@ function paint(color) {
     // Очистка всех ячеек от текста
     const cells = document.querySelectorAll('.cell');
     cells.forEach((cell) => {
-        cell.textContent = index + 1;
+        cell.textContent = '';
     });
 
         }
