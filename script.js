@@ -107,7 +107,6 @@
         const cellTexts = JSON.parse(localStorage.getItem('cellTexts')) || Array(100).fill('');
 
         cellColors.forEach((color, i) => {
-            javascript
             const cell = document.createElement('div');
             cell.className = 'cell';
             cell.id = `cell-${i}`;
@@ -136,6 +135,6 @@
             } else {
                 toggleLock();
             }
-        };
+         };
     };
 })();
