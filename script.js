@@ -21,6 +21,23 @@ function updateDisplayCounts() {
     localStorage.setItem('declineCount', declineCount);
 }
 
+function calculatePayment() {
+    const hours = parseFloat(document.getElementById('hours').value);
+    const minutes = parseFloat(document.getElementById('minutes').value);
+    const baseRate = parseFloat(document.getElementById('base-rate').value);
+
+    const totalHours = hours + minutes / 60;
+    const payment = totalHours * baseRate;
+
+    document.getElementById('payment-result').textContent = `Результат: ${payment.toFixed(2)}`;
+}
+
+function toggleFields() {
+    const fields = document.querySelector('.payment-calculator');
+    fields.style.display = fields.style.display === 'none' ? 'block' : 'none';
+}
+
+
 function paint(color) {
     const colorCode = color === 'red' ? '#FF0000' : '#00FF00';
 
