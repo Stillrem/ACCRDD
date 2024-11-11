@@ -124,6 +124,21 @@
     }
 }
 
+.payment-calculator {
+    margin-top: 20px;
+    background-color: #f4f4f4;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.payment-calculator input {
+    margin: 5px;
+}
+
+.payment-calculator button {
+    margin: 5px;
+}
+
 .intro {
     position: absolute;
     top: 15%;
