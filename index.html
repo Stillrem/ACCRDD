@@ -9,6 +9,19 @@
 </head>
 <body>
     <div class="intro">Stillrem</div>
+    <!-- Новый калькулятор оплаты -->
+<div class="payment-calculator">
+    <h2>Калькулятор оплаты</h2>
+    <label for="hours">Часы: </label>
+    <input type="number" id="hours" min="0" value="0">
+    <label for="minutes">Минуты: </label>
+    <input type="number" id="minutes" min="0" value="0">
+    <label for="base-rate">Базовая оплата: </label>
+    <input type="number" id="base-rate" min="0" value="0">
+    <button onclick="calculatePayment()">Вычислить оплату</button>
+    <div id="payment-result">Результат: 0</div>
+    <button onclick="toggleFields()">Показать/Скрыть поля</button>
+</div>
     <div class="display-container">
         <div class="display green-display">
             Accepting: <span id="accept-count">0</span>
