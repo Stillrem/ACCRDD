@@ -30,24 +30,6 @@ function updateDisplayCounts() {
             document.getElementById('result').innerText = `Результат: ${pay.toFixed(2)}`;
         }
 
-        function toggleInput() {
-            const inputContainer = document.getElementById('input-container');
-            if (inputContainer.classList.contains('visible')) {
-                inputContainer.classList.remove('visible');
-                inputContainer.classList.add('hidden');
-            } else {
-                inputContainer.classList.remove('hidden');
-                inputContainer.classList.add('visible');
-            }
-        }
-}
-
-function toggleFields() {
-    const fields = document.querySelector('.payment-calculator');
-    fields.style.display = fields.style.display === 'none' ? 'block' : 'none';
-}
-
-
 function paint(color) {
     const colorCode = color === 'red' ? '#FF0000' : '#00FF00';
 
