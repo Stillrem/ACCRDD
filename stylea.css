@@ -31,8 +31,17 @@ body {
     justify-content: center;
     color: #e0e0e0;
     box-sizing: border-box;
+    opacity: 0;
     transition: opacity 0.3s ease-in-out;
 
+}
+
+body.loaded {
+    opacity: 1;
+}
+
+body.unloading {
+    opacity: 0;
 }
 
 .container {
