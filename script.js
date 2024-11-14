@@ -218,3 +218,14 @@ document.getElementById('adjustmentButton').addEventListener('click', function()
         window.location.href = 'adjustment.html';
     }, 500);
 });
+
+function animateColorChange() {
+    setRandomColors();
+    requestAnimationFrame(animateColorChange);
+}
+
+requestAnimationFrame(animateColorChange);
+
+function getRandomDarkColor() {
+    return `rgb(${Math.floor(Math.random() * 100)}, ${Math.floor(Math.random() * 100)}, ${Math.floor(Math.random() * 100)})`;
+}
