@@ -215,3 +215,20 @@ setInterval(setRandomColors, 20000); // Меняем цвета каждые 20 
 document.getElementById('adjustmentBtn').addEventListener('click', function() {
     window.open('adjustment.html', '_blank');
 });
+
+const mainPage = document.getElementById('mainPage');
+const adjustmentPage = document.getElementById('adjustmentPage');
+const adjustmentButton = document.getElementById('adjustmentButton');
+const backButton = document.getElementById('backButton');
+
+adjustmentButton.addEventListener('click', () => {
+    mainPage.classList.add('hidden');
+    adjustmentPage.classList.remove('hidden');
+    adjustmentPage.classList.add('page-transition');
+});
+
+backButton.addEventListener('click', () => {
+    adjustmentPage.classList.add('hidden');
+    mainPage.classList.remove('hidden');
+    mainPage.classList.add('page-transition');
+});
