@@ -53,26 +53,27 @@ function setRandomColors() {
 setRandomColors();
 setInterval(setRandomColors, 20000); // Меняем цвета каждые 20 секунд
 
-        // Анимация появления страницы
-        window.onload = function() {
-            document.body.classList.add('loaded');
-        };
+// Анимация появления страницы
+window.addEventListener('pageshow', function(event) {
+    if (event.persisted) {
+        document.body.classList.remove('unloading');
+    }
+    setTimeout(function() {
+        document.body.classList.add('loaded');
+    }, 0);
+});
 
-        // Обработка кнопки "Назад"
-        document.getElementById('backButton').addEventListener('click', function() {
-            document.body.classList.remove('loaded');
-            setTimeout(function() {
-                window.location.href = 'index.html';
-            }, 300);
-        });
+// Обработка кнопки "Назад"
+document.getElementById('backButton').addEventListener('click', function(e) {
+    e.preventDefault();
+    document.body.classList.add('unloading');
+    document.body.classList.remove('loaded');
+    setTimeout(function() {
+        window.location.href = 'index.html';
+    }, 300);
+});
 
-function animateColorChange() {
-    setRandomColors();
-    requestAnimationFrame(animateColorChange);
-}
-
-requestAnimationFrame(animateColorChange);
-
-function getRandomDarkColor() {
-    return `rgb(${Math.floor(Math.random() * 100)}, ${Math.floor(Math.random() * 100)}, ${Math.floor(Math.random() * 100)})`;
-}
+// Обработка нажатия кнопки "Назад" в браузере
+window.addEventListener('pagehide', function() {
+    document.body.classList.add('unloading');
+});
