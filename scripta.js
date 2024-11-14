@@ -55,12 +55,12 @@ setInterval(setRandomColors, 20000); // Меняем цвета каждые 20 
 
         // Анимация появления страницы
         window.onload = function() {
-            document.body.style.opacity = '1';
+            document.body.classList.add('loaded');
         };
 
         // Обработка кнопки "Назад"
         document.getElementById('backButton').addEventListener('click', function() {
-            document.body.style.opacity = '0';
+            document.body.classList.remove('loaded');
             setTimeout(function() {
                 window.location.href = 'index.html';
             }, 300);
