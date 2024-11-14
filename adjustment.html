@@ -1,1 +1,23 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Калькулятор зарплаты</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="manifest.json">
 
+</head>
+<body>
+    <div>
+    <h1>Калькулятор зарплаты</h1>
+    <input type="number" id="hours" placeholder="Введите количество часов">
+    <input type="number" id="basePay" placeholder="Введите базовую оплату">
+    <button onclick="calculate()">Рассчитать</button>
+        </div>
+        <div id="result" style="display: none;"></div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
