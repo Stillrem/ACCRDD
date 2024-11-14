@@ -63,7 +63,7 @@ setInterval(setRandomColors, 20000); // Меняем цвета каждые 20 
             document.body.style.opacity = '0';
             setTimeout(function() {
                 window.location.href = 'index.html';
-            }, 500);
+            }, 300);
         });
 
 function animateColorChange() {
