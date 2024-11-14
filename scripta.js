@@ -65,3 +65,14 @@ setInterval(setRandomColors, 20000); // Меняем цвета каждые 20 
                 window.location.href = 'index.html';
             }, 500);
         });
+
+function animateColorChange() {
+    setRandomColors();
+    requestAnimationFrame(animateColorChange);
+}
+
+requestAnimationFrame(animateColorChange);
+
+function getRandomDarkColor() {
+    return `rgb(${Math.floor(Math.random() * 100)}, ${Math.floor(Math.random() * 100)}, ${Math.floor(Math.random() * 100)})`;
+}
