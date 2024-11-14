@@ -28,7 +28,7 @@ body {
     justify-content: center;
     color: #e0e0e0;
     box-sizing: border-box;
-    transition: opacity 0.5s ease-in-out;
+    transition: opacity 0.3s ease-in-out;
 }
 
         .display-container {
