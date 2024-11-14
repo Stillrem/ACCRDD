@@ -1,13 +1,34 @@
-        body {
-            font-family: 'San Francisco', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            background-color: #121212;
-            padding: 20px 0;
-        }
+        @keyframes gradientAnimation {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    padding: 20px;
+    margin: 0;
+    background: linear-gradient(45deg, 
+    #3498db, #2980b9, #2c3e50, #34495e, #2980b9, #3498db);
+    background-size: 600% 600%;
+    animation: gradientAnimation 30s cubic-bezier(0.445, 0.05, 0.55, 0.95) infinite;
+    );
+    background-size: 400% 400%;
+    animation: gradientAnimation 15s ease infinite;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #e0e0e0;
+    box-sizing: border-box;
+}
 
         .display-container {
             display: flex;
