@@ -53,10 +53,19 @@ function setRandomColors() {
 setRandomColors();
 setInterval(setRandomColors, 20000); // Меняем цвета каждые 20 секунд
 
-document.getElementById('openAdjustment').addEventListener('click', function() {
-    document.getElementById('adjustmentPage').classList.add('active');
+const mainPage = document.getElementById('mainPage');
+const adjustmentPage = document.getElementById('adjustmentPage');
+const adjustmentButton = document.getElementById('adjustmentButton');
+const backButton = document.getElementById('backButton');
+
+adjustmentButton.addEventListener('click', () => {
+    mainPage.classList.add('hidden');
+    adjustmentPage.classList.remove('hidden');
+    adjustmentPage.classList.add('page-transition');
 });
 
-document.getElementById('closeAdjustment').addEventListener('click', function() {
-    document.getElementById('adjustmentPage').classList.remove('active');
+backButton.addEventListener('click', () => {
+    adjustmentPage.classList.add('hidden');
+    mainPage.classList.remove('hidden');
+    mainPage.classList.add('page-transition');
 });
