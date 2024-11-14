@@ -216,7 +216,7 @@ document.getElementById('adjustmentButton').addEventListener('click', function()
     document.body.style.opacity = '0';
     setTimeout(function() {
         window.location.href = 'adjustment.html';
-    }, 500);
+    }, 300);
 });
 
 function animateColorChange() {
