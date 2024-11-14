@@ -193,3 +193,21 @@ window.onload = function() {
                 toggleUnLock();
             }
          };
+
+function getRandomDarkColor() {
+    const r = Math.floor(Math.random() * 100);
+    const g = Math.floor(Math.random() * 100);
+    const b = Math.floor(Math.random() * 100);
+    return `rgb(${r}, ${g}, ${b})`;
+}
+
+function setRandomColors() {
+    const root = document.documentElement;
+    root.style.setProperty('--color1', getRandomDarkColor());
+    root.style.setProperty('--color2', getRandomDarkColor());
+    root.style.setProperty('--color3', getRandomDarkColor());
+    root.style.setProperty('--color4', getRandomDarkColor());
+}
+
+setRandomColors();
+setInterval(setRandomColors, 20000); // Меняем цвета каждые 20 секунд
