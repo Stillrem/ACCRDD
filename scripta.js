@@ -52,3 +52,11 @@ function setRandomColors() {
 
 setRandomColors();
 setInterval(setRandomColors, 20000); // Меняем цвета каждые 20 секунд
+
+document.getElementById('openAdjustmentRate').addEventListener('click', function() {
+    document.getElementById('adjustmentRatePage').classList.add('active');
+});
+
+document.getElementById('closeAdjustmentRate').addEventListener('click', function() {
+    document.getElementById('adjustmentRatePage').classList.remove('active');
+});
