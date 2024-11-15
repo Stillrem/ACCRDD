@@ -158,13 +158,16 @@ body {
     color: #ffffff;
     opacity: 0;
     animation: fadeInOut 7s forwards;
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Расстояние между текстом и кнопкой */
 }
+
 .orders-needed {
         color: #ffffff;
 }
 
 #adjustmentButton {
-    position: inline-block;
     display: inline-block;
     padding: 5px 10px;
     background-color: rgba(30, 30, 30, 0.8);
