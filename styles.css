@@ -175,32 +175,30 @@ body {
         color: #ffffff;
 }
 
-.adjustmentButton {
+#adjustmentButton {
     position: fixed;
     left: 50%;
-    top: 22%; /* Располагаем кнопку по середине */
-    transform: translate(-50%, -50%); /* Центрируем */
+    top: 22%;
+    transform: translate(-50%, -50%);
     display: inline-block;
-    padding: 5px 10px;
-    background-color: rgba(30, 30, 30, 0.8);
-    border: 1px solid #333333;
+    padding: 10px 20px;
+    background: linear-gradient(45deg, #2c3e50, #34495e, #1a1a1a);
+    border: none;
     border-radius: 10px;
     backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5), inset 0 0 5px rgba(255, 255, 255, 0.1);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.6), inset 0 0 10px rgba(255, 255, 255, 0.1);
     color: #e0e0e0;
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
     font-size: 14px;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.adjustmentButton:hover {
+#adjustmentButton:hover {
     transform: translate(-50%, -50%) scale(1.05);
     background-color: rgba(255, 255, 255, 0.3);
-    box-shadow: 0 0 15px rgba(76, 175, 80, 0.8);
+    box-shadow: 0 0 25px rgba(76, 175, 80, 0.8);
 }
-
 
 @keyframes fadeInOut {
     0% 100% {
