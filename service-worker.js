@@ -1,12 +1,12 @@
 const CACHE_NAME = 'pay-calculator-v1';
 const urlsToCache = [
   '/',
-  '/adjustment.html
+  '/adjustment.html',
   '/index.html',
-  '/styles.css
+  '/styles.css',
   '/stylea.css',
   '/script.js',
-  '/scripts.js
+  '/scripts.js',
   '/1.png',
   '/3.png'
 ];
