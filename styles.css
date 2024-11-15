@@ -22,7 +22,7 @@ body {
         #34495e,  /* Серый */
         #1a1a1a   /* Почти Чёрный */
     );
-    background-size: cover; /*600% 600%;*/
+    background-size: 600% 600%;
     animation: gradientAnimation 30s ease infinite;
     min-height: 100vh;
     display: flex;
