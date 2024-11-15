@@ -150,7 +150,7 @@ body {
 }
 
 .intro {
-    position: absolute;
+    position: fixed;
     top: 0; /* Перемещаем intro наверх */
     left: 50%;
     transform: translate(-50%, 0);
@@ -176,9 +176,9 @@ body {
 }
 
 #adjustmentButton {
-    position: absolute;
+    position: fixed;
     left: 50%;
-    top: 30%; /* Располагаем кнопку по середине */
+    top: 20%; /* Располагаем кнопку по середине */
     transform: translate(-50%, -50%); /* Центрируем */
     display: inline-block;
     padding: 5px 10px;
