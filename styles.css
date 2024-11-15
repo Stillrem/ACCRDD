@@ -164,11 +164,11 @@ body {
 
 .display-container {
     display: flex;
-    justify-content: space-between;
+    justify-content: center; /* Центрируем содержимое по горизонтали */
+    align-items: center; /* Центрируем содержимое по вертикали */
     width: 380px;
     margin-bottom: 20px;
     gap: 10px;
-    position: relative; /* Добавляем для позиционирования adjustmentButton */
 }
 
 .orders-needed {
@@ -176,10 +176,7 @@ body {
 }
 
 #adjustmentButton {
-    position: absolute;
-    left: 50%;
-    top: 22%;
-    transform: translate(-50%, -50%);
+    position: relative; /* Изменяем на relative */
     display: inline-block;
     padding: 5px 10px;
     background: linear-gradient(45deg, #2c3e50, #34495e, #1a1a1a);
@@ -195,7 +192,7 @@ body {
 }
 
 #adjustmentButton:hover {
-    transform: translate(-50%, -50%) scale(1.05);
+    transform: scale(1.05); /* Убираем translate */
     background-color: rgba(255, 255, 255, 0.3);
     box-shadow: 0 0 25px rgba(76, 175, 80, 0.8);
 }
