@@ -175,7 +175,7 @@ body {
         color: #ffffff;
 }
 
-#adjustmentButton {
+.adjustmentButton {
     position: fixed;
     left: 50%;
     top: 22%; /* Располагаем кнопку по середине */
@@ -195,7 +195,7 @@ body {
     transition: all 0.3s ease;
 }
 
-#adjustmentButton:hover {
+.adjustmentButton:hover {
     transform: translate(-50%, -50%) scale(1.05);
     background-color: rgba(255, 255, 255, 0.3);
     box-shadow: 0 0 15px rgba(76, 175, 80, 0.8);
