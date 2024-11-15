@@ -60,12 +60,6 @@ body.unloading {
     max-height: 90vh;
 }
 
-label {
-    color: white;
-    width: 100%;
-    margin-bottom: 5px;
-} 
-
 input, button, #result {
     display: block;
     width: 100%;
@@ -78,6 +72,10 @@ input, button, #result {
     color: #e0e0e0;
     transition: all 0.3s ease;
     box-sizing: border-box;
+}
+
+input::placeholder {
+    color: #e0e0e0; /* Изменено на белый цвет текста для плейсхолдера */
 }
 
 input:focus {
