@@ -29,7 +29,7 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    color: #e0e0e0;
+    color: #efefef;
     box-sizing: border-box;
     opacity: 0;
     transition: opacity 0.3s ease-in-out;
@@ -69,7 +69,7 @@ input, button, #result {
     border: none;
     border-radius: 10px;
     background: rgba(255, 255, 255, 0.2);
-    color: #000000;
+    color: #e0e0e0;
     transition: all 0.3s ease;
     box-sizing: border-box;
 }
