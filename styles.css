@@ -177,7 +177,7 @@ body {
 
 #adjustmentButton {
     position: absolute; /* Абсолютное позиционирование относительно контейнера */
-    top: 19%; /* Позиционируем кнопку на 22% от верхнего края контейнера */
+    top: 19.5%; /* Позиционируем кнопку на 22% от верхнего края контейнера */
     display: inline-block;
     padding: 5px 10px;
     background: linear-gradient(45deg, #2c3e50, #34495e, #1a1a1a);
