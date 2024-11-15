@@ -60,6 +60,12 @@ body.unloading {
     max-height: 90vh;
 }
 
+label {
+    color: white;
+    width: 100%;
+    margin-bottom: 5px;
+} 
+
 input, button, #result {
     display: block;
     width: 100%;
