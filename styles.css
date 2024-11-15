@@ -151,7 +151,7 @@ body {
 
 .intro {
     position: absolute;
-    top: 5%; /* Поменял на 5% для размещения вверху */
+    top: 0; /* Перемещаем intro наверх */
     left: 50%;
     transform: translate(-50%, 0);
     font-size: 2em;
@@ -162,6 +162,15 @@ body {
     align-items: center;
 }
 
+.display-container {
+    display: flex;
+    justify-content: space-between;
+    width: 380px;
+    margin-bottom: 20px;
+    gap: 10px;
+    position: relative; /* Добавляем для позиционирования adjustmentButton */
+}
+
 .orders-needed {
         color: #ffffff;
 }
@@ -169,8 +178,8 @@ body {
 #adjustmentButton {
     position: absolute;
     left: 50%;
-    top: 60%; /* Поменян top на 60% для размещения между ячейками и дисплеем */
-    transform: translateX(-50%);
+    top: 50%; /* Располагаем кнопку по середине */
+    transform: translate(-50%, -50%); /* Центрируем */
     display: inline-block;
     padding: 5px 10px;
     background-color: rgba(30, 30, 30, 0.8);
@@ -187,10 +196,11 @@ body {
 }
 
 #adjustmentButton:hover {
-    transform: translateX(-50%) scale(1.05);
+    transform: translate(-50%, -50%) scale(1.05);
     background-color: rgba(255, 255, 255, 0.3);
     box-shadow: 0 0 15px rgba(76, 175, 80, 0.8);
 }
+
 
 @keyframes fadeInOut {
     0% 100% {
