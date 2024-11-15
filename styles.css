@@ -167,7 +167,7 @@ body {
 }
 
 #adjustmentButton {
-    position: absolute;
+    position: fixed;
     left: 50%;
     top: 19%; /* Расстояние от нижнего края */
     transform: translateX(-50%);
