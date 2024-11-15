@@ -169,7 +169,7 @@ body {
 #adjustmentButton {
     position: absolute;
     left: 50%;
-    bottom: 20px; /* Расстояние от нижнего края */
+    bottom: 50px; /* Расстояние от нижнего края */
     transform: translateX(-50%);
     display: inline-block;
     padding: 5px 10px;
