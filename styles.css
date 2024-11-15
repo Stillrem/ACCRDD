@@ -178,7 +178,7 @@ body {
 #adjustmentButton {
     position: fixed;
     left: 50%;
-    top: 20%; /* Располагаем кнопку по середине */
+    top: 23%; /* Располагаем кнопку по середине */
     transform: translate(-50%, -50%); /* Центрируем */
     display: inline-block;
     padding: 5px 10px;
