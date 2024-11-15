@@ -151,7 +151,7 @@ body {
 
 .intro {
     position: absolute;
-    top: 23%;
+    top: 25%;
     left: 50%;
     transform: translate(-50%, 0);
     font-size: 2em;
@@ -169,7 +169,7 @@ body {
 #adjustmentButton {
     position: absolute;
     left: 50%;
-    top: 23%; /* Расстояние от нижнего края */
+    top: 25%; /* Расстояние от нижнего края */
     transform: translateX(-50%);
     display: inline-block;
     padding: 5px 10px;
