@@ -212,6 +212,16 @@ function setRandomColors() {
 setRandomColors();
 setInterval(setRandomColors, 20000); // Меняем цвета каждые 20 секунд
 
+// Анимация появления страницы
+window.addEventListener('pageshow', function(event) {
+    if (event.persisted) {
+        document.body.classList.remove('unloading');
+    }
+    setTimeout(function() {
+        document.body.classList.add('loaded');
+    }, 0);
+});
+
 document.getElementById('adjustmentButton').addEventListener('click', function() {
     document.body.style.opacity = '0';
     setTimeout(function() {
