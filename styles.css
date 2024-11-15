@@ -163,11 +163,11 @@ body {
 }
 
 .display-container {
-    display: flex;
-    justify-content: center; /* Центрируем содержимое по горизонтали */
-    align-items: center; /* Центрируем содержимое по вертикали */
+    position: relative; /* Устанавливаем относительное позиционирование для контейнера */
     width: 380px;
     margin-bottom: 20px;
+    display: flex;
+    justify-content: center; /* Центрируем содержимое по горизонтали */
     gap: 10px;
 }
 
@@ -176,9 +176,9 @@ body {
 }
 
 #adjustmentButton {
-    position: relative; /* Изменяем на relative */
+    position: absolute; /* Абсолютное позиционирование относительно контейнера */
+    top: 22%; /* Позиционируем кнопку на 22% от верхнего края контейнера */
     display: inline-block;
-    top: 23%;
     padding: 5px 10px;
     background: linear-gradient(45deg, #2c3e50, #34495e, #1a1a1a);
     border: none;
@@ -193,7 +193,7 @@ body {
 }
 
 #adjustmentButton:hover {
-    transform: scale(1.05); /* Убираем translate */
+    transform: scale(1.05);
     background-color: rgba(255, 255, 255, 0.3);
     box-shadow: 0 0 25px rgba(76, 175, 80, 0.8);
 }
