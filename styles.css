@@ -164,7 +164,7 @@ body {
 }
 
 #adjustmentButton {
-    position: relative;
+    position: inline-block;
     display: inline-block;
     padding: 5px 10px;
     background-color: rgba(30, 30, 30, 0.8);
