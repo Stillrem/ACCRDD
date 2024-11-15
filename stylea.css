@@ -75,7 +75,7 @@ input, button, #result {
 }
 
 input::placeholder {
-    color: #cfcfcf; /* Цвет текста для плейсхолдера */
+    color: #7a7a7a; /* Цвет текста для плейсхолдера */
 }
 
 input:focus {
