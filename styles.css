@@ -178,7 +178,7 @@ body {
 
 #adjustmentButton {
     position: relative; /* Абсолютное позиционирование относительно контейнера */
-    left: 50%
+    left: 50%;
     top: 50%; /* Позиционируем кнопку на 22% от верхнего края контейнера */
     display: flex;
     align-items: center;
