@@ -182,7 +182,6 @@ body {
     justify-content: space-between;
     width: 380px;
     margin-bottom: 20px;
-    left: 20%;
     top: 15%; /* Позиционируем кнопку на 22% от верхнего края контейнера */
     display: flex;
     flex-direction: column;
