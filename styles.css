@@ -177,7 +177,7 @@ body {
 }
 
 #adjustmentButton {
-    position: relative; /* Абсолютное позиционирование относительно контейнера */
+    position: absolute; /* Абсолютное позиционирование относительно контейнера */
     box-sizing: border-box;
     justify-content: space-between;
     width: 380px;
