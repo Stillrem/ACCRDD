@@ -182,7 +182,7 @@ body {
     position: relative;
     justify-content: center; /* Выравнивание по центру, если нужно */
     bottom: 5px;
-    width: 360px; /* Уменьшена ширина, если нужно */
+    width: 380px; /* Уменьшена ширина, если нужно */
     margin: 0; /* Сокращение внешних отступов */
     display: flex;
     flex-direction: row;
