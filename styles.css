@@ -161,6 +161,8 @@ body {
     animation: fadeInOut 7s forwards;
     display: flex;
     align-items: center;
+    margin: 0; 
+    padding: 0;
 }
 
 .display-container {
