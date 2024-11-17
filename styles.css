@@ -180,17 +180,18 @@ body {
     position: relative; /* Абсолютное позиционирование относительно контейнера */
     justify-content: space-between;
     width: 380px;
-    margin-bottom: 5px;
+    height: 30px;
+    margin-bottom: 20px;
     gap: 10px /* Центрируем содержимое по горизонтали */
     left: 20%;
     top: 18%; /* Позиционируем кнопку на 22% от верхнего края контейнера */
     display: flex;
     text-align: center;
     align-items: center;
-    padding: 1px 1px;
+    padding: 5px 5px;
     background: linear-gradient(45deg, #2c3e50, #34495e, #1a1a1a);
     border: none;
-    border-radius: 1px;
+    border-radius: 10px;
     backdrop-filter: blur(10px);
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.6), inset 0 0 10px rgba(255, 255, 255, 0.1);
     color: #e0e0e0;
