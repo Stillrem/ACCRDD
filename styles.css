@@ -181,7 +181,7 @@ body {
     justify-content: center; /* Выравнивание по центру, если нужно */
     bottom: 5px;
     width: 360px; /* Уменьшена ширина, если нужно */
-    margin: 10px 0; /* Сокращение внешних отступов */
+    margin: 0; /* Сокращение внешних отступов */
     display: flex;
     flex-direction: row;
     text-align: center;
