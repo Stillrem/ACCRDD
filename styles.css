@@ -179,7 +179,7 @@ body {
 #adjustmentButton {
     position: relative; /* Абсолютное позиционирование относительно контейнера */
     box-sizing: border-box;
-    justify-content: space-between;
+    justify-content: flex-start;
     bottom: 5px;
     width: 380px;
     margin-bottom: 20px;
