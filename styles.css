@@ -178,11 +178,6 @@ body {
 
 #adjustmentButton {
     position: relative; /* Абсолютное позиционирование относительно контейнера */
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    color: #e0e0e0;
-    box-sizing: border-box;
     gap: 10px /* Центрируем содержимое по горизонтали */
     left: 20%;
     top: 18%; /* Позиционируем кнопку на 22% от верхнего края контейнера */
