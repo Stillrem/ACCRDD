@@ -154,10 +154,9 @@ body {
     position: relative;
     justify-content: center;
     bottom: 0;
-    left: 50%;
     flex-direction: row;
     text-align: center;
-    transform: translate(-50%, 0);
+    transform: translate(-50%, -50%);
     font-size: 2em;
     color: #ffffff;
     opacity: 0;
