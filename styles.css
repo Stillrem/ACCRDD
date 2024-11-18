@@ -181,7 +181,7 @@ body {
 #adjustmentButton {
     position: relative;
     justify-content: center; /* Выравнивание по центру, если нужно */
-    bottom: 20px;
+    bottom: 15px;
     width: 380px; /* Уменьшена ширина, если нужно */
     margin: 0; /* Сокращение внешних отступов */
     display: flex;
