@@ -74,10 +74,14 @@ function paint(color) {
                     document.getElementById(`cell-${cellIndex}`).style.backgroundColor = newColor;
 
                     if (newColor === '#00FF00') {
+                        acceptCount++;
                         acceptedCount++;
+                        declineCount--;
                         declinedCount--;
                     } else {
+                        acceptCount--; 
                         acceptedCount--;
+                        declineCount++;
                         declinedCount++;
                     }
 
