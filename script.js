@@ -92,8 +92,6 @@ function paint(color) {
             if (type === 'accept') {
                 acceptCount = 0;
                 currentNumber = 1;
-                localStorage.setItem('acceptCount', acceptCount);
-                localStorage.setItem('currentNumber', currentNumber);
             } else if (type === 'decline') {
                 declineCount = 0;
             }
@@ -104,6 +102,12 @@ function paint(color) {
         cell.textContent = '';
     });
 
+    // Сохранение изменений в localStorage
+    localStorage.setItem('acceptCount', acceptCount);
+    localStorage.setItem('declineCount', declineCount);
+    localStorage.setItem('currentNumber', currentNumber);
+    localStorage.setItem('cellTexts', JSON.stringify(Array(100).fill('')));
+            
         }
 
 window.onload = function() {
