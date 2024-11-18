@@ -107,10 +107,10 @@ function paint(color) {
     });
 
     // Сохранение изменений в localStorage
-    localStorage.setItem('acceptCount', acceptCount);
-    localStorage.setItem('declineCount', declineCount);
-    localStorage.setItem('currentNumber', currentNumber);
-    localStorage.setItem('cellTexts', JSON.stringify(Array(100).fill('')));
+    //localStorage.setItem('acceptCount', acceptCount);
+    //localStorage.setItem('declineCount', declineCount);
+    //localStorage.setItem('currentNumber', currentNumber);
+    //localStorage.setItem('cellTexts', JSON.stringify(Array(100).fill('')));
             
         }
 
