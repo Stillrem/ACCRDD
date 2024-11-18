@@ -154,6 +154,8 @@ body {
     position: relative;
     justify-content: center;
     bottom: 0;
+    text-align: center;
+    align-items: center;
     transform: translate(-50%, 0);
     font-size: 2em;
     color: #ffffff;
