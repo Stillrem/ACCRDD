@@ -75,6 +75,7 @@ function paint(color) {
 
                     if (newColor === '#00FF00') {
                         acceptedCount++;
+                        declineCount--;
                         declinedCount--;
                     } else { 
                         acceptedCount--;
