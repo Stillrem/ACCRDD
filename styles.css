@@ -156,7 +156,7 @@ body {
     justify-content: center;
     align-items: center;
     text-align: center;
-    transform: translate(-50%, -20%);
+    /*transform: translate(-50%, -20%);*/
     font-size: 2em;
     color: #ffffff;
     opacity: 0;
