@@ -152,7 +152,7 @@ body {
 
 .intro {
     position: relative;
-    border: 5px;
+    border: 1px;
     display: flex;
     justify-content: center;
     align-items: center;
