@@ -43,12 +43,10 @@ function paint(color) {
     if (colorCode === '#00FF00') {
         document.getElementById('cell-0').textContent = currentNumber;
         acceptCount++;
-        declinedCount--;
         acceptedCount++;
         currentNumber++;
     } else {
         document.getElementById('cell-0').textContent = ''; // Оставить пустым для красной
-        acceptedCount--;
         declineCount++;
         declinedCount++;
     }
