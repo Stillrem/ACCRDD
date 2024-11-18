@@ -168,7 +168,7 @@ body {
 .display-container {
     position: relative; /* Устанавливаем относительное позиционирование для контейнера */
     width: 380px;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     display: flex;
     justify-content: center; /* Центрируем содержимое по горизонтали */
     gap: 10px;
