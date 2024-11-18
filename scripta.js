@@ -77,8 +77,3 @@ document.getElementById('backButton').addEventListener('click', function(e) {
 window.addEventListener('pagehide', function() {
     document.body.classList.add('unloading');
 });
-
-function playAudio() {
-            var audio = document.getElementById("myAudio");
-            audio.play();
-}
