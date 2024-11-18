@@ -45,7 +45,7 @@ body {
 
         .calculator {
             position: relative;
-            bottom: 5px;
+            bottom: 15px;
             width: 350px;
             background-color: rgba(30, 30, 30, 0.8);
             padding: 20px;
