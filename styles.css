@@ -152,6 +152,7 @@ body {
 
 .intro {
     position: relative;
+    justify-content: center;
     bottom: 0;
     transform: translate(-50%, 0);
     font-size: 2em;
