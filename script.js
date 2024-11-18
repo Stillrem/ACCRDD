@@ -98,6 +98,7 @@ function paint(color) {
                 currentNumber = 1;
             } else if (type === 'decline') {
                 declineCount = 0;
+                declineCount = cellColors.filter(color => color === '#FF0000').length;
             }
             updateDisplayCounts();
     // Очистка всех ячеек от текста
