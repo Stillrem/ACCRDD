@@ -46,7 +46,7 @@ function paint(color) {
         acceptedCount++;
         currentNumber++;
     } else {
-        document.getElementById('cell-0').textContent = ''; // Оставить пустым для красной
+        //document.getElementById('cell-0').textContent = ''; // Оставить пустым для красной
         declineCount++;
         declinedCount++;
     }
