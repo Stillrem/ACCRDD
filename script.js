@@ -75,11 +75,9 @@ function paint(color) {
 
                     if (newColor === '#00FF00') {
                         acceptedCount++;
-                        declineCount--;
                         declinedCount--;
                     } else { 
                         acceptedCount--;
-                        declineCount++;
                         declinedCount++;
                     }
 
@@ -97,7 +95,7 @@ function paint(color) {
             } else if (type === 'decline') {
                 //declineCount = 0;
                 currentNumber = 1;
-                declineCount = cellColors.filter(color => color === '#FF0000').length;
+                //declineCount = cellColors.filter(color => color === '#FF0000').length;
             }
             updateDisplayCounts();
     // Очистка всех ячеек от текста
@@ -107,10 +105,10 @@ function paint(color) {
     });
 
     // Сохранение изменений в localStorage
-    //localStorage.setItem('acceptCount', acceptCount);
-    //localStorage.setItem('declineCount', declineCount);
-    //localStorage.setItem('currentNumber', currentNumber);
-    //localStorage.setItem('cellTexts', JSON.stringify(Array(100).fill('')));
+    localStorage.setItem('acceptCount', acceptCount);
+    localStorage.setItem('declineCount', declineCount);
+    localStorage.setItem('currentNumber', currentNumber);
+    localStorage.setItem('cellTexts', JSON.stringify(Array(100).fill('')));
             
         }
 
