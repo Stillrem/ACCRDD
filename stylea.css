@@ -29,7 +29,7 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    color: #000000;
+    color: #e0e0e0;
     box-sizing: border-box;
     opacity: 0;
     transition: opacity 0.3s ease-in-out;
