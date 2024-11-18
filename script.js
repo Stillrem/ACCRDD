@@ -97,7 +97,7 @@ function paint(color) {
                 acceptCount = 0;
                 currentNumber = 1;
             } else if (type === 'decline') {
-                declineCount = 0;
+                //declineCount = 0;
                 declineCount = cellColors.filter(color => color === '#FF0000').length;
             }
             updateDisplayCounts();
