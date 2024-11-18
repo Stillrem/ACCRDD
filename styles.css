@@ -187,7 +187,7 @@ body {
     align-items: center;
     padding: 5px 10px; /* Уменьшены внутренние отступы */
     /*background: linear-gradient(45deg, #2c3e50, #1a1a1a, #1a1a1a);*/
-    background: linear-gradient(45deg, rgba(44, 62, 80, 0.5), rgba(26, 26, 26, 0.5), rgba(26, 26, 26, 0.5));
+    background: linear-gradient(45deg, rgba(44, 62, 80, 0.8), rgba(26, 26, 26, 0.8), rgba(26, 26, 26, 0.8));
     border: none;
     border-radius: 10px;
     backdrop-filter: blur(10px);
