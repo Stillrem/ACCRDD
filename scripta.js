@@ -78,15 +78,13 @@ window.addEventListener('pagehide', function() {
     document.body.classList.add('unloading');
 });
 
- // Попробуем воспроизвести аудио при загрузке страницы
-        window.addEventListener('load', function() {
+    // Слушатель события на касание экрана
+        document.body.addEventListener('touchstart', function() {
             var audio = document.getElementById('backgroundMusic');
-            var playPromise = audio.play();
+            audio.play().catch(function(error) {
+                console.log('Ошибка при воспроизведении:', error);
+            });
 
-            if (playPromise !== undefined) {
-                playPromise.catch(function(error) {
-                    // Автовоспроизведение было отменено, так как пользователь еще не взаимодействовал со страницей.
-                    console.log('Автовоспроизведение запрещено:', error);
-                });
-            }
-        });
+            // Удалить слушатель после первого касания, чтобы предотвратить повторное воспроизведение
+            document.body.removeEventListener('touchstart', arguments.callee);
+        }, { once: true }); // Опция { once: true } автоматически удаляет обработчик после первого выполнения
