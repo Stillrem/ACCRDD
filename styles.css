@@ -152,11 +152,10 @@ body {
 
 .intro {
     position: relative;
-    top: 50%; 
-    left: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
+    text-align: center;
     transform: translate(-50%, 0);
     font-size: 2em;
     color: #ffffff;
