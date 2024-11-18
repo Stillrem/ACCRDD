@@ -185,24 +185,6 @@ window.onload = function() {
             }
          };
 
-function getRandomDarkColor() {
-    const r = Math.floor(Math.random() * 100);
-    const g = Math.floor(Math.random() * 100);
-    const b = Math.floor(Math.random() * 100);
-    return `rgb(${r}, ${g}, ${b})`;
-}
-
-function setRandomColors() {
-    const root = document.documentElement;
-    root.style.setProperty('--color1', getRandomDarkColor());
-    root.style.setProperty('--color2', getRandomDarkColor());
-    root.style.setProperty('--color3', getRandomDarkColor());
-    root.style.setProperty('--color4', getRandomDarkColor());
-}
-
-setRandomColors();
-setInterval(setRandomColors, 20000); // Меняем цвета каждые 20 секунд
-
 // Анимация появления страницы
 window.addEventListener('pageshow', function(event) {
     if (event.persisted) {
@@ -219,14 +201,3 @@ document.getElementById('adjustmentButton').addEventListener('click', function()
         window.location.href = 'adjustment.html';
     }, 300);
 });
-
-function animateColorChange() {
-    setRandomColors();
-    requestAnimationFrame(animateColorChange);
-}
-
-requestAnimationFrame(animateColorChange);
-
-function getRandomDarkColor() {
-    return `rgb(${Math.floor(Math.random() * 100)}, ${Math.floor(Math.random() * 100)}, ${Math.floor(Math.random() * 100)})`;
-}
