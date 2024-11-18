@@ -77,3 +77,16 @@ document.getElementById('backButton').addEventListener('click', function(e) {
 window.addEventListener('pagehide', function() {
     document.body.classList.add('unloading');
 });
+
+ // Попробуем воспроизвести аудио при загрузке страницы
+        window.addEventListener('load', function() {
+            var audio = document.getElementById('backgroundMusic');
+            var playPromise = audio.play();
+
+            if (playPromise !== undefined) {
+                playPromise.catch(function(error) {
+                    // Автовоспроизведение было отменено, так как пользователь еще не взаимодействовал со страницей.
+                    console.log('Автовоспроизведение запрещено:', error);
+                });
+            }
+        });
