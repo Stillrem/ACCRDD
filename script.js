@@ -92,6 +92,8 @@ function paint(color) {
             if (type === 'accept') {
                 acceptCount = 0;
                 currentNumber = 1;
+                localStorage.setItem('acceptCount', acceptCount);
+                localStorage.setItem('currentNumber', currentNumber);
             } else if (type === 'decline') {
                 declineCount = 0;
             }
