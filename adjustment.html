@@ -9,13 +9,6 @@
 
 </head>
 <body>
-
-    <audio autoplay>
-        <source src="OST-Resident-evil-3.mp3" type="audio/mpeg">
-        Ваш браузер не поддерживает элемент audio.
-    </audio>
-    <button onclick="playAudio()">Play Audio</button>
-
     <div>
     <h1>Calculation - Adjustment</h1>
     <input type="number" id="basePay" placeholder="Enter BasePay">
@@ -24,7 +17,12 @@
     <button onclick="calculate()">Calculate</button>
     <div id="result" style="display: none;"></div>
     <button id="backButton">Return</button>
-        </div>
+        <!-- Добавьте аудио элемент здесь -->
+     <audio autoplay>
+      <source src="OST-Resident-evil-3.mp3" type="audio/mpeg">
+     Ваш браузер не поддерживает элемент <code>audio</code>.
+    </audio>
+    </div>
     </div>
     <script src="scripta.js"></script>
 </body>
