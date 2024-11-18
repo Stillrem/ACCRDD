@@ -152,15 +152,14 @@ body {
 
 .intro {
     position: relative;
-    left: 15%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     transform: translate(-50%, 0);
     font-size: 2em;
     color: #ffffff;
     opacity: 0;
     animation: fadeInOut 7s forwards;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     margin: 0; 
     padding: 0;
 }
