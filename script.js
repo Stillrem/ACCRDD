@@ -98,7 +98,6 @@ function paint(color) {
                 declineCount = cellColors.filter(color => color === '#FF0000').length;
             }
             updateDisplayCounts();
-        }
     // Очистка всех ячеек от текста
     const cells = document.querySelectorAll('.cell');
     cells.forEach((cell) => {
@@ -111,7 +110,7 @@ function paint(color) {
     localStorage.setItem('currentNumber', currentNumber);
     localStorage.setItem('cellTexts', JSON.stringify(Array(100).fill('')));
          
-        
+   }
 
 window.onload = function() {
     const cellsContainer = document.querySelector('.cells');
