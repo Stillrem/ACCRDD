@@ -123,6 +123,7 @@ window.onload = function() {
         cell.style.textAlign = 'center';
         cell.textContent = cellTexts[i]; // Восстановление текста ячейки
         cell.onclick = () => toggleCellColor(i); // Установка обработчика клика
+        cell.addEventListener('click', () => toggleCellColor(i));
         cellsContainer.appendChild(cell);
     }
                       
