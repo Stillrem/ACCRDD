@@ -217,3 +217,10 @@ document.getElementById('adjustmentButton').addEventListener('click', function()
         window.location.href = 'adjustment.html';
     }, 300);
 });
+
+document.addEventListener('touchstart', function(event) {
+    // Блокировка свайпов влево
+    if (event.touches.length > 1) {
+        event.preventDefault();
+    }
+}, { passive: false });
