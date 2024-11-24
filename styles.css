@@ -33,11 +33,6 @@ body {
     overflow: hidden;
 }
 
-body::-webkit-scrollbar {
-    display: none;
-}
-
-
         /*.display-container {
             display: flex;
             justify-content: space-between;
