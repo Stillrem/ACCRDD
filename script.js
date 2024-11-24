@@ -26,7 +26,7 @@ function paint(color) {
 
     if (cellColors[99] === '#00FF00') {
         acceptedCount--;
-        acceptCount--
+        acceptCount--;
     } else if (cellColors[99] === '#FF0000') {
         declinedCount--;
         declineCount--;
