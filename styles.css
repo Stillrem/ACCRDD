@@ -31,7 +31,7 @@ body {
     box-sizing: border-box;
     transition: opacity 0.3s ease-in-out;
     overflow: hidden; /* Скрывает полосу прокрутки */
-    /*overflow-y: scroll; /* Оставляет возможность вертикальной прокрутки */
+    overflow-y: scroll; /* Оставляет возможность вертикальной прокрутки */
 }
 
         /*.display-container {
