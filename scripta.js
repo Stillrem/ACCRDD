@@ -88,3 +88,35 @@ window.addEventListener('pagehide', function() {
             // Удалить слушатель после первого касания, чтобы предотвратить повторное воспроизведение
             document.body.removeEventListener('touchstart', arguments.callee);
         }, { once: true }); // Опция { once: true } автоматически удаляет обработчик после первого выполнения
+
+   document.addEventListener('touchstart', handleTouchStart, false);
+   document.addEventListener('touchmove', handleTouchMove, false);
+
+   let xDown = null;
+   let yDown = null;
+
+   function handleTouchStart(evt) {
+       const firstTouch = evt.touches[0];
+       xDown = firstTouch.clientX;
+       yDown = firstTouch.clientY;
+   };
+
+   function handleTouchMove(evt) {
+       if (!xDown || !yDown) {
+           return;
+       }
+
+       const xUp = evt.touches[0].clientX;
+       const yUp = evt.touches[0].clientY;
+
+       const xDiff = xDown - xUp;
+       const yDiff = yDown - yUp;
+
+       if (Math.abs(xDiff) > Math.abs(yDiff)) {
+           // Свайп влево или вправо
+           evt.preventDefault();
+       }
+       xDown = null;
+       yDown = null;
+   };
+   
