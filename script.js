@@ -218,28 +218,8 @@ document.getElementById('adjustmentButton').addEventListener('click', function()
     }, 300);
 });
 
-document.body.addEventListener('touchstart', handleTouchStart, false);
-document.body.addEventListener('touchmove', handleTouchMove, false);
-
-let xDown = null;
-
-function handleTouchStart(evt) {
-    const firstTouch = evt.touches[0];                                      
-    xDown = firstTouch.clientX;                                      
-}
-
-function handleTouchMove(evt) {
-    if (!xDown) {
-        return;
+document.addEventListener('touchstart', function(event) {
+    if (event.touches.length > 1) {
+        event.preventDefault();
     }
-
-    const xUp = evt.touches[0].clientX;
-    const xDiff = xDown - xUp;
-
-    // Если свайп влево или вправо, отменяем стандартное поведение
-    if (Math.abs(xDiff) > 0) {
-        evt.preventDefault();
-    }
-
-    xDown = null;
-}
+}, { passive: false });
