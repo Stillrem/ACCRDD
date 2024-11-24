@@ -31,13 +31,13 @@ body {
     transition: opacity 0.3s ease-in-out;
 }
 
-        .display-container {
+        /*.display-container {
             display: flex;
             justify-content: space-between;
             width: 380px;
             margin-bottom: 20px;
             gap: 10px
-        }
+        }*/
 
         .calculator {
             width: 350px;
