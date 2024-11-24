@@ -30,14 +30,11 @@ body {
     color: #000000;
     box-sizing: border-box;
     transition: opacity 0.3s ease-in-out;
-}
-
-.container {
     overflow: auto;
     -webkit-overflow-scrolling: touch; /* Для плавной прокрутки на iOS */
 }
 
-.container::-webkit-scrollbar {
+body::-webkit-scrollbar {
     display: none; /* Скрыть полосу прокрутки */
 }
 
