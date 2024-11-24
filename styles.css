@@ -10,7 +10,7 @@
     }
 }
 
-html, body {
+body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
     padding: 20px;
     margin: 0;
@@ -30,12 +30,7 @@ html, body {
     color: #000000;
     box-sizing: border-box;
     transition: opacity 0.3s ease-in-out;
-    overflow: auto;
-    -webkit-overflow-scrolling: touch; /* Для плавной прокрутки на iOS */
-}
-
-html::-webkit-scrollbar, body::-webkit-scrollbar {
-    display: none; /* Скрыть полосу прокрутки */
+    overflow-y: scroll;
 }
 
         /*.display-container {
