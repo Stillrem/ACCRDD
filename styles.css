@@ -33,12 +33,6 @@ body {
     overflow: auto; /* Убирает прокрутку полностью */
 }
 
-body::-webkit-scrollbar {
-    width: 0; /* Убирает линию прокрутки */
-    height: 0;
-    background: transparent; /* Делаем фон прозрачным */
-}
-
         /*.display-container {
             display: flex;
             justify-content: space-between;
