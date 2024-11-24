@@ -64,33 +64,33 @@ function paint(color) {
     updateAcceptanceRate();
     }
 
-    function toggleCellColor(cellIndex) {
-    if (!isLocked) {
-        const currentColor = cellColors[cellIndex];
-        const newColor = currentColor === '#00FF00' ? '#FF0000' : '#00FF00';
+       function toggleCellColor(cellIndex) {
+       if (!isLocked) {
+           const currentColor = cellColors[cellIndex];
+           const newColor = currentColor === '#00FF00' ? '#FF0000' : '#00FF00';
 
-        if (currentColor !== newColor) {
-            cellColors[cellIndex] = newColor;
-            document.getElementById(`cell-${cellIndex}`).style.backgroundColor = newColor;
+           if (currentColor !== newColor) {
+               cellColors[cellIndex] = newColor;
+               document.getElementById(`cell-${cellIndex}`).style.backgroundColor = newColor;
 
-            if (newColor === '#00FF00') {
-                acceptedCount++;
-                if (currentColor === '#FF0000') {
-                    declinedCount--;
-                }
-            } else { 
-                declinedCount++;
-                if (currentColor === '#00FF00') {
-                    acceptedCount--;
-                }
-            }
+               if (newColor === '#00FF00') {
+                   acceptedCount++;
+                   declinedCount--;
+                   // Уменьшить declineCount
+                   declineCount--;
+               } else { 
+                   acceptedCount--;
+                   declinedCount++;
+                   // Увеличить declineCount
+                   declineCount++;
+               }
 
-            updateDisplayCounts();
-            localStorage.setItem('cellColors', JSON.stringify(cellColors));
-            updateAcceptanceRate();
-        }
-    }
-}
+               updateDisplayCounts();
+               localStorage.setItem('cellColors', JSON.stringify(cellColors));
+               updateAcceptanceRate();
+           }
+       }
+   }
                 
         function resetCount(type) {
             if (type === 'accept') {
