@@ -14,7 +14,7 @@ body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
     padding: 20px;
     margin: 0;
-    margin-top: -30px;
+    margin-top: -25px;
     background-color: #121212;
     background-image: url('All.webp'); /* Замена на ваш путь к изображению */
     background-size: cover; /* Изображение будет покрывать весь фон */
