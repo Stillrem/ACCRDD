@@ -30,12 +30,9 @@ body {
     color: #000000;
     box-sizing: border-box;
     transition: opacity 0.3s ease-in-out;
-
+    overflow: hidden; /* Скрывает скроллбар */
+    overflow-y: scroll; /* Позволяет вертикальную прокрутку без видимого скроллбара */
 }
-
-.scrollable-element {
-       overflow: hidden;
-   }
 
         /*.display-container {
             display: flex;
