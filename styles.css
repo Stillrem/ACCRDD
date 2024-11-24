@@ -15,7 +15,7 @@ body {
     padding: 20px;
     margin: 0;
     margin-top: -25px;
-    margin-bottom: 10px;
+    margin-bottom: 30px;
     background-color: #121212;
     background-image: url('All.webp'); /* Замена на ваш путь к изображению */
     background-size: cover; /* Изображение будет покрывать весь фон */
