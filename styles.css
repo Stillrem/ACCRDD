@@ -213,16 +213,3 @@ body {
         opacity: 1;
     }
 }
-
-.calculator, .display-container, .cells, .buttons, .intro, #adjustmentButton, .display {
-    /* Поднимаем элементы на 20 пикселей */
-    transform: translateY(-20px);
-    transition: transform 0.3s ease-in-out;
-}
-
-.container {
-       display: flex;
-       flex-direction: column;
-       align-items: center; /* Центрирование по горизонтали */
-       justify-content: center; /* Центрирование по вертикали */
-   }
