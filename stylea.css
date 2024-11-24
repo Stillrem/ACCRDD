@@ -34,6 +34,8 @@ body {
     opacity: 0;
     transition: opacity 0.3s ease-in-out;
     overflow: hidden;
+    overscroll-behavior-x: none; /* Отключает горизонтальные свайпы */
+    touch-action: none; /* Отключает жесты (не всегда работает в Safari) */
 }
 
 body.loaded {
