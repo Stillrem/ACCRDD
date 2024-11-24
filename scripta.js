@@ -88,3 +88,8 @@ window.addEventListener('pagehide', function() {
             // Удалить слушатель после первого касания, чтобы предотвратить повторное воспроизведение
             document.body.removeEventListener('touchstart', arguments.callee);
         }, { once: true }); // Опция { once: true } автоматически удаляет обработчик после первого выполнения
+
+//javascript
+document.addEventListener('gesturestart', function (e) {
+    e.preventDefault();
+});
