@@ -30,12 +30,13 @@ body {
     color: #000000;
     box-sizing: border-box;
     transition: opacity 0.3s ease-in-out;
-    overflow: hidden; /* Скрывает скроллбар */
-    overflow-y: scroll; /* Позволяет вертикальную прокрутку без видимого скроллбара */
+    overflow: hidden; /* Убирает прокрутку полностью */
+    overflow-y: auto; /* Включает вертикальную прокрутку */
 }
 
 body::-webkit-scrollbar {
-    display: none;
+    width: 0; /* Убирает линию прокрутки */
+    background: transparent; /* Делаем фон прозрачным */
 }
 
         /*.display-container {
