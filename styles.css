@@ -30,7 +30,7 @@ body {
     color: #000000;
     box-sizing: border-box;
     transition: opacity 0.3s ease-in-out;
-    overflow-y: auto; /* Включает вертикальную прокрутку */
+    overflow: auto; /* Включает вертикальную прокрутку */
 
 }
         /*.display-container {
