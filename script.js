@@ -75,10 +75,14 @@ function paint(color) {
 
             if (newColor === '#00FF00') {
                 acceptedCount++;
-                declinedCount--; // Уменьшаем количество отклоненных
+                if (currentColor === '#FF0000') {
+                    declinedCount--;
+                }
             } else { 
-                acceptedCount--;
-                declinedCount++; // Увеличиваем количество отклоненных
+                declinedCount++;
+                if (currentColor === '#00FF00') {
+                    acceptedCount--;
+                }
             }
 
             updateDisplayCounts();
