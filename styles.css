@@ -213,3 +213,9 @@ body {
         opacity: 1;
     }
 }
+
+.calculator, .display-container, .cells, .buttons, .intro {
+    /* Поднимаем элементы на 20 пикселей */
+    transform: translateY(-20px);
+    transition: transform 0.3s ease-in-out;
+}
