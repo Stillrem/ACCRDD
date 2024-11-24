@@ -26,7 +26,7 @@ function paint(color) {
 
     if (cellColors[99] === '#00FF00') {
         acceptedCount--;
-        acceptCount--
+        acceptCount--;
     } else if (cellColors[99] === '#FF0000') {
         declinedCount--;
         declineCount--;
@@ -41,14 +41,13 @@ function paint(color) {
     cellColors[0] = colorCode;
     document.getElementById('cell-0').style.backgroundColor = colorCode;
 
-    // Пропуск нумерации красной ячейки
     if (colorCode === '#00FF00') {
         document.getElementById('cell-0').textContent = currentNumber;
         acceptCount++;
         acceptedCount++;
         currentNumber++;
     } else {
-        document.getElementById('cell-0').textContent = ''; // Оставить пустым для красной
+        document.getElementById('cell-0').textContent = '';
         declineCount++;
         declinedCount++;
     }
@@ -60,63 +59,58 @@ function paint(color) {
     localStorage.setItem('currentNumber', currentNumber);
     updateDisplayCounts();
     localStorage.setItem('cellColors', JSON.stringify(cellColors));
-    // Сохранение текстов ячеек
+
     const cellTexts = Array.from(document.querySelectorAll('.cell')).map(cell => cell.textContent);
     localStorage.setItem('cellTexts', JSON.stringify(cellTexts));
     updateAcceptanceRate();
-    }
+}
 
-       function toggleCellColor(cellIndex) {
-       if (!isLocked) {
-           const currentColor = cellColors[cellIndex];
-           const newColor = currentColor === '#00FF00' ? '#FF0000' : '#00FF00';
+function toggleCellColor(cellIndex) {
+    if (!isLocked) {
+        const currentColor = cellColors[cellIndex];
+        const newColor = currentColor === '#00FF00' ? '#FF0000' : '#00FF00';
 
-           if (currentColor !== newColor) {
-               cellColors[cellIndex] = newColor;
-               document.getElementById(`cell-${cellIndex}`).style.backgroundColor = newColor;
+        if (currentColor !== newColor) {
+            cellColors[cellIndex] = newColor;
+            document.getElementById(`cell-${cellIndex}`).style.backgroundColor = newColor;
 
-               if (newColor === '#00FF00') {
-                   acceptedCount++;
-                   declinedCount--;
-                   // Уменьшить declineCount
-                   declineCount--;
-               } else { 
-                   acceptedCount--;
-                   declinedCount++;
-                   // Увеличить declineCount
-                   declineCount++;
-               }
-
-               updateDisplayCounts();
-               localStorage.setItem('cellColors', JSON.stringify(cellColors));
-               updateAcceptanceRate();
-           }
-       }
-   }
-                
-        function resetCount(type) {
-            if (type === 'accept') {
-                acceptCount = 0;
-                currentNumber = 1;
-            } else if (type === 'decline') {
-                //declineCount = 0;
-                currentNumber = 1;
-                declineCount = cellColors.filter(color => color === '#FF0000').length;
+            if (newColor === '#00FF00') {
+                acceptedCount++;
+                declinedCount--;
+                declineCount--;
+            } else { 
+                acceptedCount--;
+                declinedCount++;
+                declineCount++;
             }
+
             updateDisplayCounts();
-    // Очистка всех ячеек от текста
+            localStorage.setItem('cellColors', JSON.stringify(cellColors));
+            updateAcceptanceRate();
+        }
+    }
+}
+
+function resetCount(type) {
+    if (type === 'accept') {
+        acceptCount = 0;
+        currentNumber = 1;
+    } else if (type === 'decline') {
+        currentNumber = 1;
+        declineCount = cellColors.filter(color => color === '#FF0000').length;
+    }
+    updateDisplayCounts();
+
     const cells = document.querySelectorAll('.cell');
     cells.forEach((cell) => {
         cell.textContent = '';
     });
 
-    // Сохранение изменений в localStorage
     localStorage.setItem('acceptCount', acceptCount);
     localStorage.setItem('declineCount', declineCount);
     localStorage.setItem('currentNumber', currentNumber);
     localStorage.setItem('cellTexts', JSON.stringify(Array(100).fill('')));
-         
-   }
+}
 
 window.onload = function() {
     const cellsContainer = document.querySelector('.cells');
