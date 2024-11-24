@@ -214,7 +214,7 @@ body {
     }
 }
 
-.calculator, .display-container, .cells, .buttons, .intro .adjustmentButton {
+.calculator, .display-container, .cells, .buttons, .intro, #adjustmentButton {
     /* Поднимаем элементы на 20 пикселей */
     transform: translateY(-20px);
     transition: transform 0.3s ease-in-out;
