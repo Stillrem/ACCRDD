@@ -218,34 +218,38 @@ document.getElementById('adjustmentButton').addEventListener('click', function()
     }, 300);
 });
 
-   document.addEventListener('touchstart', handleTouchStart, false);
-   document.addEventListener('touchmove', handleTouchMove, false);
+document.addEventListener('touchstart', handleTouchStart, false);
+document.addEventListener('touchmove', handleTouchMove, false);
 
-   let xDown = null;
-   let yDown = null;
+let xDown = null;
+let yDown = null;
 
-   function handleTouchStart(evt) {
-       const firstTouch = evt.touches[0];
-       xDown = firstTouch.clientX;
-       yDown = firstTouch.clientY;
-   };
+function handleTouchStart(evt) {
+    const firstTouch = evt.touches[0];
+    xDown = firstTouch.clientX;
+    yDown = firstTouch.clientY;
+}
 
-   function handleTouchMove(evt) {
-       if (!xDown || !yDown) {
-           return;
-       }
+function handleTouchMove(evt) {
+    if (!xDown || !yDown) {
+        return;
+    }
 
-       const xUp = evt.touches[0].clientX;
-       const yUp = evt.touches[0].clientY;
+    const xUp = evt.touches[0].clientX;
+    const yUp = evt.touches[0].clientY;
 
-       const xDiff = xDown - xUp;
-       const yDiff = yDown - yUp;
+    const xDiff = xDown - xUp;
+    const yDiff = yDown - yUp;
 
-       if (Math.abs(xDiff) > Math.abs(yDiff)) {
-           // Свайп влево или вправо
-           evt.preventDefault();
-       }
-       xDown = null;
-       yDown = null;
-   };
-   
+    if (Math.abs(xDiff) > Math.abs(yDiff)) {
+        if (xDiff > 0) {
+            // Свайп влево
+        } else {
+            // Свайп вправо
+            evt.preventDefault(); // Отключаем действие свайпа вправо
+        }
+    }
+
+    xDown = null;
+    yDown = null;
+}
