@@ -32,6 +32,15 @@ body {
     transition: opacity 0.3s ease-in-out;
 }
 
+.container {
+    overflow: auto;
+    -webkit-overflow-scrolling: touch; /* Для плавной прокрутки на iOS */
+}
+
+.container::-webkit-scrollbar {
+    display: none; /* Скрыть полосу прокрутки */
+}
+
         /*.display-container {
             display: flex;
             justify-content: space-between;
