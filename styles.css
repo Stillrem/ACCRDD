@@ -32,7 +32,6 @@ body {
     transition: opacity 0.3s ease-in-out;
     overflow: hidden; /* Убирает прокрутку полностью */
     overflow-y: auto; /* Включает вертикальную прокрутку */
-}
 
 body::-webkit-scrollbar {
     width: 0; /* Убирает линию прокрутки */
