@@ -36,7 +36,7 @@ body {
 
 body::-webkit-scrollbar {
     width: 0; /* Убирает линию прокрутки */
-    background: transparent; /* Делаем фон прозрачным */
+    background: red; /* Делаем фон прозрачным */
 }
 
         /*.display-container {
