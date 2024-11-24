@@ -33,7 +33,7 @@ function paint(color) {
     for (let i = cellColors.length - 1; i > 0; i--) {
         cellColors[i] = cellColors[i - 1];
         document.getElementById(`cell-${i}`).style.backgroundColor = cellColors[i];
-        document.getElementById(`cell-${i}`).textContent = document.getElementById(`cell-${i-1}`).textContent;
+        //document.getElementById(`cell-${i}`).textContent = document.getElementById(`cell-${i-1}`).textContent;
     }
 
     cellColors[0] = colorCode;
