@@ -34,6 +34,10 @@ body {
     overflow-y: scroll; /* Позволяет вертикальную прокрутку без видимого скроллбара */
 }
 
+body::-webkit-scrollbar {
+    display: none;
+}
+
         /*.display-container {
             display: flex;
             justify-content: space-between;
