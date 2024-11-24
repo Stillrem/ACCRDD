@@ -77,11 +77,13 @@ function paint(color) {
 
                if (newColor === '#00FF00') {
                    acceptedCount++;
+                   acceptCount++;
                    declinedCount--;
                    // Уменьшить declineCount
                    declineCount--;
                } else { 
                    acceptedCount--;
+                   acceptCount--;
                    declinedCount++;
                    // Увеличить declineCount
                    declineCount++;
