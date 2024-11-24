@@ -34,10 +34,9 @@ body {
 
 }
 
-body::-webkit-scrollbar {
-    width: 0; /* или width: 0px; */
-    height: 0; /* или height: 0px; */
-}
+.scrollable-element {
+       overflow: hidden;
+   }
 
         /*.display-container {
             display: flex;
