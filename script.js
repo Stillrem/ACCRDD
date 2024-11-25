@@ -217,12 +217,3 @@ document.getElementById('adjustmentButton').addEventListener('click', function()
         window.location.href = 'adjustment.html';
     }, 300);
 });
-
-// Добавляем фиктивное состояние в историю
-history.pushState(null, null, location.href);
-
-// Обрабатываем событие popstate, которое вызывается при попытке навигации назад
-window.addEventListener('popstate', function (event) {
-    // Возвращаем на текущую страницу, предотвращая навигацию назад
-    history.pushState(null, null, location.href);
-});
