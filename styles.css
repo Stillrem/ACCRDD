@@ -31,7 +31,6 @@ body {
     box-sizing: border-box;
     transition: opacity 0.3s ease-in-out;
     overflow: hidden;
-    overscroll-behavior: contain;
     overscroll-behavior: none;
     overscroll-behavior-x: none; 
     overscroll-behavior-y: none;
