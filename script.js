@@ -219,14 +219,17 @@ document.getElementById('adjustmentButton').addEventListener('click', function()
 });
 
 // Перехват касаний на левом краю экрана
-     let touchStartX = 0;
+let touchStartX = 0;
 
-     window.addEventListener('touchstart', function(e) {
-       touchStartX = e.changedTouches[0].screenX;
-     }, { passive: false });
+window.addEventListener('touchstart', function(e) {
+  if (e.touches.length === 1) {
+    touchStartX = e.touches[0].clientX;
+  }
+}, { passive: false });
 
-     window.addEventListener('touchmove', function(e) {
-       if (touchStartX < 50) { // 50px от левого края
-         e.preventDefault();
-       }
-     }, { passive: false });
+window.addEventListener('touchmove', function(e) {
+  let touchCurrentX = e.touches[0].clientX;
+  let touchDiff = touchCurrentX - touchStartX;
+
+  // Если жест направлен вправо и начинается с левого края
+  if (touchDiff > 50 && touchStartX < 30)
