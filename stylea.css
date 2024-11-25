@@ -59,7 +59,7 @@ body.unloading {
     display: flex;
     flex-direction: column;
     align-items: center;
-    overflow: auto;
+    overflow: hidden;
     max-height: 90vh;
 }
 
