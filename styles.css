@@ -32,6 +32,7 @@ body {
     transition: opacity 0.3s ease-in-out;
     overflow: hidden;
     overscroll-behavior: contain;
+    overscroll-behavior: none;
 }
 
         /*.display-container {
