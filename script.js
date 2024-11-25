@@ -217,13 +217,3 @@ document.getElementById('adjustmentButton').addEventListener('click', function()
         window.location.href = 'adjustment.html';
     }, 300);
 });
-
-//javascript
-document.addEventListener('touchstart', function(e) {
-  if (e.touches.length === 1) {
-    const touch = e.touches[0];
-    if (touch.clientX <= 1 || touch.clientX >= window.innerWidth - 1) {
-      e.preventDefault();
-    }
-  }
-}, { passive: false });
