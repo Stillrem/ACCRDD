@@ -16,7 +16,7 @@ function calculate() {
     resultElement.innerHTML = `
         Почасовая ставка: $${hourlyRate.toFixed(2)}<br>
         Разница со ставкой $23: $${difference.toFixed(2)}<br>
-        Дополнительная оплата: $${additionalPay.toFixed(2)}
+        Дополнительная оплата: $${additionalPay.toFixed(2)} +/-
     `;
 }
 
