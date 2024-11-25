@@ -217,3 +217,16 @@ document.getElementById('adjustmentButton').addEventListener('click', function()
         window.location.href = 'adjustment.html';
     }, 300);
 });
+
+// Перехват касаний на левом краю экрана
+     let touchStartX = 0;
+
+     window.addEventListener('touchstart', function(e) {
+       touchStartX = e.changedTouches[0].screenX;
+     }, { passive: false });
+
+     window.addEventListener('touchmove', function(e) {
+       if (touchStartX < 50) { // 50px от левого края
+         e.preventDefault();
+       }
+     }, { passive: false });
