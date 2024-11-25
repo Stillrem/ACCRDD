@@ -35,6 +35,7 @@ body {
     overscroll-behavior: none;
     overscroll-behavior-x: none; 
     overscroll-behavior-y: none;
+    touch-action: none;
 }
 
         /*.display-container {
