@@ -42,9 +42,11 @@ body {
     opacity: 0;
     transition: opacity 0.3s ease-in-out;
     overflow: hidden;
-    /*touch-action: pan-y;
-    overscroll-behavior-x: none;
-    overscroll-behavior: none;*/
+    touch-action: none; /* Отключает прокрутку */
+    -webkit-user-select: none; /* Safari */
+    -moz-user-select: none;    /* Firefox */
+    -ms-user-select: none;     /* Internet Explorer */
+    user-select: none;         /* Standard syntax */
 }
 
 body.loaded {
