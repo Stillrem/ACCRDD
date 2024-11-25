@@ -217,19 +217,3 @@ document.getElementById('adjustmentButton').addEventListener('click', function()
         window.location.href = 'adjustment.html';
     }, 300);
 });
-
-// Перехват касаний на левом краю экрана
-let touchStartX = 0;
-
-window.addEventListener('touchstart', function(e) {
-  if (e.touches.length === 1) {
-    touchStartX = e.touches[0].clientX;
-  }
-}, { passive: false });
-
-window.addEventListener('touchmove', function(e) {
-  let touchCurrentX = e.touches[0].clientX;
-  let touchDiff = touchCurrentX - touchStartX;
-
-  // Если жест направлен вправо и начинается с левого края
-  if (touchDiff > 50 && touchStartX < 30)
