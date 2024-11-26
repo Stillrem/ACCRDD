@@ -68,7 +68,6 @@ body {
 }
 
 .cell {
-    width: 100%;
     aspect-ratio: 1; /* Square aspect ratio */
     position: relative;
     background-color: rgba(30, 30, 30, 0.8);
