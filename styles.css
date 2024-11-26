@@ -119,12 +119,6 @@ body {
     background-color: rgba(244, 67, 54, 0.8);
 }
 
-@media (max-width: 600px) {
-    .calculator {
-        width: 100%;
-        padding: 15px;
-    }
-
 .footer {
             margin-top: 20px;
             font-size: 0.8em;
