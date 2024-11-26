@@ -234,11 +234,6 @@ body {
         margin-bottom: 10px;
     }
 
-    .cells {
-        grid-template-columns: repeat(5, 1fr);
-        gap: 5px;
-    }
-
     .button {
         padding: 8px 12px;
         font-size: 0.9em;
@@ -263,11 +258,6 @@ body {
         margin-bottom: 15px;
     }
 
-    .cells {
-        grid-template-columns: repeat(8, 1fr);
-        gap: 10px;
-    }
-
     .button {
         padding: 9px 15px;
         font-size: 1em;
@@ -289,11 +279,6 @@ body {
     .display {
         font-size: 1.5em;
         margin-bottom: 20px;
-    }
-
-    .cells {
-        grid-template-columns: repeat(10, 1fr);
-        gap: 15px;
     }
 
     .button {
