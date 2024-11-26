@@ -221,28 +221,12 @@ body {
     }
 }
 
-/* Общие стили */
-.calculator {
-    margin: 0 auto;
-    max-width: 600px; /* Ограничение максимальной ширины */
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-.display {
-    text-align: right; /* Выравнивание текста справа */
-    padding: 10px;
-    border-bottom: 1px solid #ccc;
-}
-
-.button, #adjustmentButton {
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.button:hover, #adjustmentButton:hover {
-    background-color: #f0f0f0;
+/* Общие стили для центрирования */
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* или другая подходящая высота */
 }
 
 /* Адаптивность для небольших экранов */
@@ -257,13 +241,13 @@ body {
     }
 
     .button {
-        padding: 10px;
-        font-size: 1em;
+        padding: 8px 12px;
+        font-size: 0.9em;
     }
 
     #adjustmentButton {
         width: 100%;
-        font-size: 1em;
+        font-size: 12px;
     }
 }
 
@@ -278,8 +262,8 @@ body {
     }
 
     .button {
-        padding: 12px;
-        font-size: 1.1em;
+        padding: 9px 15px;
+        font-size: 1em;
     }
 
     #adjustmentButton {
@@ -298,8 +282,8 @@ body {
     }
 
     .button {
-        padding: 15px;
-        font-size: 1.2em;
+        padding: 10px 20px;
+        font-size: 1em;
     }
 
     #adjustmentButton {
