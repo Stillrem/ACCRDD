@@ -22,7 +22,7 @@ body {
 }
 
 .calculator {
-    width: 90%; /* Используйте % вместо фиксированной ширины */
+    width: 90%;
     max-width: 350px;
     background-color: rgba(30, 30, 30, 0.8);
     padding: 20px;
@@ -49,7 +49,7 @@ body {
 
 .cells {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(30px, 1fr)); /* Гибкая сетка */
+    grid-template-columns: repeat(auto-fill, minmax(30px, 1fr));
     gap: 5px;
     margin-bottom: 20px;
     justify-content: center;
