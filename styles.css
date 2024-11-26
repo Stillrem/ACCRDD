@@ -220,3 +220,44 @@ body {
         opacity: 1;
     }
 }
+
+/* Мобильные устройства (менее 600px) */
+@media only screen and (max-width: 600px) {
+    .calculator {
+        width: 90%;
+    }
+    
+    .display-container, #adjustmentButton {
+        width: 100%;
+    }
+    
+    .button {
+        font-size: 0.8em;
+    }
+}
+
+/* Планшеты (от 600px до 768px) */
+@media only screen and (min-width: 600px) and (max-width: 768px) {
+    .calculator {
+        width: 80%;
+    }
+    
+    .display-container, #adjustmentButton {
+        width: 90%;
+    }
+    
+    .button {
+        font-size: 0.9em;
+    }
+}
+
+/* Настольные компьютеры и большие экраны (более 768px) */
+@media only screen and (min-width: 768px) {
+    .calculator {
+        width: 60%;
+    }
+    
+    .display-container, #adjustmentButton {
+        width: 70%;
+    }
+}
