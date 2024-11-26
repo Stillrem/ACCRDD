@@ -221,72 +221,44 @@ body {
     }
 }
 
-/* Мобильные устройства (до 600px) */
-@media (max-width: 600px) {
+/* Общие стили для планшетов и небольших экранов */
+@media (max-width: 768px) {
     .calculator {
-        width: 90%;
-        padding: 15px;
+        width: 90%; /* Увеличение ширины калькулятора на маленьких экранах */
     }
+
     .display {
-        font-size: 1.2em;
+        font-size: 1.2em; /* Уменьшение размера шрифта */
     }
-    .buttons {
-        flex-direction: column;
-    }
-    .button {
-        margin-bottom: 10px;
-    }
-    #adjustmentButton {
-        width: 90%;
-        font-size: 12px;
+
+    .cells {
+        grid-template-columns: repeat(5, 1fr); /* Изменение количества колонок сетки */
     }
 }
 
-/* Планшеты (от 601px до 768px) */
-@media (min-width: 601px) and (max-width: 768px) {
+/* Общие стили для мобильных устройств */
+@media (max-width: 480px) {
     .calculator {
-        width: 80%;
-        padding: 18px;
+        width: 100%; /* Полная ширина на мобильных устройствах */
     }
-    .display {
-        font-size: 1.4em;
-    }
+
     .button {
-        font-size: 0.9em;
+        padding: 8px 12px; /* Уменьшение отступов для кнопок */
+        font-size: 0.9em; /* Уменьшение размера шрифта */
     }
-    #adjustmentButton {
-        width: 80%;
+
+    .display {
+        font-size: 1em; /* Еще большее уменьшение размера шрифта */
     }
 }
 
-/* Ноутбуки и стандартные экраны (от 769px до 1200px) */
-@media (min-width: 769px) and (max-width: 1200px) {
-    .calculator {
-        width: 70%;
+/* Медиазапросы по высоте экрана */
+@media (max-height: 600px) {
+    .footer {
+        font-size: 0.7em; /* Уменьшение размера шрифта для футера */
     }
-    .display {
-        font-size: 1.5em;
-    }
-    .button {
-        font-size: 1em;
-    }
-    #adjustmentButton {
-        width: 70%;
-    }
-}
 
-/* Большие экраны (более 1200px) */
-@media (min-width: 1201px) {
-    .calculator {
-        width: 50%;
-    }
-    .display {
-        font-size: 1.5em;
-    }
-    .button {
-        font-size: 1em;
-    }
-    #adjustmentButton {
-        width: 50%;
+    .intro {
+        font-size: 1.5em; /* Уменьшение размера шрифта для вступления */
     }
 }
