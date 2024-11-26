@@ -221,14 +221,6 @@ body {
     }
 }
 
-/* Общие стили для центрирования */
-.container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh; /* или другая подходящая высота */
-}
-
 /* Адаптивность для небольших экранов */
 @media (max-width: 600px) {
     .calculator {
@@ -241,8 +233,8 @@ body {
     }
 
     .button {
-        padding: 8px 12px;
-        font-size: 0.9em;
+        padding: 5px 10px;
+        font-size: 1em;
     }
 
     #adjustmentButton {
@@ -262,7 +254,7 @@ body {
     }
 
     .button {
-        padding: 9px 15px;
+        padding: 5px 10px;
         font-size: 1em;
     }
 
@@ -282,7 +274,7 @@ body {
     }
 
     .button {
-        padding: 10px 20px;
+        padding: 5px 10px;
         font-size: 1em;
     }
 
