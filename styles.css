@@ -221,56 +221,72 @@ body {
     }
 }
 
-/* Мобильные устройства: ширина менее 600px и высота менее 500px */
-@media only screen and (max-width: 600px) and (max-height: 500px) {
+/* Мобильные устройства (до 600px) */
+@media (max-width: 600px) {
     .calculator {
         width: 90%;
-        height: 90vh;
+        padding: 15px;
     }
-    
-    .display-container, #adjustmentButton {
-        width: 100%;
-        height: 15vh;
+    .display {
+        font-size: 1.2em;
     }
-    
+    .buttons {
+        flex-direction: column;
+    }
     .button {
-        font-size: 0.7em;
-        height: 10vh;
+        margin-bottom: 10px;
+    }
+    #adjustmentButton {
+        width: 90%;
+        font-size: 12px;
     }
 }
 
-/* Планшеты: ширина от 600px до 768px и высота от 500px до 800px */
-@media only screen and (min-width: 600px) and (max-width: 768px) and (min-height: 500px) and (max-height: 800px) {
+/* Планшеты (от 601px до 768px) */
+@media (min-width: 601px) and (max-width: 768px) {
     .calculator {
         width: 80%;
-        height: 80vh;
+        padding: 18px;
     }
-    
-    .display-container, #adjustmentButton {
-        width: 90%;
-        height: 20vh;
+    .display {
+        font-size: 1.4em;
     }
-    
     .button {
         font-size: 0.9em;
-        height: 8vh;
+    }
+    #adjustmentButton {
+        width: 80%;
     }
 }
 
-/* Настольные компьютеры: ширина более 768px и высота более 800px */
-@media only screen and (min-width: 768px) and (min-height: 800px) {
+/* Ноутбуки и стандартные экраны (от 769px до 1200px) */
+@media (min-width: 769px) and (max-width: 1200px) {
     .calculator {
-        width: 60%;
-        height: 70vh;
-    }
-    
-    .display-container, #adjustmentButton {
         width: 70%;
-        height: 25vh;
     }
-    
+    .display {
+        font-size: 1.5em;
+    }
     .button {
         font-size: 1em;
-        height: 6vh;
+    }
+    #adjustmentButton {
+        width: 70%;
+    }
+}
+
+/* Большие экраны (более 1200px) */
+@media (min-width: 1201px) {
+    .calculator {
+        width: 50%;
+    }
+    .display {
+        font-size: 1.5em;
+    }
+    .button {
+        font-size: 1em;
+    }
+    #adjustmentButton {
+        width: 50%;
     }
 }
