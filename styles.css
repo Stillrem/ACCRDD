@@ -221,11 +221,11 @@ body {
     }
 }
 
-/* Адаптивность для небольших экранов */
+/* Адаптация для маленьких экранов */
 @media (max-width: 600px) {
     .calculator {
         width: 100%;
-        padding: 10px;
+        padding: 15px;
     }
 
     .display {
@@ -233,52 +233,39 @@ body {
     }
 
     .button {
-        padding: 5px 10px;
         font-size: 1em;
-    }
-
-    #adjustmentButton {
-        width: 100%;
-        font-size: 12px;
+        padding: 5px 10px;
     }
 }
 
-/* Адаптивность для средних экранов */
-@media (min-width: 601px) and (max-width: 1024px) {
+/* Адаптация для средних экранов */
+@media (min-width: 601px) and (max-width: 1200px) {
     .calculator {
-        width: 80%;
+        width: 70%;
+        padding: 20px;
     }
 
     .display {
-        font-size: 1.3em;
+        font-size: 1.4em;
+    }
+
+    .button {
+        font-size: 1em;
+        padding: 5px 10px;
+    }
+}
+
+/* Адаптация для экранов с малой высотой */
+@media (max-height: 500px) {
+    .calculator {
+        padding: 10px;
+    }
+
+    .display {
+        margin-bottom: 10px;
     }
 
     .button {
         padding: 5px 10px;
-        font-size: 1em;
-    }
-
-    #adjustmentButton {
-        width: 90%;
-    }
-}
-
-/* Адаптивность для больших экранов */
-@media (min-width: 1025px) {
-    .calculator {
-        width: 60%;
-    }
-
-    .display {
-        font-size: 1.5em;
-    }
-
-    .button {
-        padding: 5px 10px;
-        font-size: 1em;
-    }
-
-    #adjustmentButton {
-        width: 80%;
     }
 }
