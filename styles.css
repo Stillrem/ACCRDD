@@ -19,7 +19,7 @@ body {
     background-color: #121212;
     background-image: url('All.webp'); /* Замена на ваш путь к изображению */
     background-size: cover; /* Изображение будет покрывать весь фон */
-    background-attachment: fixed; /* Фон будет зафиксирован при прокрутке */
+    /*background-attachment: fixed; /* Фон будет зафиксирован при прокрутке */
     background-position: center; /* Центрирование фона */
     animation: gradientAnimation 30s ease infinite;
     min-height: 100vh;
