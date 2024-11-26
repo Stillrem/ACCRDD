@@ -79,6 +79,10 @@ input, button, #result {
     box-sizing: border-box;
 }
 
+input {
+    overflow: hidden
+}
+
 input::placeholder {
     color: #b0b0b0; /* Цвет текста для плейсхолдера */
 }
