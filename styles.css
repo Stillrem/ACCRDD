@@ -220,14 +220,3 @@ body {
         opacity: 1;
     }
 }
-
-@media (max-width: 768px) {
-    .calculator {
-        width: 300px; /* Уменьшаем ширину для планшетов */
-    }
-
-@media (max-width: 480px) {
-    .calculator {
-        width: 250px; /* Уменьшаем ширину для телефонов */
-        padding: 15px;
-    }
