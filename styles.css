@@ -46,33 +46,17 @@ body {
             gap: 10px
         }*/
 
-.calculator {
-    width: 100%;
-    max-width: 400px; /* Максимальная ширина для контроля размера */
-    margin: 0 auto;
-    padding: 20px;
-    background-color: rgba(30, 30, 30, 0.8);
-    border-radius: 20px;
-    box-shadow: 0 0 30px rgba(0, 0, 0, 0.5), inset 0 0 10px rgba(255, 255, 255, 0.1);
-    min-height: 300px; /* Минимальная высота */
-    max-height: 600px; /* Максимальная высота */
-    overflow-y: auto; /* Скролл, если содержимое превышает максимальную высоту */
-}
-
-@media (min-width: 768px) {
-    .calculator {
-        width: 80%;
-        min-height: 350px; /* Изменение минимальной высоты для других экранов */
-    }
-}
-
-@media (min-width: 1024px) {
-    .calculator {
-        width: 60%;
-        min-height: 400px; /* Еще одно изменение минимальной высоты */
-    }
-}
-
+        .calculator {
+            width: 350px;
+            background-color: rgba(30, 30, 30, 0.8);
+            padding: 20px;
+            border-radius: 20px;
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.5), inset 0 0 10px rgba(255, 255, 255, 0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            backdrop-filter: blur(10px);
+        }
 
         .display {
             margin-bottom: 20px;
