@@ -221,51 +221,51 @@ body {
     }
 }
 
-/* Медиазапрос для устройств с шириной экрана менее 768px (например, планшеты) */
-@media (max-width: 768px) {
+/* Адаптация для маленьких экранов */
+@media (max-width: 600px) {
     .calculator {
-        width: 90%; /* Увеличиваем ширину для адаптации */
+        width: 90%;
+        padding: 15px;
     }
 
     .display {
-        font-size: 1.2em; /* Уменьшаем размер шрифта */
-    }
-
-    .cells {
-        grid-template-columns: repeat(5, 50px); /* Изменяем количество колонок и ширину */
+        font-size: 1.2em;
     }
 
     .button {
-        font-size: 0.9em; /* Уменьшаем размер шрифта кнопок */
+        font-size: 0.9em;
+        padding: 8px 15px;
     }
 }
 
-/* Медиазапрос для устройств с шириной экрана менее 480px (например, мобильные телефоны) */
-@media (max-width: 480px) {
+/* Адаптация для средних экранов */
+@media (min-width: 601px) and (max-width: 1200px) {
     .calculator {
-        width: 95%; /* Еще больше увеличиваем ширину для мобильных */
+        width: 70%;
+        padding: 20px;
     }
 
     .display {
-        font-size: 1em; /* Еще уменьшаем размер шрифта */
-    }
-
-    .cells {
-        grid-template-columns: repeat(4, 60px); /* Еще изменяем количество колонок и ширину */
+        font-size: 1.4em;
     }
 
     .button {
-        font-size: 0.8em; /* Еще уменьшаем размер шрифта кнопок */
+        font-size: 1em;
+        padding: 10px 20px;
     }
 }
 
-/* Медиазапрос для устройств с высотой экрана менее 600px */
-@media (max-height: 600px) {
-    .footer {
-        font-size: 0.7em; /* Уменьшаем размер шрифта в футере */
+/* Адаптация для экранов с малой высотой */
+@media (max-height: 500px) {
+    .calculator {
+        padding: 10px;
     }
 
-    .intro {
-        font-size: 1.5em; /* Уменьшаем размер шрифта интро */
+    .display {
+        margin-bottom: 10px;
+    }
+
+    .button {
+        padding: 5px 10px;
     }
 }
