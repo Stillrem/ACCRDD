@@ -1,4 +1,3 @@
-css
 @keyframes gradientAnimation {
     0% {
         background-position: 0% 50%;
@@ -15,115 +14,127 @@ body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
     padding: 20px;
     margin: 0;
+    margin-top: -30px;
+    margin-bottom: 50px;
     background-color: #121212;
-    background-image: url('All.webp');
-    background-size: cover;
-    background-attachment: fixed;
-    background-position: center;
+    background-image: url('All.webp'); /* Замена на ваш путь к изображению */
+    background-size: cover; /* Изображение будет покрывать весь фон */
+    background-attachment: fixed; /* Фон будет зафиксирован при прокрутке */
+    background-position: center; /* Центрирование фона */
     animation: gradientAnimation 30s ease infinite;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    color: #000;
+    color: #000000;
     box-sizing: border-box;
     transition: opacity 0.3s ease-in-out;
     overflow: hidden;
-    touch-action: none;
-    user-select: none;
+    touch-action: none; /* Отключает прокрутку */
+    -webkit-user-select: none; /* Safari */
+    -moz-user-select: none;    /* Firefox */
+    -ms-user-select: none;     /* Internet Explorer */
+    user-select: none;         /* Standard syntax */
 }
 
-.calculator {
-    width: 90vw;
-    max-width: 350px;
-    background-color: rgba(30, 30, 30, 0.8);
-    padding: 20px;
-    border-radius: 20px;
-    box-shadow: 0 0 30px rgba(0, 0, 0, 0.5), inset 0 0 10px rgba(255, 255, 255, 0.1);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    backdrop-filter: blur(10px);
-}
+        /*.display-container {
+            display: flex;
+            justify-content: space-between;
+            width: 380px;
+            margin-bottom: 20px;
+            gap: 10px
+        }*/
 
-.display {
-    margin-bottom: 20px;
-    font-size: 1.5em;
-    text-align: center;
-    width: 100%;
-    background: rgba(44, 44, 44, 0.8);
-    color: #fff;
-    padding: 10px;
-    border-radius: 10px;
-    box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.2);
-}
+        .calculator {
+            width: 350px;
+            background-color: rgba(30, 30, 30, 0.8);
+            padding: 20px;
+            border-radius: 20px;
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.5), inset 0 0 10px rgba(255, 255, 255, 0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            backdrop-filter: blur(10px);
+        }
 
-.cells {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(30px, 1fr));
-    gap: 5px;
-    margin-bottom: 20px;
-    justify-content: center;
-}
+        .display {
+            margin-bottom: 20px;
+            font-size: 1.5em;
+            text-align: center;
+            width: 93%;
+            background: rgba(44, 44, 44, 0.8);
+            color: #ffffff;
+            padding: 10px;
+            border-radius: 10px;
+            box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.2);
+        }
 
-.cell {
-    width: 100%;
-    height: 30px;
-    background-color: rgba(30, 30, 30, 0.8);
-    border-radius: 5px;
-    border: 1px solid #333;
-    box-shadow: 0 0 5px rgba(0, 0, 255, 0.5), inset 0 0 5px rgba(255, 255, 255, 0.1);
-    transition: transform 0.2s, box-shadow 0.2s;
-}
+        .cells {
+            display: grid;
+            grid-template-columns: repeat(10, 30px);
+            gap: 5px;
+            margin-bottom: 20px;
+            justify-content: center;
+        }
 
-.cell.green:active {
-    transform: scale(1.1);
-    box-shadow: 0 0 15px rgba(76, 175, 80, 0.8);
-}
+        .cell {
+            width: 30px;
+            height: 30px;
+            background-color: rgba(30, 30, 30, 0.8);
+            border-radius: 5px;
+            border: 1px solid #333333;
+            box-shadow: 0 0 5px rgba(0, 0, 255, 0.5), inset 0 0 5px rgba(255, 255, 255, 0.1);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
 
-.cell.red {
-    background-color: rgba(244, 67, 54, 0.8);
-}
+        .cell.green:active {
+            transform: scale(1.1);
+            box-shadow: 0 0 15px rgba(76, 175, 80, 0.8);
+        }
 
-.buttons {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-}
+        .cell.red {
+            background-color: rgba(244, 67, 54, 0.8);
+        }
 
-.button {
-    padding: 10px 20px;
-    font-size: 1em;
-    cursor: pointer;
-    border: none;
-    border-radius: 10px;
-    flex: 1;
-    margin: 0 5px;
-    color: white;
-    background-color: rgba(76, 175, 80, 0.8);
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5), inset 0 0 5px rgba(255, 255, 255, 0.1);
-    transition: transform 0.2s, box-shadow 0.2s;
-    backdrop-filter: blur(5px);
-}
+        .buttons {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+        }
 
-.accept {
-    background-color: rgba(76, 175, 80, 0.8);
-}
+        .button {
+            padding: 10px 20px;
+            font-size: 1em;
+            cursor: pointer;
+            border: none;
+            border-radius: 10px;
+            flex: 1;
+            margin: 0 5px;
+            color: white;
+            background-color: rgba(76, 175, 80, 0.8);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5), inset 0 0 5px rgba(255, 255, 255, 0.1);
+            transition: transform 0.2s, box-shadow 0.2s;
+            backdrop-filter: blur(5px);
+        }
 
-.decline {
-    background-color: rgba(244, 67, 54, 0.8);
-}
+        .accept {
+            background-color: rgba(76, 175, 80, 0.8);
+        }
 
-.footer {
-    margin-top: 20px;
-    font-size: 0.8em;
-    color: #fff;
-    opacity: 0.5;
-}
+        .decline {
+            background-color: rgba(244, 67, 54, 0.8);
+        }
+
+        .footer {
+            margin-top: 20px;
+            font-size: 0.8em;
+            color: #fff;
+            opacity: 0.5;
+        }
 
 .cell.green {
-    background-color: rgba(76, 175, 80, 0.8);
+    background-color: rgba(76, 175, 80, 0.8); /* Зеленый цвет для нажатых ячеек */
     animation: pulse 1s infinite alternate; /* Анимация для зеленых ячеек */
 }
 
