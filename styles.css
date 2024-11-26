@@ -221,51 +221,88 @@ body {
     }
 }
 
-/* Адаптация для маленьких экранов */
+/* Адаптивность для небольших экранов */
 @media (max-width: 600px) {
     .calculator {
-        width: 90%;
+        width: 100%;
         padding: 10px;
+        box-sizing: border-box;
     }
 
     .display {
         font-size: 1.2em;
-    }
-
-    .button {
-        font-size: 1em;
-        padding: 5px 10px;
-    }
-}
-
-/* Адаптация для средних экранов */
-@media (min-width: 601px) and (max-width: 1200px) {
-    .calculator {
-        width: 70%;
-        padding: 10px;
-    }
-
-    .display {
-        font-size: 1.4em;
-    }
-
-    .button {
-        font-size: 1em;
-        padding: 5px 10px;
-    }
-}
-
-/* Адаптация для экранов с малой высотой */
-@media (max-height: 500px) {
-    .calculator {
-        padding: 10px;
-    }
-
-    .display {
         margin-bottom: 10px;
     }
 
+    .cells {
+        grid-template-columns: repeat(5, 1fr);
+        gap: 5px;
+    }
+
     .button {
-        padding: 5px 10px;
+        padding: 8px 12px;
+        font-size: 0.9em;
+    }
+
+    #adjustmentButton {
+        width: 100%;
+        font-size: 12px;
+        margin-top: 10px;
+    }
+}
+
+/* Адаптивность для средних экранов */
+@media (min-width: 601px) and (max-width: 1024px) {
+    .calculator {
+        width: 80%;
+        margin: 0 auto;
+    }
+
+    .display {
+        font-size: 1.3em;
+        margin-bottom: 15px;
+    }
+
+    .cells {
+        grid-template-columns: repeat(8, 1fr);
+        gap: 10px;
+    }
+
+    .button {
+        padding: 9px 15px;
+        font-size: 1em;
+    }
+
+    #adjustmentButton {
+        width: 90%;
+        margin-top: 15px;
+    }
+}
+
+/* Адаптивность для больших экранов */
+@media (min-width: 1025px) {
+    .calculator {
+        width: 60%;
+        margin: 0 auto;
+    }
+
+    .display {
+        font-size: 1.5em;
+        margin-bottom: 20px;
+    }
+
+    .cells {
+        grid-template-columns: repeat(10, 1fr);
+        gap: 15px;
+    }
+
+    .button {
+        padding: 10px 20px;
+        font-size: 1em;
+    }
+
+    #adjustmentButton {
+        width: 80%;
+        margin-top: 20px;
     }
 }
