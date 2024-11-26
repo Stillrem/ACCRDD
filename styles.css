@@ -220,3 +220,15 @@ body {
         opacity: 1;
     }
 }
+
+@media (min-width: 768px) {
+    .calculator {
+        width: 80%;
+    }
+}
+
+@media (min-width: 1024px) {
+    .calculator {
+        width: 60%;
+    }
+}
