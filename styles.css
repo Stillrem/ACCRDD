@@ -221,30 +221,28 @@ body {
     }
 }
 
-/* Общие стили для всех экранов */
+/* Общие стили */
 .calculator {
-    margin: 0 auto; /* Центрирование калькулятора */
-    box-sizing: border-box;
+    margin: 0 auto;
+    max-width: 600px; /* Ограничение максимальной ширины */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .display {
-    margin-bottom: 15px; /* Отступ снизу */
-    text-align: center; /* Выравнивание текста по центру */
+    text-align: right; /* Выравнивание текста справа */
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
 }
 
-.button {
-    border: none; /* Убираем границу для кнопок */
-    border-radius: 5px; /* Скругляем углы */
-    cursor: pointer; /* Указатель мыши */
-    transition: background-color 0.3s ease; /* Плавное изменение цвета */
+.button, #adjustmentButton {
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
-.button:hover {
-    background-color: #f0f0f0; /* Цвет фона при наведении */
-}
-
-#adjustmentButton {
-    margin-top: 10px; /* Отступ сверху */
+.button:hover, #adjustmentButton:hover {
+    background-color: #f0f0f0;
 }
 
 /* Адаптивность для небольших экранов */
@@ -259,13 +257,13 @@ body {
     }
 
     .button {
-        padding: 8px 12px;
-        font-size: 0.9em;
+        padding: 10px;
+        font-size: 1em;
     }
 
     #adjustmentButton {
         width: 100%;
-        font-size: 12px;
+        font-size: 1em;
     }
 }
 
@@ -280,8 +278,8 @@ body {
     }
 
     .button {
-        padding: 9px 15px;
-        font-size: 1em;
+        padding: 12px;
+        font-size: 1.1em;
     }
 
     #adjustmentButton {
@@ -300,8 +298,8 @@ body {
     }
 
     .button {
-        padding: 10px 20px;
-        font-size: 1em;
+        padding: 15px;
+        font-size: 1.2em;
     }
 
     #adjustmentButton {
