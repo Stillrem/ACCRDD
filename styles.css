@@ -218,14 +218,14 @@ body {
     box-shadow: 0 0 25px rgba(0, 0, 255, 0.5);
 }
 
-.reset-container {
+/*.reset-container {
     display: flex;
     justify-content: center; /* Центрирование по горизонтали */
-    align-items: center; /* Центрирование по вертикали, если нужно */
-    width: 380px; /* Убедитесь, что ширина контейнера установлена */
-    margin-top: 10px;
+    /*align-items: center; /* Центрирование по вертикали, если нужно */
+    /*width: 380px; /* Убедитесь, что ширина контейнера установлена */
+    /*margin-top: 10px;
     align-items: center;
-}
+}*/
 
 .reset-button {
     display: flex;
