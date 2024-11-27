@@ -244,7 +244,6 @@ body {
 }
 
 .reset-button {
-    display: flex;
     justify-content: center;
     align-items: center;
     padding: 3px 7px;
