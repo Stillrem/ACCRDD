@@ -65,7 +65,6 @@ body {
         }
 
         .green-display {
-            display: flex;
             margin-bottom: 20px;
             font-size: 1.5em;
             text-align: center;
@@ -80,7 +79,6 @@ body {
         }
 
         .red-display {
-            display: flex;
             margin-bottom: 20px;
             font-size: 1.5em;
             text-align: center;
