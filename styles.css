@@ -243,11 +243,12 @@ body {
     text-align: center;
     margin: 0 auto;
     margin-top: 10px;
+    border: 1px solid white;
 }
 
 .reset-button:hover {
     transform: scale(1.05);
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
 }
 
 #decline {
