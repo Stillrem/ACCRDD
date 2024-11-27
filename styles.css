@@ -222,8 +222,8 @@ body {
 }
 
 /* Адаптация для маленьких экранов */
-    .button {
+    /*.button {
         font-size: 0.9em;
         padding: 8px 15px;
     }
-}
+}*/
