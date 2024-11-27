@@ -240,7 +240,8 @@ body {
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
     transition: transform 0.2s, box-shadow 0.2s;
     text-align: center;
-    margin: 5px;
+    margin: 0 auto;
+    margin-top: 5px;
     align-items: center;
 }
 
