@@ -240,6 +240,7 @@ body {
     align-items: center; /* Центрирование по вертикали, если нужно */
     width: 380px; /* Убедитесь, что ширина контейнера установлена */
     margin-top: 10px;
+    text-align: center;
 }
 
 .reset-button {
@@ -254,6 +255,7 @@ body {
     color: white;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
     transition: transform 0.2s, box-shadow 0.2s;
+    text-align: center;
 }
 
 .reset-button:hover {
