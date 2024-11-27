@@ -251,10 +251,6 @@ body {
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
 }
 
-#decline {
-    color: red; 
-}
-
 @keyframes fadeInOut {
     0% 100% {
         opacity: 0;
@@ -280,10 +276,10 @@ body {
         height: 30px;
     }
 
-    .button {
+    /*.button {
         padding: 8px 15px;
         font-size: 0.9em;
-    }
+    }*/
     
     .intro {
         font-size: 1.5em;
