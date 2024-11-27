@@ -221,16 +221,53 @@ body {
     }
 }
 
-.calculator {
-    width: 100%;
-    max-width: 350px;
+@media (max-width: 600px) {
+    .calculator {
+        width: 90%;
+    }
+    .display {
+        width: 100%;
+        font-size: 1.2em;
+    }
+    .button {
+        padding: 8px 16px;
+        font-size: 0.9em;
+    }
+    #adjustmentButton {
+        width: 100%;
+    }
 }
 
-.display {
-    width: 93%;
+@media (min-width: 601px) and (max-width: 1024px) {
+    .calculator {
+        width: 70%;
+    }
+    .display {
+        width: 100%;
+        font-size: 1.4em;
+    }
+    .button {
+        padding: 9px 18px;
+        font-size: 0.95em;
+    }
+    #adjustmentButton {
+        width: 90%;
+    }
 }
 
-#adjustmentButton {
-    width: 100%;
-    max-width: 380px;
+@media (min-width: 1025px) {
+    .calculator {
+        width: 50%;
+    }
+    .display {
+        width: 100%;
+        font-size: 1.5em;
+    }
+    .button {
+        padding: 10px 20px;
+        font-size: 1em;
+    }
+    #adjustmentButton {
+        width: 80%;
+    }
 }
