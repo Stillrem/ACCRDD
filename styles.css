@@ -221,7 +221,49 @@ body {
     }
 }
 
-/* Медиазапросы для адаптации под разные устройства */
+@media only screen and (min-width: 390px) and (max-width: 430px) and (min-height: 844px) and (max-height: 900px) {
+    body {
+        padding: 10px;
+        margin-top: -20px;
+        margin-bottom: 40px;
+        background-size: contain;
+        font-size: 16px; /* Изменение размера шрифта для лучшей читаемости */
+    }
+
+    .calculator {
+        width: 320px;
+        padding: 15px;
+        border-radius: 15px;
+    }
+
+    .display {
+        font-size: 1.4em;
+        width: 100%;
+    }
+
+    .cells {
+        grid-template-columns: repeat(10, 28px);
+        gap: 4px;
+    }
+
+    .cell {
+        width: 28px;
+        height: 28px;
+    }
+
+    .buttons .button {
+        padding: 8px 16px;
+        font-size: 0.9em;
+    }
+
+    #adjustmentButton {
+        width: 340px;
+        padding: 4px 8px;
+        font-size: 13px;
+    }
+}
+
+/* Медиазапросы для адаптации под разные устройства
 @media (max-width: 768px) {
     .calculator {
         width: 90%;
@@ -257,7 +299,7 @@ body {
         font-size: 0.9em;
         padding: 8px 15px;
     }
-}
+}*/
 
 /* Адаптация для маленьких экранов */
     /*.button {
