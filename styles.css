@@ -221,40 +221,6 @@ body {
     }
 }
 
-/* Адаптация для маленьких экранов */
-@media (max-width: 600px) {
-    .calculator {
-        width: 100%;
-        padding: 15px;
-    }
-
-    .display {
-        font-size: 1.2em;
-    }
-
-    .button {
-        font-size: 1em;
-        padding: 10px 15px;
-    }
-}
-
-/* Адаптация для средних экранов */
-@media (min-width: 601px) and (max-width: 1200px) {
-    .calculator {
-        width: 70%;
-        padding: 20px;
-    }
-
-    .display {
-        font-size: 1.4em;
-    }
-
-    .button {
-        font-size: 1em;
-        padding: 10px 20px;
-    }
-}
-
 /* Адаптация для экранов с малой высотой */
 @media (max-height: 500px) {
     .calculator {
