@@ -36,6 +36,7 @@ body {
     -moz-user-select: none;    /* Firefox */
     -ms-user-select: none;     /* Internet Explorer */
     user-select: none;         /* Standard syntax */
+    transform: translateY(-5px);
 }
 
         .calculator {
