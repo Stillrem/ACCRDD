@@ -240,6 +240,8 @@ body {
 }
 
     .display {
+        text-align: center;
+        align-items: center;
         font-size: 5vw;
     }
 
