@@ -225,7 +225,7 @@ body {
 @media (max-width: 600px) {
     .calculator {
         width: 100%;
-        padding: 15px;
+        padding: 35px;
     }
 
     .button {
