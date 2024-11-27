@@ -233,12 +233,6 @@ body {
     width: 100%;
 }
 
-.cells {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr); /* Используйте гибкое распределение колонок */
-    gap: 1vw; /* Используйте промежутки между элементами */
-}
-
 .button {
     font-size: 3vw; /* Используйте размер шрифта, основанный на ширине окна */
     padding: 2vw; 
