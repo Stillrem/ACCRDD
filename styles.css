@@ -221,39 +221,51 @@ body {
     }
 }
 
-/* Общие стили для адаптивности */
-body, .calculator, .display, .cells, .cell, .buttons, .button, #adjustmentButton {
-    max-width: 100%;
-    box-sizing: border-box;
-}
-
-/* Адаптивные стили для различных экранов */
-@media (max-width: 768px) {
+/* Адаптация для маленьких экранов */
+@media (max-width: 600px) {
     .calculator {
-        width: 100%; /* Установить ширину 90% от ширины экрана */
+        width: 100%;
+        padding: 15px;
     }
+
     .display {
-        width: 100%;
-        font-size: 1.2em; /* Уменьшение размера шрифта */
+        font-size: 1.2em;
     }
+
     .button {
-        width: 100%;
-        padding: 8px 15px; /* Уменьшение отступов */
-        font-size: 0.9em; /* Уменьшение размера шрифта */
+        font-size: 0.9em;
+        padding: 8px 15px;
     }
 }
 
-@media (max-width: 480px) {
+/* Адаптация для средних экранов */
+@media (min-width: 601px) and (max-width: 1200px) {
     .calculator {
-        width: 100%; /* Установить ширину 95% от ширины экрана */
+        width: 70%;
+        padding: 20px;
     }
+
     .display {
-        width: 100%;
-        font-size: 1em; /* Ещё большее уменьшение размера шрифта */
+        font-size: 1.4em;
     }
+
     .button {
-        width: 100%;
-        padding: 5px 10px; /* Ещё большее уменьшение отступов */
-        font-size: 0.8em; /* Ещё большее уменьшение размера шрифта */
+        font-size: 1em;
+        padding: 10px 20px;
+    }
+}
+
+/* Адаптация для экранов с малой высотой */
+@media (max-height: 500px) {
+    .calculator {
+        padding: 10px;
+    }
+
+    .display {
+        margin-bottom: 10px;
+    }
+
+    .button {
+        padding: 5px 10px;
     }
 }
