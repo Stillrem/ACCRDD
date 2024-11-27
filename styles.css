@@ -222,12 +222,6 @@ body {
 }
 
 /* Адаптация для маленьких экранов */
-@media (max-width: 600px) {
-    .calculator {
-        width: 100%;
-        padding: 10px;
-    }
-
     .button {
         font-size: 0.9em;
         padding: 8px 15px;
