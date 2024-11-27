@@ -222,11 +222,6 @@ body {
 }
 
 /* Медиазапросы для адаптации под разные устройства */
-@media (max-width: 768px) {
-    body {
-        width: 90%;
-    }
-
     .button {
         font-size: 0.9em;
         padding: 8px 15px;
