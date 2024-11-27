@@ -221,48 +221,63 @@ body {
     }
 }
 
-/* Медиазапрос для устройств с шириной экрана до 600px */
-@media (max-width: 600px) {
+/* Медиазапрос для устройств с шириной экрана до 768px (например, планшеты) */
+@media (max-width: 768px) {
     .calculator {
-        width: 100%;
+        width: 90%;
+        padding: 15px;
     }
 
-    .display-container,
-    #adjustmentButton {
-        width: 100%;
+    .display {
+        font-size: 1.2em;
+        width: 95%;
     }
 
-    .button {
+    .buttons .button {
         padding: 8px 15px;
         font-size: 0.9em;
     }
+
+    #adjustmentButton {
+        width: 95%;
+        padding: 5px;
+    }
 }
 
-/* Медиазапрос для устройств с шириной экрана от 601px до 1024px */
-@media (min-width: 601px) and (max-width: 1024px) {
+/* Медиазапрос для устройств с шириной экрана до 480px (например, мобильные телефоны) */
+@media (max-width: 480px) {
     .calculator {
         width: 100%;
+        padding: 10px;
     }
 
-    .display-container,
-    #adjustmentButton {
+    .display {
+        font-size: 1em;
         width: 100%;
     }
 
-    .button {
-        padding: 9px 18px;
-        font-size: 0.95em;
+    .buttons .button {
+        padding: 5px 10px;
+        font-size: 0.8em;
+    }
+
+    #adjustmentButton {
+        width: 100%;
+        padding: 5px;
     }
 }
 
 /* Медиазапрос для устройств с высотой экрана до 600px */
 @media (max-height: 600px) {
     .calculator {
-        padding: 15px;
+        padding: 10px;
     }
 
-    .display-container,
+    .display {
+        font-size: 1em;
+    }
+
     #adjustmentButton {
-        margin-bottom: 5px;
+        padding: 5px;
     }
 }
