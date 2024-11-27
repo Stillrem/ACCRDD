@@ -68,7 +68,7 @@ body {
             margin-bottom: 20px;
             font-size: 1.5em;
             text-align: center;
-            width: 380px;
+            width: 100%;
             background: rgba(44, 44, 44, 0.8);
             color: green;
             padding: 10px;
@@ -82,7 +82,7 @@ body {
             margin-bottom: 20px;
             font-size: 1.5em;
             text-align: center;
-            width: 50%;
+            width: 100%;
             background: rgba(44, 44, 44, 0.8);
             color: red;
             padding: 10px;
