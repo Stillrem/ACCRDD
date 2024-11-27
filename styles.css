@@ -249,7 +249,7 @@ body {
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
 }
 
-.resetCount-decline {
+#decline {
     color: red; 
 }
 
@@ -268,11 +268,6 @@ body {
         padding: 15px;
     }
 
-    /*.display {
-        font-size: 1.2em;
-        width: 90%;
-    }*/
-
     .cells {
         grid-template-columns: repeat(10, 30px);
         gap: 5px;
@@ -287,12 +282,6 @@ body {
         padding: 8px 15px;
         font-size: 0.9em;
     }
-
-    /*.display-container {
-        width: 380px;
-        padding: 5px, 10px;
-        gap: 10px;
-    }*/
     
     .intro {
         font-size: 1.5em;
