@@ -243,8 +243,7 @@ body {
     text-align: center;
     margin: 0 auto;
     margin-top: 10px;
-    border: 0.1px solid white;
-    outline: none;
+    border: none;
 }
 
 .reset-button:hover {
