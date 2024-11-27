@@ -221,25 +221,36 @@ body {
     }
 }
 
-/* Адаптивная ширина и высота для .calculator */
-@media (max-width: 600px) {
-    .calculator {
-        width: 90%;
-    }
+/* Общие стили для адаптивности */
+body, .calculator, .display, .cells, .cell, .buttons, .button, #adjustmentButton {
+    max-width: 100%;
+    box-sizing: border-box;
 }
 
-/* Адаптивная ширина и высота для .display */
-@media (max-width: 600px) {
+/* Адаптивные стили для различных экранов */
+@media (max-width: 768px) {
+    .calculator {
+        width: 90%; /* Установить ширину 90% от ширины экрана */
+    }
     .display {
         width: 100%;
-        font-size: 1.2em;
+        font-size: 1.2em; /* Уменьшение размера шрифта */
+    }
+    .button {
+        padding: 8px 15px; /* Уменьшение отступов */
+        font-size: 0.9em; /* Уменьшение размера шрифта */
     }
 }
 
-/* Адаптивное изменение размера кнопок */
-@media (max-width: 600px) {
+@media (max-width: 480px) {
+    .calculator {
+        width: 95%; /* Установить ширину 95% от ширины экрана */
+    }
+    .display {
+        font-size: 1em; /* Ещё большее уменьшение размера шрифта */
+    }
     .button {
-        padding: 5px 10px;
-        font-size: 0.9em;
+        padding: 5px 10px; /* Ещё большее уменьшение отступов */
+        font-size: 0.8em; /* Ещё большее уменьшение размера шрифта */
     }
 }
