@@ -220,3 +220,20 @@ body {
         opacity: 1;
     }
 }
+
+/* Адаптация для маленьких экранов */
+@media (max-width: 600px) {
+    .calculator {
+        width: 100%;
+        padding: 15px;
+    }
+
+    .display {
+        font-size: 1.2em;
+    }
+
+    .button {
+        font-size: 0.9em;
+        padding: 8px 15px;
+    }
+}
