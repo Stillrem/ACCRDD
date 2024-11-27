@@ -182,7 +182,7 @@ body {
     font-family: 'Lobster';
     src: url('/Lobster Regular 400.ttf') format('truetype'), 
          url('/Lobster 1.4.woff2') format('woff2'),
-         url('/Lobster Regular 400.oet') format('embedded-opentype'), 
+         url('/Lobster Regular 400.eot') format('embedded-opentype'), 
          url('/Lobster Regular 400.woff') format('woff');
 }
 
