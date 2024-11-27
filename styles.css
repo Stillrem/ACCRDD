@@ -55,7 +55,6 @@ body {
             font-size: 1.5em;
             text-align: center;
             width: 93%;
-            background-color: rgba(76, 175, 80, 0.8);
             background: rgba(44, 44, 44, 0.8);
             color: #ffffff;
             padding: 10px;
@@ -71,7 +70,6 @@ body {
             text-align: center;
             width: 93%;
             background-color: green;
-            background: rgba(44, 44, 44, 0.8);
             color: #ffffff;
             padding: 10px;
             border-radius: 10px;
@@ -86,7 +84,6 @@ body {
             text-align: center;
             width: 93%;
             background-color: red;
-            background: rgba(44, 44, 44, 0.8);
             color: #ffffff;
             padding: 10px;
             border-radius: 10px;
