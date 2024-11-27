@@ -249,7 +249,7 @@ body {
 
     .display-container, #adjustmentButton {
         width: 100%;
-        padding: 0px;
+        padding: 5px, 10px;
         gap: 5px;
     }
 
