@@ -221,15 +221,65 @@ body {
     }
 }
 
-.button {
-    font-size: 3vw; /* Используйте размер шрифта, основанный на ширине окна */
-    padding: 2vw; 
+@media only screen and (max-width: 600px) {
+    .calculator {
+        width: 90%; /* Увеличиваем ширину для мобильных устройств */
+    }
+    .display {
+        font-size: 1.2em; /* Уменьшаем размер шрифта */
+    }
+    .cells {
+        grid-template-columns: repeat(5, 1fr); /* Изменяем количество столбцов */
+    }
+    .button {
+        padding: 8px 15px; /* Уменьшаем внутренний отступ */
+        font-size: 0.9em; /* Уменьшаем размер шрифта */
+    }
+    #adjustmentButton {
+        width: 90%; /* Увеличиваем ширину для мобильных устройств */
+        font-size: 12px; /* Уменьшаем размер шрифта */
+    }
 }
 
-    .display {
-        align-items: center;
-        font-size: 5vw;
+@media only screen and (min-width: 601px) and (max-width: 1024px) {
+    .calculator {
+        width: 80%; /* Ширина для планшетов */
     }
+    .display {
+        font-size: 1.4em; /* Увеличиваем размер шрифта для планшетов */
+    }
+    .cells {
+        grid-template-columns: repeat(8, 1fr); /* Изменяем количество столбцов */
+    }
+    .button {
+        padding: 10px 18px; /* Корректируем внутренний отступ */
+        font-size: 1em; /* Корректируем размер шрифта */
+    }
+    #adjustmentButton {
+        width: 80%; /* Ширина для планшетов */
+        font-size: 13px; /* Корректируем размер шрифта */
+    }
+}
+
+@media only screen and (min-width: 1025px) {
+    .calculator {
+        width: 60%; /* Ширина для десктопов */
+    }
+    .display {
+        font-size: 1.5em; /* Стандартный размер шрифта */
+    }
+    .cells {
+        grid-template-columns: repeat(10, 1fr); /* Стандартное количество столбцов */
+    }
+    .button {
+        padding: 12px 20px; /* Стандартный внутренний отступ */
+        font-size: 1em; /* Стандартный размер шрифта */
+    }
+    #adjustmentButton {
+        width: 60%; /* Ширина для десктопов */
+        font-size: 14px; /* Стандартный размер шрифта */
+    }
+}
 
 /* Адаптация для маленьких экранов */
     /*.button {
