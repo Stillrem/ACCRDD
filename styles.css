@@ -214,9 +214,11 @@ body {
 
 .reset-button {
     justify-content: center; /* Выравнивание по центру, если нужно */
+    text-align: center;
+    align-items: center;
     margin-top: 10px;
     padding: 5px 10px;
-    font-size: 14px;
+    font-size: 10px;
     cursor: pointer;
 }
 
