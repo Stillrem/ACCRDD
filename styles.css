@@ -173,6 +173,12 @@ body {
     margin: 0;
     margin-top: 10px;
     padding: 0;
+    font-family: 'Lobster', cursive;
+}
+
+@font-face {
+    font-family: 'Lobster';
+    src: url('/lobster 1.4.otf') format('truetype');
 }
 
 .display-container {
