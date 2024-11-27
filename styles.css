@@ -221,30 +221,25 @@ body {
     }
 }
 
-/* Адаптивная ширина и высота для разных устройств */
-.calculator {
-    width: 90%; /* Ширина в процентах для адаптации */
-    max-width: 400px; /* Максимальная ширина */
-}
-
-.display {
-    font-size: 1.5em;
-    width: 100%; /* Адаптивная ширина */
-}
-
-.button {
-    font-size: 1em;
-    padding: 10px 5%;
-}
-
-#adjustmentButton {
-    width: 100%; /* Адаптивная ширина */
-    max-width: 400px; /* Максимальная ширина */
-}
-
-/* Медиазапросы для дополнительных настроек на разных устройствах */
-@media (min-width: 768px) {
+/* Адаптивная ширина и высота для .calculator */
+@media (max-width: 600px) {
     .calculator {
-        width: 70%;
+        width: 90%;
+    }
+}
+
+/* Адаптивная ширина и высота для .display */
+@media (max-width: 600px) {
+    .display {
+        width: 100%;
+        font-size: 1.2em;
+    }
+}
+
+/* Адаптивное изменение размера кнопок */
+@media (max-width: 600px) {
+    .button {
+        padding: 5px 10px;
+        font-size: 0.9em;
     }
 }
