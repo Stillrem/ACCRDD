@@ -66,13 +66,13 @@ body {
 
         .green-display {
             background: rgba(44, 44, 44, 0.8);
-            color: green;
+            color: white;
             box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.2);
         }
 
         .red-display {
             background: rgba(44, 44, 44, 0.8);
-            color: red;
+            color: white;
             box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.2);
         }
 
