@@ -248,7 +248,7 @@ body {
     }
 
     .display-container, #adjustmentButton {
-        width: 380px;
+        width: 100%;
         padding: 5px, 10px;
         gap: 5px;
     }
