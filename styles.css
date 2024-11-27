@@ -38,14 +38,6 @@ body {
     user-select: none;         /* Standard syntax */
 }
 
-        /*.display-container {
-            display: flex;
-            justify-content: space-between;
-            width: 380px;
-            margin-bottom: 20px;
-            gap: 10px
-        }*/
-
         .calculator {
             width: 350px;
             background-color: rgba(30, 30, 30, 0.8);
@@ -217,7 +209,6 @@ body {
     padding: 5px 10px;
     font-size: 10px;
     cursor: pointer;
-    display: inline-block; /* Убедитесь, что кнопка является строчно-блочным элементом */
 }
 
 @keyframes fadeInOut {
@@ -236,7 +227,6 @@ body {
     }
 
     .display {
-        text-align: center;
         font-size: 1.2em;
         width: 90%;
     }
@@ -257,7 +247,6 @@ body {
     }
 
     .display-container {
-        text-align: center;
         width: 380px;
         padding: 5px, 10px;
         gap: 10px;
