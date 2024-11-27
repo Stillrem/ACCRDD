@@ -215,6 +215,7 @@ body {
 }
 
 .reset-button {
+    display: block;
     margin: 10px auto;
     padding: 5px 10px;
     font-size: 10px;
