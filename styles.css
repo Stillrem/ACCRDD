@@ -248,7 +248,7 @@ body {
     }
 
     .display-container {
-        width: 100%;
+        width: 90%;
         justify-content: center;
         padding: 5px, 10px;
         gap: 5px;
