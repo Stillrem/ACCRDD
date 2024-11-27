@@ -236,7 +236,7 @@ body {
     cursor: pointer;
     /*background-color: rgba(76, 175, 80, 0.8);*/
     background: linear-gradient(45deg, rgba(44, 62, 80, 0.8), rgba(44, 62, 80, 0.8), rgba(26, 26, 26, 0.8));
-    border-radius: 10px;
+    border-radius: 12px;
     color: white;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
     transition: transform 0.2s, box-shadow 0.2s;
@@ -244,6 +244,7 @@ body {
     margin: 0 auto;
     margin-top: 10px;
     border: 0.1px solid white;
+    outline: none;
 }
 
 .reset-button:hover {
