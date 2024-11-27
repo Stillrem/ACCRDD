@@ -222,6 +222,8 @@ body {
 }
 
 .display {
+    text-align: center;
+    align-items: center;
     font-size: 4vw; /* Используйте размер шрифта, основанный на ширине окна */
     width: 100%;
 }
