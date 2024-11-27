@@ -248,7 +248,8 @@ body {
     }
 
     .display-container, #adjustmentButton {
-        align-items: center;
+        width: 100%;
+        justify-content: center;
         padding: 5px;
         gap: 5px;
     }
