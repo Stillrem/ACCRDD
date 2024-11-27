@@ -227,7 +227,7 @@ body {
     }
     .display {
         width: 100%;
-        font-size: 1.3em;
+        font-size: auto;
     }
     .button {
         width: 100%;
@@ -245,7 +245,7 @@ body {
     }
     .display {
         width: 100%;
-        font-size: 1.3em;
+        font-size: auto;
     }
     .button {
         width: 100%;
@@ -263,7 +263,7 @@ body {
     }
     .display {
         width: 100%;
-        font-size: 1.3em;
+        font-size: auto;
     }
     .button {
         width: 100%;
