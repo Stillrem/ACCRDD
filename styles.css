@@ -237,6 +237,7 @@ body, .calculator, .display, .cells, .cell, .buttons, .button, #adjustmentButton
         font-size: 1.2em; /* Уменьшение размера шрифта */
     }
     .button {
+        width: 100%;
         padding: 8px 15px; /* Уменьшение отступов */
         font-size: 0.9em; /* Уменьшение размера шрифта */
     }
@@ -247,9 +248,11 @@ body, .calculator, .display, .cells, .cell, .buttons, .button, #adjustmentButton
         width: 100%; /* Установить ширину 95% от ширины экрана */
     }
     .display {
+        width: 100%;
         font-size: 1em; /* Ещё большее уменьшение размера шрифта */
     }
     .button {
+        width: 100%;
         padding: 5px 10px; /* Ещё большее уменьшение отступов */
         font-size: 0.8em; /* Ещё большее уменьшение размера шрифта */
     }
