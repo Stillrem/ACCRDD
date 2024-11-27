@@ -240,7 +240,7 @@ body {
 @media only screen and (max-width: 430px) {
     .calculator {
         width: 100%;
-        padding: 18px;
+        padding: 15px;
     }
 
     /*.display {
@@ -250,7 +250,7 @@ body {
 
     .cells {
         grid-template-columns: repeat(10, 30px);
-        gap: 4px;
+        gap: 5px;
     }
 
     .cell {
