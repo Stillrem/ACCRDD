@@ -221,7 +221,7 @@ body {
     }
 }
 
-/* Медиазапрос для устройств с шириной экрана до 768px (например, планшеты) */
+/* Медиа-запрос для устройств с шириной экрана меньше 768px (например, планшеты и телефоны) */
 @media (max-width: 768px) {
     .calculator {
         width: 90%;
@@ -230,35 +230,12 @@ body {
 
     .display {
         font-size: 1.2em;
-        width: 95%;
+        width: 100%;
     }
 
-    .buttons .button {
+    .button {
+        font-size: 0.9em;
         padding: 8px 15px;
-        font-size: 1em;
-    }
-
-    #adjustmentButton {
-        width: 95%;
-        padding: 5px;
-    }
-}
-
-/* Медиазапрос для устройств с шириной экрана до 480px (например, мобильные телефоны) */
-@media (max-width: 480px) {
-    .calculator {
-        width: 100%;
-        padding: 10px;
-    }
-
-    .display {
-        font-size: 1em;
-        width: 100%;
-    }
-
-    .buttons .button {
-        padding: 5px 10px;
-        font-size: 1em;
     }
 
     #adjustmentButton {
@@ -267,7 +244,7 @@ body {
     }
 }
 
-/* Медиазапрос для устройств с высотой экрана до 600px */
+/* Медиа-запрос для устройств с высотой экрана меньше 600px (например, телефоны в альбомной ориентации) */
 @media (max-height: 600px) {
     .calculator {
         padding: 10px;
@@ -277,7 +254,12 @@ body {
         font-size: 1em;
     }
 
+    .button {
+        font-size: 0.8em;
+        padding: 6px 10px;
+    }
+
     #adjustmentButton {
-        padding: 5px;
+        font-size: 12px;
     }
 }
