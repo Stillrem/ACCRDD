@@ -215,7 +215,7 @@ body {
 }
 
 .reset-button {
-    margin-top: 10px;
+    margin: 10px auto;
     padding: 5px 10px;
     font-size: 10px;
     cursor: pointer;
