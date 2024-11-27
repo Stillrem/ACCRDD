@@ -48,6 +48,16 @@ body {
             flex-direction: column;
             align-items: center;
             backdrop-filter: blur(10px);
+            margin-bottom: 20px;
+            font-size: 1.5em;
+            text-align: center;
+            width: 93%;
+            background-color: rgba(76, 175, 80, 0.8);
+            background: rgba(44, 44, 44, 0.8);
+            color: #ffffff;
+            padding: 10px;
+            border-radius: 10px;
+            box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.2);
         }
 
         .green-display {
