@@ -233,7 +233,7 @@ body {
     }
 
     .cells {
-        grid-template-columns: repeat(auto-fit, minmax(28px, 1fr));
+        grid-template-columns: repeat(10, 28px);
         gap: 4px;
     }
 
