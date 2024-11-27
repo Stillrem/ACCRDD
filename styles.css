@@ -48,6 +48,8 @@ body {
             flex-direction: column;
             align-items: center;
             backdrop-filter: blur(10px);
+        }
+        .display {
             margin-bottom: 20px;
             font-size: 1.5em;
             text-align: center;
