@@ -217,7 +217,7 @@ body {
     font-size: 10px;
     cursor: pointer;
     background-color: rgba(76, 175, 80, 0.8);
-    border-radius: 5px;
+    border-radius: 10px;
     color: white;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
     transition: transform 0.2s, box-shadow 0.2s;
