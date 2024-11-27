@@ -65,29 +65,15 @@ body {
         }
 
         .green-display {
-            margin-bottom: 20px;
-            font-size: 1.5em;
-            text-align: center;
-            width: 100%;
             background: rgba(44, 44, 44, 0.8);
             color: green;
-            padding: 10px;
-            border-radius: 10px;
             box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.2);
-            align-items: center;
         }
 
         .red-display {
-            margin-bottom: 20px;
-            font-size: 1.5em;
-            text-align: center;
-            width: 100%;
             background: rgba(44, 44, 44, 0.8);
             color: red;
-            padding: 10px;
-            border-radius: 10px;
             box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.2);
-            align-items: center;
         }
 
         .cells {
