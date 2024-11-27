@@ -51,6 +51,7 @@ body {
         }
 
         .display {
+            display: flex;
             margin-bottom: 20px;
             font-size: 1.5em;
             text-align: center;
@@ -74,8 +75,6 @@ body {
             padding: 10px;
             border-radius: 10px;
             box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.2);
-            justify-content: center;
-            align-items: center;
         }
 
         .red-display {
@@ -88,8 +87,6 @@ body {
             padding: 10px;
             border-radius: 10px;
             box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.2);
-            justify-content: center;
-            align-items: center;
         }
 
         .cells {
