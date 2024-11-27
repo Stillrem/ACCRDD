@@ -221,56 +221,48 @@ body {
     }
 }
 
+/* Медиазапрос для устройств с шириной экрана до 600px */
 @media (max-width: 600px) {
     .calculator {
-        width: 100%;
+        width: 90%;
     }
-    .display {
-        width: 100%;
-        font-size: auto;
-    }
-    .button {
-        width: 100%;
-        padding: 10px 20px;
-        font-size: 1em;
-    }
+
+    .display-container,
     #adjustmentButton {
         width: 100%;
     }
+
+    .button {
+        padding: 8px 15px;
+        font-size: 0.9em;
+    }
 }
 
+/* Медиазапрос для устройств с шириной экрана от 601px до 1024px */
 @media (min-width: 601px) and (max-width: 1024px) {
     .calculator {
-        width: 100%;
+        width: 80%;
     }
-    .display {
-        width: 100%;
-        font-size: auto;
-    }
-    .button {
-        width: 100%;
-        padding: 10px 20px;
-        font-size: 1em;
-    }
+
+    .display-container,
     #adjustmentButton {
-        width: 100%;
+        width: 90%;
+    }
+
+    .button {
+        padding: 9px 18px;
+        font-size: 0.95em;
     }
 }
 
-@media (min-width: 1025px) {
+/* Медиазапрос для устройств с высотой экрана до 600px */
+@media (max-height: 600px) {
     .calculator {
-        width: 100%;
+        padding: 15px;
     }
-    .display {
-        width: 100%;
-        font-size: auto;
-    }
-    .button {
-        width: 100%;
-        padding: 10px 20px;
-        font-size: 1em;
-    }
+
+    .display-container,
     #adjustmentButton {
-        width: 100%;
+        margin-bottom: 5px;
     }
 }
