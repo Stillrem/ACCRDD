@@ -168,7 +168,6 @@ body {
     display: flex;
     justify-content: center; /* Центрируем содержимое по горизонтали */
     gap: 10px;
-    box-sizing: border-box;
 }
 
 .orders-needed {
@@ -209,7 +208,7 @@ body {
     display: flex;
     justify-content: center; /* Центрирование по горизонтали */
     align-items: center; /* Центрирование по вертикали, если нужно */
-    width: 100%; /* Убедитесь, что ширина контейнера установлена */
+    width: 380px; /* Убедитесь, что ширина контейнера установлена */
     margin-top: 10px;
 }
 
