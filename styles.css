@@ -228,14 +228,8 @@ body {
     }
 
     .button {
-        width: 90%;
         font-size: 0.9em;
         padding: 8px 15px;
-    }
-
-    .display {
-        width: 90%;
-        font-size: 1.4em;
     }
 }
 
@@ -247,10 +241,6 @@ body {
     .button {
         font-size: 0.9em;
         padding: 8px 15px;
-    }
-
-    .display {
-        font-size: 1.4em;
     }
 }
 
