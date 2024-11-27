@@ -237,11 +237,6 @@ body {
     font-size: 3vw;
 }
 
-@media (max-width: 600px) {
-    .calculator {
-        width: 95vw; /* Увеличьте ширину для меньших экранов */
-    }
-
     .display {
         font-size: 5vw;
     }
