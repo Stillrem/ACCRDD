@@ -237,16 +237,6 @@ body {
     width: 100%;
 }
 
-.cells {
-    grid-template-columns: repeat(auto-fill, minmax(30px, 1fr));
-}
-
-.cell {
-    width: auto;
-    height: auto;
-    padding: 5px; /* Добавлено для обеспечения отзывчивости */
-}
-
 .button {
     font-size: 1.5vw; /* Размер шрифта будет изменяться в зависимости от ширины окна */
     padding: 10px;
