@@ -204,6 +204,30 @@ body {
     box-shadow: 0 0 25px rgba(0, 0, 255, 0.5);
 }
 
+.reset-container {
+    display: flex;
+    justify-content: center; /* Центрирование по горизонтали */
+    align-items: center; /* Центрирование по вертикали, если нужно */
+    width: 100%; /* Убедитесь, что ширина контейнера установлена */
+    margin-top: 10px;
+}
+
+.reset-button {
+    padding: 5px 10px;
+    font-size: 10px;
+    cursor: pointer;
+    background-color: rgba(76, 175, 80, 0.8);
+    border-radius: 5px;
+    color: white;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.reset-button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+}
+
 @keyframes fadeInOut {
     0% 100% {
         opacity: 0;
