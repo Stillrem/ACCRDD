@@ -229,6 +229,7 @@ body {
 }
 
 .reset-button {
+    display: flex;
     justify-content: center;
     align-items: center;
     padding: 3px 7px;
@@ -241,6 +242,7 @@ body {
     transition: transform 0.2s, box-shadow 0.2s;
     text-align: center;
     align-self: center; /* Центрирование внутри контейнера */
+    margin: 0 auto;
 }
 
 .reset-button:hover {
