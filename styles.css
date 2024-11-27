@@ -234,7 +234,8 @@ body {
     padding: 3px 7px;
     font-size: 10px;
     cursor: pointer;
-    background-color: rgba(76, 175, 80, 0.8);
+    /*background-color: rgba(76, 175, 80, 0.8);*/
+    background: linear-gradient(45deg, rgba(44, 62, 80, 0.8), rgba(26, 26, 26, 0.8), rgba(26, 26, 26, 0.8));
     border-radius: 10px;
     color: white;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
