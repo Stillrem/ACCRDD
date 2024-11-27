@@ -220,3 +220,17 @@ body {
         opacity: 1;
     }
 }
+
+.calculator {
+    width: 100%;
+    max-width: 350px;
+}
+
+.display {
+    width: 93%;
+}
+
+#adjustmentButton {
+    width: 100%;
+    max-width: 380px;
+}
