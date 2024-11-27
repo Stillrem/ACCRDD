@@ -221,6 +221,43 @@ body {
     }
 }
 
+/* Медиазапросы для адаптации под разные устройства */
+@media (max-width: 768px) {
+    body {
+        width: 90%;
+    }
+
+    .button {
+        font-size: 0.9em;
+        padding: 8px 15px;
+    }
+
+    .display {
+        font-size: 1.2em;
+    }
+}
+
+    .button {
+        font-size: 0.8em;
+        padding: 5px 10px;
+    }
+
+    .display {
+        font-size: 1em;
+    }
+}
+
+@media (max-height: 600px) {
+    body {
+        padding: 10px;
+    }
+
+    .button {
+        font-size: 0.8em;
+        padding: 5px 10px;
+    }
+}
+
 /* Адаптация для маленьких экранов */
     /*.button {
         font-size: 0.9em;
