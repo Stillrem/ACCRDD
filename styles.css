@@ -221,6 +221,53 @@ body {
     }
 }
 
+.calculator {
+    width: 80vw; /* Используйте ширину окна просмотра */
+    max-width: 400px; /* Установите максимальную ширину для больших экранов */
+    padding: 2vw; /* Используйте отступы в зависимости от ширины окна */
+    box-sizing: border-box; /* Учитывайте отступы и бордеры в общей ширине элемента */
+}
+
+.display {
+    font-size: 4vw; /* Используйте размер шрифта, основанный на ширине окна */
+    width: 100%;
+}
+
+.cells {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* Используйте гибкое распределение колонок */
+    gap: 1vw; /* Используйте промежутки между элементами */
+}
+
+.button {
+    font-size: 3vw; /* Используйте размер шрифта, основанный на ширине окна */
+    padding: 2vw; 
+}
+
+#adjustmentButton {
+    width: 100%;
+    padding: 1.5vw;
+    font-size: 3vw;
+}
+
+@media (max-width: 600px) {
+    .calculator {
+        width: 95vw; /* Увеличьте ширину для меньших экранов */
+    }
+
+    .display {
+        font-size: 5vw;
+    }
+
+    .button {
+        font-size: 4vw;
+    }
+
+    #adjustmentButton {
+        font-size: 4vw;
+    }
+}
+
 /* Адаптация для маленьких экранов */
     /*.button {
         font-size: 0.9em;
