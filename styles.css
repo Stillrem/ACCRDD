@@ -65,6 +65,7 @@ body {
         }
 
         .green-display {
+            display: flex;
             margin-bottom: 20px;
             font-size: 1.5em;
             text-align: center;
@@ -79,6 +80,7 @@ body {
         }
 
         .red-display {
+            display: flex;
             margin-bottom: 20px;
             font-size: 1.5em;
             text-align: center;
@@ -251,6 +253,7 @@ body {
     color: white;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
     transition: transform 0.2s, box-shadow 0.2s;
+    margin: 0;
 }
 
 .reset-button:hover {
