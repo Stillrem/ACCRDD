@@ -242,7 +242,7 @@ body {
     transition: transform 0.2s, box-shadow 0.2s;
     text-align: center;
     align-self: center; /* Центрирование внутри контейнера */
-    margin: 0 auto;
+    margin-top: 10px;
 }
 
 .reset-button:hover {
