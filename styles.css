@@ -249,7 +249,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 4px 15px;
+    padding: 3px 15px;
     font-size: 12px;
     cursor: pointer;
     /*background-color: rgba(76, 175, 80, 0.8);*/
