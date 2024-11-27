@@ -250,7 +250,7 @@ body {
     justify-content: center;
     align-items: center;
     padding: 4px 15px;
-    font-size: 11px;
+    font-size: 12px;
     cursor: pointer;
     /*background-color: rgba(76, 175, 80, 0.8);*/
     background: linear-gradient(45deg, rgba(44, 62, 80, 0.8), rgba(44, 62, 80, 0.8), rgba(26, 26, 26, 0.8));
