@@ -221,36 +221,15 @@ body {
     }
 }
 
-.display {
-    text-align: center;
-    font-size: 4vw; /* Используйте размер шрифта, основанный на ширине окна */
-    width: 100%;
-}
-
 .button {
     font-size: 3vw; /* Используйте размер шрифта, основанный на ширине окна */
     padding: 2vw; 
-}
-
-#adjustmentButton {
-    width: 100%;
-    padding: 1.5vw;
-    font-size: 3vw;
 }
 
     .display {
         text-align: center;
         font-size: 5vw;
     }
-
-    .button {
-        font-size: 4vw;
-    }
-
-    #adjustmentButton {
-        font-size: 4vw;
-    }
-}
 
 /* Адаптация для маленьких экранов */
     /*.button {
