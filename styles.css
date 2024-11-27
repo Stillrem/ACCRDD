@@ -233,13 +233,13 @@ body {
     }
 
     .cells {
-        grid-template-columns: repeat(10, 28px);
+        grid-template-columns: repeat(10, 30px);
         gap: 4px;
     }
 
     .cell {
-        width: 28px;
-        height: 28px;
+        width: 30px;
+        height: 30px;
     }
 
     .button {
@@ -249,7 +249,7 @@ body {
 
     .display-container, #adjustmentButton {
         width: 100%;
-        padding: 5px;
+        padding: 0px;
         gap: 5px;
     }
 
