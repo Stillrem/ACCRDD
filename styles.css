@@ -247,12 +247,18 @@ body {
         font-size: 0.9em;
     }
 
-    .display-container, #adjustmentButton {
+    .display-container {
         width: 100%;
-        padding: 5px, 10px;
+        padding: 5px;
         gap: 5px;
     }
 
+    #adjustmentButton {
+        width: 380px;
+        padding: 5px, 10px;
+        gap: 5px;
+    }
+    
     .intro {
         font-size: 1.5em;
     }
