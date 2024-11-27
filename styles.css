@@ -225,7 +225,7 @@ body {
 @media (max-width: 600px) {
     .calculator {
         width: 100%;
-        padding: 10px;
+        padding: 15px;
     }
 
     .display {
@@ -234,7 +234,7 @@ body {
 
     .button {
         font-size: 1em;
-        padding: 5px 10px;
+        padding: 10px 15px;
     }
 }
 
@@ -242,7 +242,7 @@ body {
 @media (min-width: 601px) and (max-width: 1200px) {
     .calculator {
         width: 70%;
-        padding: 10px;
+        padding: 20px;
     }
 
     .display {
@@ -251,7 +251,7 @@ body {
 
     .button {
         font-size: 1em;
-        padding: 5px 10px;
+        padding: 10px 20px;
     }
 }
 
