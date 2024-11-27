@@ -248,10 +248,9 @@ body {
     }
 
     .display-container {
-        width: 90%;
-        justify-content: center;
+        width: 380px;
         padding: 5px, 10px;
-        gap: 5px;
+        gap: 10px;
     }
     
     .intro {
