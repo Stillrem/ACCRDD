@@ -228,11 +228,13 @@ body {
     }
 
     .button {
+        width: 90%;
         font-size: 0.9em;
         padding: 8px 15px;
     }
 
     .display {
+        width: 90%;
         font-size: 1.4em;
     }
 }
@@ -243,13 +245,11 @@ body {
     }
 
     .button {
-        width: 95%;
         font-size: 0.9em;
         padding: 8px 15px;
     }
 
     .display {
-        width: 95%;
         font-size: 1.4em;
     }
 }
