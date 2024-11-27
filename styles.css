@@ -228,9 +228,6 @@ body {
     .display {
         font-size: 1.2em; /* Уменьшаем размер шрифта */
     }
-    .cells {
-        grid-template-columns: repeat(5, 1fr); /* Изменяем количество столбцов */
-    }
     .button {
         padding: 8px 15px; /* Уменьшаем внутренний отступ */
         font-size: 0.9em; /* Уменьшаем размер шрифта */
@@ -248,9 +245,6 @@ body {
     .display {
         font-size: 1.4em; /* Увеличиваем размер шрифта для планшетов */
     }
-    .cells {
-        grid-template-columns: repeat(8, 1fr); /* Изменяем количество столбцов */
-    }
     .button {
         padding: 10px 18px; /* Корректируем внутренний отступ */
         font-size: 1em; /* Корректируем размер шрифта */
@@ -267,9 +261,6 @@ body {
     }
     .display {
         font-size: 1.5em; /* Стандартный размер шрифта */
-    }
-    .cells {
-        grid-template-columns: repeat(10, 1fr); /* Стандартное количество столбцов */
     }
     .button {
         padding: 12px 20px; /* Стандартный внутренний отступ */
