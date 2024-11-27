@@ -224,7 +224,7 @@ body {
 /* Медиазапрос для устройств с шириной экрана до 600px */
 @media (max-width: 600px) {
     .calculator {
-        width: 90%;
+        width: 100%;
     }
 
     .display-container,
@@ -241,12 +241,12 @@ body {
 /* Медиазапрос для устройств с шириной экрана от 601px до 1024px */
 @media (min-width: 601px) and (max-width: 1024px) {
     .calculator {
-        width: 80%;
+        width: 100%;
     }
 
     .display-container,
     #adjustmentButton {
-        width: 90%;
+        width: 100%;
     }
 
     .button {
