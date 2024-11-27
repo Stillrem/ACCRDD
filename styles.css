@@ -221,52 +221,6 @@ body {
     }
 }
 
-/* Медиазапросы для адаптации интерфейса */
-
-/* Для устройств с шириной экрана до 600px (например, мобильные телефоны) */
-@media screen and (max-width: 600px) {
-    .calculator {
-        width: 95%; /* Увеличиваем ширину до 95% экрана */
-    }
-    
-    .display-container, #adjustmentButton {
-        width: 100%; /* Увеличиваем ширину до 100% экрана */
-    }
-    
-    .button {
-        padding: 8px 15px;
-        font-size: 0.9em;
-    }
-}
-
-/* Для устройств с шириной экрана от 601px до 1024px (например, планшеты) */
-@media screen and (min-width: 601px) and (max-width: 1024px) {
-    .calculator {
-        width: 70%; /* Увеличиваем ширину до 70% экрана */
-    }
-    
-    .display-container, #adjustmentButton {
-        width: 90%; /* Увеличиваем ширину до 90% экрана */
-    }
-    
-    .button {
-        padding: 10px 18px;
-        font-size: 1em;
-    }
-}
-
-/* Для устройств с высотой экрана до 500px (например, маленькие экраны) */
-@media screen and (max-height: 500px) {
-    .calculator, .display-container, #adjustmentButton {
-        margin-bottom: 5px;
-    }
-    
-    .button {
-        padding: 6px 12px;
-        font-size: 0.8em;
-    }
-}
-
 /* Адаптация для маленьких экранов */
     /*.button {
         font-size: 0.9em;
