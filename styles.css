@@ -226,10 +226,12 @@ body {
     .calculator {
         width: 100%;
         padding: 10px;
+        box-sizing: border-box;
     }
 
     .display {
         font-size: 1.2em;
+        margin-bottom: 10px;
     }
 
     .button {
@@ -240,6 +242,7 @@ body {
     #adjustmentButton {
         width: 100%;
         font-size: 12px;
+        margin-top: 10px;
     }
 }
 
@@ -247,10 +250,12 @@ body {
 @media (min-width: 601px) and (max-width: 1024px) {
     .calculator {
         width: 80%;
+        margin: 0 auto;
     }
 
     .display {
         font-size: 1.3em;
+        margin-bottom: 15px;
     }
 
     .button {
@@ -260,6 +265,7 @@ body {
 
     #adjustmentButton {
         width: 90%;
+        margin-top: 15px;
     }
 }
 
@@ -267,10 +273,12 @@ body {
 @media (min-width: 1025px) {
     .calculator {
         width: 60%;
+        margin: 0 auto;
     }
 
     .display {
         font-size: 1.5em;
+        margin-bottom: 20px;
     }
 
     .button {
@@ -280,5 +288,6 @@ body {
 
     #adjustmentButton {
         width: 80%;
+        margin-top: 20px;
     }
 }
