@@ -180,7 +180,7 @@ body {
 
 @font-face {
     font-family: 'Lobster';
-    src: url('/Lobster 1.4.woff2') format('woff2');
+    src: url('/Lobster Regular 400.ttf') format('truetype');
 }
 
 .display-container {
