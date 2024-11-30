@@ -21,95 +21,7 @@ function updateDisplayCounts() {
     localStorage.setItem('declineCount', declineCount);
 }
 
-let undoStack = [];
-let redoStack = [];
-
-function saveState() {
-    const state = {
-        cellColors: [...cellColors],
-        cellTexts: [...cellTexts],
-        acceptCount,
-        declineCount,
-        currentNumber,
-        acceptedCount,
-        declinedCount
-    };
-    undoStack.push(state);
-    redoStack = []; // Очистка redoStack после нового действия
-}
-
-function undo() {
-    if (undoStack.length > 0) {
-        const currentState = {
-            cellColors: [...cellColors],
-            cellTexts: [...cellTexts],
-            acceptCount,
-            declineCount,
-            currentNumber,
-            acceptedCount,
-            declinedCount
-        };
-        redoStack.push(currentState);
-
-        const prevState = undoStack.pop();
-        cellColors = prevState.cellColors;
-        cellTexts = prevState.cellTexts;
-        acceptCount = prevState.acceptCount;
-        declineCount = prevState.declineCount;
-        currentNumber = prevState.currentNumber;
-        acceptedCount = prevState.acceptedCount;
-        declinedCount = prevState.declinedCount;
-
-        updateDisplay();
-    }
-}
-
-function redo() {
-    if (redoStack.length > 0) {
-        const currentState = {
-            cellColors: [...cellColors],
-            cellTexts: [...cellTexts],
-            acceptCount,
-            declineCount,
-            currentNumber,
-            acceptedCount,
-            declinedCount
-        };
-        undoStack.push(currentState);
-
-        const nextState = redoStack.pop();
-        cellColors = nextState.cellColors;
-        cellTexts = nextState.cellTexts;
-        acceptCount = nextState.acceptCount;
-        declineCount = nextState.declineCount;
-        currentNumber = nextState.currentNumber;
-        acceptedCount = nextState.acceptedCount;
-        declinedCount = nextState.declinedCount;
-
-        updateDisplay();
-    }
-}
-
-function updateDisplay() {
-    for (let i = 0; i < cellColors.length; i++) {
-        const cell = document.getElementById(`cell-${i}`);
-        cell.style.backgroundColor = cellColors[i];
-        cell.textContent = cellTexts[i];
-    }
-    updateDisplayCounts();
-    updateAcceptanceRate();
-}
-
-// Пример вызова saveState() после каждого изменения
-document.getElementById('undo-button').addEventListener('click', undo);
-document.getElementById('redo-button').addEventListener('click', redo);
-
-// Не забудьте вызывать saveState() в начале paint(), toggleCellColor(), resetCount() и других функций, где происходит изменение состояния
-
-
 function paint(color) {
-    saveState(); 
-
     const colorCode = color === 'red' ? '#FF0000' : '#00FF00';
 
     if (cellColors[99] === '#00FF00') {
@@ -156,7 +68,6 @@ function paint(color) {
 
        function toggleCellColor(cellIndex) {
        if (!isLocked) {
-           saveState();
            const currentColor = cellColors[cellIndex];
            const newColor = currentColor === '#00FF00' ? '#FF0000' : '#00FF00';
 
