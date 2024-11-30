@@ -21,7 +21,6 @@ function updateDisplayCounts() {
     localStorage.setItem('declineCount', declineCount);
 }
 
-javascript
 let history = [];
 let future = [];
 
