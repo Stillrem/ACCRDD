@@ -9,6 +9,55 @@ let isLocked = localStorage.getItem('isLocked') === 'true';
 let currentNumber = parseInt(localStorage.getItem('currentNumber')) || 1;
 let cellTexts = JSON.parse(localStorage.getItem('cellTexts')) || Array(100).fill('');
 
+// История изменений
+let history = [];
+let historyIndex = -1;
+
+function saveState() {
+    const state = {
+        acceptCount,
+        declineCount,
+        cellColors: [...cellColors],
+        currentNumber,
+        cellTexts: [...cellTexts]
+    };
+    // Если мы делаем новое действие после отмены, удаляем "будущее"
+    history = history.slice(0, historyIndex + 1);
+    history.push(state);
+    historyIndex++;
+}
+
+function restoreState(state) {
+    acceptCount = state.acceptCount;
+    declineCount = state.declineCount;
+    cellColors = [...state.cellColors];
+    currentNumber = state.currentNumber;
+    cellTexts = [...state.cellTexts];
+
+    for (let i = 0; i < cellColors.length; i++) {
+        const cell = document.getElementById(`cell-${i}`);
+        cell.style.backgroundColor = cellColors[i];
+        cell.textContent = cellTexts[i];
+    }
+
+    updateDisplayCounts();
+    updateAcceptanceRate();
+}
+
+function undo() {
+    if (historyIndex > 0) {
+        historyIndex--;
+        restoreState(history[historyIndex]);
+    }
+}
+
+function redo() {
+    if (historyIndex < history.length - 1) {
+        historyIndex++;
+        restoreState(history[historyIndex]);
+    }
+}
+
 function updateAcceptanceRate() {
     const acceptanceRate = (acceptedCount / 100) * 100;
     document.getElementById('acceptance-rate').textContent = `Acceptance Rate: ${acceptanceRate.toFixed(2)}%`;
@@ -22,6 +71,7 @@ function updateDisplayCounts() {
 }
 
 function paint(color) {
+    saveState();
     const colorCode = color === 'red' ? '#FF0000' : '#00FF00';
 
     if (cellColors[99] === '#00FF00') {
@@ -67,6 +117,7 @@ function paint(color) {
     }
 
        function toggleCellColor(cellIndex) {
+           saveState();
        if (!isLocked) {
            const currentColor = cellColors[cellIndex];
            const newColor = currentColor === '#00FF00' ? '#FF0000' : '#00FF00';
@@ -93,6 +144,9 @@ function paint(color) {
            }
        }
    }
+
+document.getElementById('undo-btn').addEventListener('click', undo);
+document.getElementById('redo-btn').addEventListener('click', redo);
                 
         function resetCount(type) {
             if (type === 'accept') {
