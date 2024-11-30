@@ -21,7 +21,83 @@ function updateDisplayCounts() {
     localStorage.setItem('declineCount', declineCount);
 }
 
+let undoStack = [];
+let redoStack = [];
+
+function saveState() {
+    undoStack.push({
+        cellColors: [...cellColors],
+        cellTexts: [...cellTexts],
+        acceptCount,
+        declineCount,
+        currentNumber
+    });
+    redoStack = []; // Очистка redo стека при каждом новом действии
+}
+
+function undo() {
+    if (undoStack.length > 0) {
+        const currentState = {
+            cellColors: [...cellColors],
+            cellTexts: [...cellTexts],
+            acceptCount,
+            declineCount,
+            currentNumber
+        };
+        redoStack.push(currentState);
+
+        const prevState = undoStack.pop();
+        cellColors = [...prevState.cellColors];
+        cellTexts = [...prevState.cellTexts];
+        acceptCount = prevState.acceptCount;
+        declineCount = prevState.declineCount;
+        currentNumber = prevState.currentNumber;
+
+        applyState();
+    }
+}
+
+function redo() {
+    if (redoStack.length > 0) {
+        const currentState = {
+            cellColors: [...cellColors],
+            cellTexts: [...cellTexts],
+            acceptCount,
+            declineCount,
+            currentNumber
+        };
+        undoStack.push(currentState);
+
+        const nextState = redoStack.pop();
+        cellColors = [...nextState.cellColors];
+        cellTexts = [...nextState.cellTexts];
+        acceptCount = nextState.acceptCount;
+        declineCount = nextState.declineCount;
+        currentNumber = nextState.currentNumber;
+
+        applyState();
+    }
+}
+
+function applyState() {
+    for (let i = 0; i < cellColors.length; i++) {
+        document.getElementById(`cell-${i}`).style.backgroundColor = cellColors[i];
+        document.getElementById(`cell-${i}`).textContent = cellTexts[i];
+    }
+    updateDisplayCounts();
+    updateAcceptanceRate();
+
+    localStorage.setItem('cellColors', JSON.stringify(cellColors));
+    localStorage.setItem('cellTexts', JSON.stringify(cellTexts));
+    localStorage.setItem('acceptCount', acceptCount);
+    localStorage.setItem('declineCount', declineCount);
+    localStorage.setItem('currentNumber', currentNumber);
+}
+
+
 function paint(color) {
+    saveState(); 
+
     const colorCode = color === 'red' ? '#FF0000' : '#00FF00';
 
     if (cellColors[99] === '#00FF00') {
@@ -68,6 +144,7 @@ function paint(color) {
 
        function toggleCellColor(cellIndex) {
        if (!isLocked) {
+           saveState();
            const currentColor = cellColors[cellIndex];
            const newColor = currentColor === '#00FF00' ? '#FF0000' : '#00FF00';
 
