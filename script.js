@@ -220,7 +220,6 @@ window.onload = function() {
 
     document.getElementById('undo-button').onclick = undo;
     document.getElementById('redo-button').onclick = redo;
-}
 
     updateDisplayCounts();
     updateAcceptanceRate();
