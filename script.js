@@ -145,8 +145,8 @@ function paint(color) {
        }
    }
 
-document.getElementById('undo-btn').addEventListener('click', undo);
-document.getElementById('redo-btn').addEventListener('click', redo);
+document.getElementById('undo-button').addEventListener('click', undo);
+document.getElementById('redo-button').addEventListener('click', redo);
                 
         function resetCount(type) {
             if (type === 'accept') {
