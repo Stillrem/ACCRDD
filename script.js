@@ -21,68 +21,7 @@ function updateDisplayCounts() {
     localStorage.setItem('declineCount', declineCount);
 }
 
-let history = [];
-let future = [];
-
-function saveState() {
-    history.push({
-        acceptCount,
-        declineCount,
-        cellColors: [...cellColors],
-        currentNumber,
-        cellTexts: [...cellTexts]
-    });
-    // Очистка будущего, если мы делаем новое изменение
-    future = [];
-}
-
-function stepBack() {
-    if (history.length > 0) {
-        const previousState = history.pop();
-        future.push({
-            acceptCount,
-            declineCount,
-            cellColors: [...cellColors],
-            currentNumber,
-            cellTexts: [...cellTexts]
-        });
-        
-        ({ acceptCount, declineCount, cellColors, currentNumber, cellTexts } = previousState);
-        
-        updateDisplayCounts();
-        updateAcceptanceRate();
-        restoreState();
-    }
-}
-
-function stepForward() {
-    if (future.length > 0) {
-        const nextState = future.pop();
-        history.push({
-            acceptCount,
-            declineCount,
-            cellColors: [...cellColors],
-            currentNumber,
-            cellTexts: [...cellTexts]
-        });
-        
-        ({ acceptCount, declineCount, cellColors, currentNumber, cellTexts } = nextState);
-        
-        updateDisplayCounts();
-        updateAcceptanceRate();
-        restoreState();
-    }
-}
-
-function restoreState() {
-    for (let i = 0; i < cellColors.length; i++) {
-        document.getElementById(`cell-${i}`).style.backgroundColor = cellColors[i];
-        document.getElementById(`cell-${i}`).textContent = cellTexts[i];
-    }
-}
-
 function paint(color) {
-    saveState();
     const colorCode = color === 'red' ? '#FF0000' : '#00FF00';
 
     if (cellColors[99] === '#00FF00') {
