@@ -21,90 +21,7 @@ function updateDisplayCounts() {
     localStorage.setItem('declineCount', declineCount);
 }
 
-// Создаем массивы для хранения истории
-let history = [];
-let future = [];
-
-// Функция для сохранения текущего состояния в истории
-function saveState() {
-    history.push({
-        cellColors: [...cellColors],
-        currentNumber: currentNumber,
-        acceptCount: acceptCount,
-        declineCount: declineCount,
-        acceptedCount: acceptedCount,
-        declinedCount: declinedCount,
-        cellTexts: [...cellTexts]
-    });
-    // Очищаем будущее, так как добавлено новое состояние
-    future = [];
-}
-
-// Функция для шага назад
-function undo() {
-    if (history.length > 0) {
-        const previousState = history.pop();
-        future.push({
-            cellColors: [...cellColors],
-            currentNumber: currentNumber,
-            acceptCount: acceptCount,
-            declineCount: declineCount,
-            acceptedCount: acceptedCount,
-            declinedCount: declinedCount,
-            cellTexts: [...cellTexts]
-        });
-
-        cellColors = previousState.cellColors;
-        currentNumber = previousState.currentNumber;
-        acceptCount = previousState.acceptCount;
-        declineCount = previousState.declineCount;
-        acceptedCount = previousState.acceptedCount;
-        declinedCount = previousState.declinedCount;
-        cellTexts = previousState.cellTexts;
-
-        updateDisplay();
-    }
-}
-
-// Функция для шага вперёд
-function redo() {
-    if (future.length > 0) {
-        const nextState = future.pop();
-        history.push({
-            cellColors: [...cellColors],
-            currentNumber: currentNumber,
-            acceptCount: acceptCount,
-            declineCount: declineCount,
-            acceptedCount: acceptedCount,
-            declinedCount: declinedCount,
-            cellTexts: [...cellTexts]
-        });
-
-        cellColors = nextState.cellColors;
-        currentNumber = nextState.currentNumber;
-        acceptCount = nextState.acceptCount;
-        declineCount = nextState.declineCount;
-        acceptedCount = nextState.acceptedCount;
-        declinedCount = nextState.declinedCount;
-        cellTexts = nextState.cellTexts;
-
-        updateDisplay();
-    }
-}
-
-// Функция для обновления отображения
-function updateDisplay() {
-    for (let i = 0; i < cellColors.length; i++) {
-        document.getElementById(`cell-${i}`).style.backgroundColor = cellColors[i];
-        document.getElementById(`cell-${i}`).textContent = cellTexts[i];
-    }
-
-    updateDisplayCounts();
-    updateAcceptanceRate();
-}
-
 function paint(color) {
-    saveState();
     const colorCode = color === 'red' ? '#FF0000' : '#00FF00';
 
     if (cellColors[99] === '#00FF00') {
@@ -150,7 +67,6 @@ function paint(color) {
     }
 
        function toggleCellColor(cellIndex) {
-           saveState();
        if (!isLocked) {
            const currentColor = cellColors[cellIndex];
            const newColor = currentColor === '#00FF00' ? '#FF0000' : '#00FF00';
@@ -217,10 +133,7 @@ window.onload = function() {
         cell.addEventListener('click', () => toggleCellColor(i));
         cellsContainer.appendChild(cell);
     }
-
-    document.getElementById('undo-button').onclick = undo;
-    document.getElementById('redo-button').onclick = redo;
-
+                      
     updateDisplayCounts();
     updateAcceptanceRate();
 
