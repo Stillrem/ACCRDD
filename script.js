@@ -9,65 +9,86 @@ let isLocked = localStorage.getItem('isLocked') === 'true';
 let currentNumber = parseInt(localStorage.getItem('currentNumber')) || 1;
 let cellTexts = JSON.parse(localStorage.getItem('cellTexts')) || Array(100).fill('');
 
-// История изменений
+// Создаем массивы для хранения истории
 let history = [];
-let historyIndex = -1;
+let future = [];
 
+// Функция для сохранения текущего состояния в истории
 function saveState() {
-    const state = {
-        acceptCount,
-        declineCount,
+    history.push({
         cellColors: [...cellColors],
-        currentNumber,
+        currentNumber: currentNumber,
+        acceptCount: acceptCount,
+        declineCount: declineCount,
+        acceptedCount: acceptedCount,
+        declinedCount: declinedCount,
         cellTexts: [...cellTexts]
-    };
-    // Если мы делаем новое действие после отмены, удаляем "будущее"
-    history = history.slice(0, historyIndex + 1);
-    history.push(state);
-    historyIndex++;
+    });
+    // Очищаем будущее, так как добавлено новое состояние
+    future = [];
 }
 
-function restoreState(state) {
-    acceptCount = state.acceptCount;
-    declineCount = state.declineCount;
-    cellColors = [...state.cellColors];
-    currentNumber = state.currentNumber;
-    cellTexts = [...state.cellTexts];
+// Функция для шага назад
+function undo() {
+    if (history.length > 0) {
+        const previousState = history.pop();
+        future.push({
+            cellColors: [...cellColors],
+            currentNumber: currentNumber,
+            acceptCount: acceptCount,
+            declineCount: declineCount,
+            acceptedCount: acceptedCount,
+            declinedCount: declinedCount,
+            cellTexts: [...cellTexts]
+        });
 
+        cellColors = previousState.cellColors;
+        currentNumber = previousState.currentNumber;
+        acceptCount = previousState.acceptCount;
+        declineCount = previousState.declineCount;
+        acceptedCount = previousState.acceptedCount;
+        declinedCount = previousState.declinedCount;
+        cellTexts = previousState.cellTexts;
+
+        updateDisplay();
+    }
+}
+
+// Функция для шага вперёд
+function redo() {
+    if (future.length > 0) {
+        const nextState = future.pop();
+        history.push({
+            cellColors: [...cellColors],
+            currentNumber: currentNumber,
+            acceptCount: acceptCount,
+            declineCount: declineCount,
+            acceptedCount: acceptedCount,
+            declinedCount: declinedCount,
+            cellTexts: [...cellTexts]
+        });
+
+        cellColors = nextState.cellColors;
+        currentNumber = nextState.currentNumber;
+        acceptCount = nextState.acceptCount;
+        declineCount = nextState.declineCount;
+        acceptedCount = nextState.acceptedCount;
+        declinedCount = nextState.declinedCount;
+        cellTexts = nextState.cellTexts;
+
+        updateDisplay();
+    }
+}
+
+// Функция для обновления отображения
+function updateDisplay() {
     for (let i = 0; i < cellColors.length; i++) {
-        const cell = document.getElementById(`cell-${i}`);
-        cell.style.backgroundColor = cellColors[i];
-        cell.textContent = cellTexts[i];
+        document.getElementById(`cell-${i}`).style.backgroundColor = cellColors[i];
+        document.getElementById(`cell-${i}`).textContent = cellTexts[i];
     }
 
     updateDisplayCounts();
     updateAcceptanceRate();
-}
-
-function undo() {
-    if (historyIndex > 0) {
-        historyIndex--;
-        restoreState(history[historyIndex]);
-    }
-}
-
-function redo() {
-    if (historyIndex < history.length - 1) {
-        historyIndex++;
-        restoreState(history[historyIndex]);
-    }
-}
-
-function updateAcceptanceRate() {
-    const acceptanceRate = (acceptedCount / 100) * 100;
-    document.getElementById('acceptance-rate').textContent = `Acceptance Rate: ${acceptanceRate.toFixed(2)}%`;
-}
-
-function updateDisplayCounts() {
-    document.getElementById('accept-count').textContent = acceptCount;
-    document.getElementById('decline-count').textContent = declineCount;
-    localStorage.setItem('acceptCount', acceptCount);
-    localStorage.setItem('declineCount', declineCount);
 }
 
 function paint(color) {
@@ -145,9 +166,6 @@ function paint(color) {
        }
    }
 
-document.getElementById('undo-button').addEventListener('click', undo);
-document.getElementById('redo-button').addEventListener('click', redo);
-                
         function resetCount(type) {
             if (type === 'accept') {
                 acceptCount = 0;
@@ -186,6 +204,9 @@ window.onload = function() {
         //cell.onclick = () => toggleCellColor(i); // Установка обработчика клика
         cell.addEventListener('click', () => toggleCellColor(i));
         cellsContainer.appendChild(cell);
+        document.getElementById('undo-button').addEventListener('click', undo);
+        document.getElementById('redo-button').addEventListener('click', redo);
+                
     }
                       
     updateDisplayCounts();
