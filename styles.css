@@ -298,7 +298,7 @@ body {
 }
 
 .undo-button:hover, .redo-button:hover {
-    background-color: ##3a3a3a;
+    background-color: #3a3a3a;
 }
 
 /*.toggle-switch {
