@@ -276,7 +276,7 @@ body {
 }
 
 .undo-button {
-    padding: 10px 20px;
+    padding: 3px 15px;
     font-size: 1em;
     cursor: pointer;
     border: none;
@@ -296,7 +296,7 @@ body {
 }
 
 .redo-button {
-    padding: 10px 20px;
+    padding: 3px 15px;
     font-size: 1em;
     cursor: pointer;
     border: none;
