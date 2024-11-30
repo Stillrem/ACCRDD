@@ -25,63 +25,60 @@ let history = [];
 let future = [];
 
 function saveState() {
-    const state = {
-        acceptCount: acceptCount,
-        declineCount: declineCount,
+    history.push({
+        acceptCount,
+        declineCount,
         cellColors: [...cellColors],
-        currentNumber: currentNumber,
+        currentNumber,
         cellTexts: [...cellTexts]
-    };
-    history.push(state);
-    future = []; // Очистка будущих состояний при новом действии
-}
-
-function undo() {
-    if (history.length > 0) {
-        const state = history.pop();
-        future.push({
-            acceptCount: acceptCount,
-            declineCount: declineCount,
-            cellColors: [...cellColors],
-            currentNumber: currentNumber,
-            cellTexts: [...cellTexts]
-        });
-        loadState(state);
-    }
-}
-
-function redo() {
-    if (future.length > 0) {
-        const state = future.pop();
-        history.push({
-            acceptCount: acceptCount,
-            declineCount: declineCount,
-            cellColors: [...cellColors],
-            currentNumber: currentNumber,
-            cellTexts: [...cellTexts]
-        });
-        loadState(state);
-    }
-}
-
-function loadState(state) {
-    acceptCount = state.acceptCount;
-    declineCount = state.declineCount;
-    cellColors = state.cellColors;
-    currentNumber = state.currentNumber;
-    cellTexts = state.cellTexts;
-
-    updateDisplayCounts();
-    updateAcceptanceRate();
-    renderCells();
-}
-
-function renderCells() {
-    const cells = document.querySelectorAll('.cell');
-    cells.forEach((cell, i) => {
-        cell.style.backgroundColor = cellColors[i];
-        cell.textContent = cellTexts[i];
     });
+    // Очистка будущего, если мы делаем новое изменение
+    future = [];
+}
+
+function stepBack() {
+    if (history.length > 0) {
+        const previousState = history.pop();
+        future.push({
+            acceptCount,
+            declineCount,
+            cellColors: [...cellColors],
+            currentNumber,
+            cellTexts: [...cellTexts]
+        });
+        
+        ({ acceptCount, declineCount, cellColors, currentNumber, cellTexts } = previousState);
+        
+        updateDisplayCounts();
+        updateAcceptanceRate();
+        restoreState();
+    }
+}
+
+function stepForward() {
+    if (future.length > 0) {
+        const nextState = future.pop();
+        history.push({
+            acceptCount,
+            declineCount,
+            cellColors: [...cellColors],
+            currentNumber,
+            cellTexts: [...cellTexts]
+        });
+        
+        ({ acceptCount, declineCount, cellColors, currentNumber, cellTexts } = nextState);
+        
+        updateDisplayCounts();
+        updateAcceptanceRate();
+        restoreState();
+    }
+}
+
+function restoreState() {
+    for (let i = 0; i < cellColors.length; i++) {
+        document.getElementById(`cell-${i}`).style.backgroundColor = cellColors[i];
+        document.getElementById(`cell-${i}`).textContent = cellTexts[i];
+    }
 }
 
 function paint(color) {
