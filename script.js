@@ -214,6 +214,9 @@ window.onload = function() {
     updateDisplayCounts();
     updateAcceptanceRate();
 
+document.getElementById('undo-button').addEventListener('click', undo);
+document.getElementById('redo-button').addEventListener('click', redo);
+    
             document.getElementById('accept-count').addEventListener('click', () => {
                 acceptCount++;
                 updateDisplayCounts();
