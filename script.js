@@ -9,6 +9,18 @@ let isLocked = localStorage.getItem('isLocked') === 'true';
 let currentNumber = parseInt(localStorage.getItem('currentNumber')) || 1;
 let cellTexts = JSON.parse(localStorage.getItem('cellTexts')) || Array(100).fill('');
 
+function updateAcceptanceRate() {
+    const acceptanceRate = (acceptedCount / 100) * 100;
+    document.getElementById('acceptance-rate').textContent = `Acceptance Rate: ${acceptanceRate.toFixed(2)}%`;
+}
+
+function updateDisplayCounts() {
+    document.getElementById('accept-count').textContent = acceptCount;
+    document.getElementById('decline-count').textContent = declineCount;
+    localStorage.setItem('acceptCount', acceptCount);
+    localStorage.setItem('declineCount', declineCount);
+}
+
 // Создаем массивы для хранения истории
 let history = [];
 let future = [];
@@ -165,7 +177,7 @@ function paint(color) {
            }
        }
    }
-
+                
         function resetCount(type) {
             if (type === 'accept') {
                 acceptCount = 0;
@@ -204,9 +216,6 @@ window.onload = function() {
         //cell.onclick = () => toggleCellColor(i); // Установка обработчика клика
         cell.addEventListener('click', () => toggleCellColor(i));
         cellsContainer.appendChild(cell);
-        document.getElementById('undo-button').addEventListener('click', undo);
-        document.getElementById('redo-button').addEventListener('click', redo);
-                
     }
                       
     updateDisplayCounts();
