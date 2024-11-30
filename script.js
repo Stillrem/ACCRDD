@@ -25,14 +25,17 @@ let undoStack = [];
 let redoStack = [];
 
 function saveState() {
-    undoStack.push({
+    const state = {
         cellColors: [...cellColors],
         cellTexts: [...cellTexts],
         acceptCount,
         declineCount,
-        currentNumber
-    });
-    redoStack = []; // Очистка redo стека при каждом новом действии
+        currentNumber,
+        acceptedCount,
+        declinedCount
+    };
+    undoStack.push(state);
+    redoStack = []; // Очистка redoStack после нового действия
 }
 
 function undo() {
@@ -42,18 +45,22 @@ function undo() {
             cellTexts: [...cellTexts],
             acceptCount,
             declineCount,
-            currentNumber
+            currentNumber,
+            acceptedCount,
+            declinedCount
         };
         redoStack.push(currentState);
 
         const prevState = undoStack.pop();
-        cellColors = [...prevState.cellColors];
-        cellTexts = [...prevState.cellTexts];
+        cellColors = prevState.cellColors;
+        cellTexts = prevState.cellTexts;
         acceptCount = prevState.acceptCount;
         declineCount = prevState.declineCount;
         currentNumber = prevState.currentNumber;
+        acceptedCount = prevState.acceptedCount;
+        declinedCount = prevState.declinedCount;
 
-        applyState();
+        updateDisplay();
     }
 }
 
@@ -64,35 +71,40 @@ function redo() {
             cellTexts: [...cellTexts],
             acceptCount,
             declineCount,
-            currentNumber
+            currentNumber,
+            acceptedCount,
+            declinedCount
         };
         undoStack.push(currentState);
 
         const nextState = redoStack.pop();
-        cellColors = [...nextState.cellColors];
-        cellTexts = [...nextState.cellTexts];
+        cellColors = nextState.cellColors;
+        cellTexts = nextState.cellTexts;
         acceptCount = nextState.acceptCount;
         declineCount = nextState.declineCount;
         currentNumber = nextState.currentNumber;
+        acceptedCount = nextState.acceptedCount;
+        declinedCount = nextState.declinedCount;
 
-        applyState();
+        updateDisplay();
     }
 }
 
-function applyState() {
+function updateDisplay() {
     for (let i = 0; i < cellColors.length; i++) {
-        document.getElementById(`cell-${i}`).style.backgroundColor = cellColors[i];
-        document.getElementById(`cell-${i}`).textContent = cellTexts[i];
+        const cell = document.getElementById(`cell-${i}`);
+        cell.style.backgroundColor = cellColors[i];
+        cell.textContent = cellTexts[i];
     }
     updateDisplayCounts();
     updateAcceptanceRate();
-
-    localStorage.setItem('cellColors', JSON.stringify(cellColors));
-    localStorage.setItem('cellTexts', JSON.stringify(cellTexts));
-    localStorage.setItem('acceptCount', acceptCount);
-    localStorage.setItem('declineCount', declineCount);
-    localStorage.setItem('currentNumber', currentNumber);
 }
+
+// Пример вызова saveState() после каждого изменения
+document.getElementById('undo-button').addEventListener('click', undo);
+document.getElementById('redo-button').addEventListener('click', redo);
+
+// Не забудьте вызывать saveState() в начале paint(), toggleCellColor(), resetCount() и других функций, где происходит изменение состояния
 
 
 function paint(color) {
@@ -214,9 +226,6 @@ window.onload = function() {
     updateDisplayCounts();
     updateAcceptanceRate();
 
-document.getElementById('undo-button').addEventListener('click', undo);
-document.getElementById('redo-button').addEventListener('click', redo);
-    
             document.getElementById('accept-count').addEventListener('click', () => {
                 acceptCount++;
                 updateDisplayCounts();
