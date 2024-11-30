@@ -290,15 +290,15 @@ body {
     border: none;
     border-radius: 10px;
     color: #e0e0e0;
-    background-color: rgba(45,62, 80, 0.8);
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5), inset 0 0 5px rgba(255, 255, 255, 0.1);
+    background-color: rgba(26,26, 26, 0.8);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5), inset 0 0 5px rgba(44, 62, 80, 0.1);
     transition: transform 0.2s, box-shadow 0.2s;
     backdrop-filter: blur(5px);
     font-family: 'Lobster'; 
 }
 
 .undo-button:hover, .redo-button:hover {
-    background-color: #45a049;
+    background-color: #e0e0e0;
 }
 
 /*.toggle-switch {
