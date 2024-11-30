@@ -216,6 +216,8 @@ window.onload = function() {
         //cell.onclick = () => toggleCellColor(i); // Установка обработчика клика
         cell.addEventListener('click', () => toggleCellColor(i));
         cellsContainer.appendChild(cell);
+    document.getElementById('undo-button').onclick = undo;
+    document.getElementById('redo-button').onclick = redo;
     }
                       
     updateDisplayCounts();
