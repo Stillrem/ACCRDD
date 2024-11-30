@@ -21,7 +21,72 @@ function updateDisplayCounts() {
     localStorage.setItem('declineCount', declineCount);
 }
 
+javascript
+let history = [];
+let future = [];
+
+function saveState() {
+    const state = {
+        acceptCount: acceptCount,
+        declineCount: declineCount,
+        cellColors: [...cellColors],
+        currentNumber: currentNumber,
+        cellTexts: [...cellTexts]
+    };
+    history.push(state);
+    future = []; // Очистка будущих состояний при новом действии
+}
+
+function undo() {
+    if (history.length > 0) {
+        const state = history.pop();
+        future.push({
+            acceptCount: acceptCount,
+            declineCount: declineCount,
+            cellColors: [...cellColors],
+            currentNumber: currentNumber,
+            cellTexts: [...cellTexts]
+        });
+        loadState(state);
+    }
+}
+
+function redo() {
+    if (future.length > 0) {
+        const state = future.pop();
+        history.push({
+            acceptCount: acceptCount,
+            declineCount: declineCount,
+            cellColors: [...cellColors],
+            currentNumber: currentNumber,
+            cellTexts: [...cellTexts]
+        });
+        loadState(state);
+    }
+}
+
+function loadState(state) {
+    acceptCount = state.acceptCount;
+    declineCount = state.declineCount;
+    cellColors = state.cellColors;
+    currentNumber = state.currentNumber;
+    cellTexts = state.cellTexts;
+
+    updateDisplayCounts();
+    updateAcceptanceRate();
+    renderCells();
+}
+
+function renderCells() {
+    const cells = document.querySelectorAll('.cell');
+    cells.forEach((cell, i) => {
+        cell.style.backgroundColor = cellColors[i];
+        cell.textContent = cellTexts[i];
+    });
+}
+
 function paint(color) {
+    saveState();
     const colorCode = color === 'red' ? '#FF0000' : '#00FF00';
 
     if (cellColors[99] === '#00FF00') {
