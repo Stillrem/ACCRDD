@@ -26,6 +26,7 @@ function saveState() {
     if (undoStack.length > 100) {
         undoStack.shift(); // Ограничение на 100 шагов
     }
+    // Очистка redo стека при новом действии
     redoStack = [];
 }
 
@@ -35,7 +36,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 });
 
 function undo() {
-    if (undoStack.length > 0) {
+    if (undoStack.length > 1) {
         const currentState = {
             cellColors: [...cellColors],
             cellTexts: [...cellTexts],
@@ -46,7 +47,8 @@ function undo() {
             declinedCount
         };
         redoStack.push(currentState);
-        const prevState = undoStack.pop();
+        undoStack.pop();
+        const prevState = undoStack[undoStack.length - 1];
         restoreState(prevState);
     }
 }
