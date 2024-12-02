@@ -192,9 +192,9 @@ window.onload = function() {
         //cell.onclick = () => toggleCellColor(i); // Установка обработчика клика
         cell.addEventListener('click', () => toggleCellColor(i));
         cellsContainer.appendChild(cell);
-        saveState();
     }
-                      
+
+    saveState();
     updateDisplayCounts();
     updateAcceptanceRate();
 
