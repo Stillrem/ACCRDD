@@ -28,7 +28,7 @@ function saveState() {
     }
 }
 
-function undo() {
+function undo-button() {
     if (undoStack.length > 0) {
         const currentState = {
             cellColors: [...cellColors],
@@ -45,7 +45,7 @@ function undo() {
     }
 }
 
-function redo() {
+function redo-button() {
     if (redoStack.length > 0) {
         const currentState = {
             cellColors: [...cellColors],
