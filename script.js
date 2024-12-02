@@ -154,6 +154,7 @@ function paint(color) {
     const cellTexts = Array.from(document.querySelectorAll('.cell')).map(cell => cell.textContent);
     localStorage.setItem('cellTexts', JSON.stringify(cellTexts));
     updateAcceptanceRate();
+    redoStack = [];
     }
 
        function toggleCellColor(cellIndex) {
@@ -181,6 +182,7 @@ function paint(color) {
                updateDisplayCounts();
                localStorage.setItem('cellColors', JSON.stringify(cellColors));
                updateAcceptanceRate();
+               redoStack = [];
            }
        }
    }
