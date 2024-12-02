@@ -9,64 +9,6 @@ let isLocked = localStorage.getItem('isLocked') === 'true';
 let currentNumber = parseInt(localStorage.getItem('currentNumber')) || 1;
 let cellTexts = JSON.parse(localStorage.getItem('cellTexts')) || Array(100).fill('');
 
-let history = [];
-let historyIndex = -1;
-
-function saveState() {
-    const state = {
-        acceptCount: acceptCount,
-        declineCount: declineCount,
-        cellColors: [...cellColors],
-        currentNumber: currentNumber,
-        cellTexts: [...cellTexts]
-    };
-
-    if (historyIndex < history.length - 1) {
-        history.splice(historyIndex + 1);
-    }
-
-    history.push(state);
-    if (history.length > 100) {
-        history.shift(); // Удаляем самый старый элемент, если превышен лимит
-    } else {
-        historyIndex++;
-    }
-}
-
-function undo() {
-    if (historyIndex > 0) {
-        historyIndex--;
-        restoreState(history[historyIndex]);
-    }
-}
-
-function redo() {
-    if (historyIndex < history.length - 1) {
-        historyIndex++;
-        restoreState(history[historyIndex]);
-    }
-}
-
-function restoreState(state) {
-    acceptCount = state.acceptCount;
-    declineCount = state.declineCount;
-    cellColors = [...state.cellColors];
-    currentNumber = state.currentNumber;
-    cellTexts = [...state.cellTexts];
-
-    cellColors.forEach((color, index) => {
-        document.getElementById(`cell-${index}`).style.backgroundColor = color;
-        document.getElementById(`cell-${index}`).textContent = cellTexts[index];
-    });
-
-    updateDisplayCounts();
-    updateAcceptanceRate();
-}
-
-// Добавьте обработчики для кнопок undo и redo
-document.getElementById('undo-button').addEventListener('click', undo);
-document.getElementById('redo-button').addEventListener('click', redo);
-
 function updateAcceptanceRate() {
     const acceptanceRate = (acceptedCount / 100) * 100;
     document.getElementById('acceptance-rate').textContent = `Acceptance Rate: ${acceptanceRate.toFixed(2)}%`;
@@ -80,7 +22,6 @@ function updateDisplayCounts() {
 }
 
 function paint(color) {
-    saveState();
     const colorCode = color === 'red' ? '#FF0000' : '#00FF00';
 
     if (cellColors[99] === '#00FF00') {
@@ -126,7 +67,6 @@ function paint(color) {
     }
 
        function toggleCellColor(cellIndex) {
-           saveState();
        if (!isLocked) {
            const currentColor = cellColors[cellIndex];
            const newColor = currentColor === '#00FF00' ? '#FF0000' : '#00FF00';
@@ -193,8 +133,7 @@ window.onload = function() {
         cell.addEventListener('click', () => toggleCellColor(i));
         cellsContainer.appendChild(cell);
     }
-
-    saveState();
+                      
     updateDisplayCounts();
     updateAcceptanceRate();
 
