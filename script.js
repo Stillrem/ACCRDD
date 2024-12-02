@@ -23,16 +23,13 @@ function saveState() {
         declinedCount
     };
     undoStack.push(state);
-    redoStack = [];
     if (undoStack.length > 100) {
         undoStack.shift(); // Ограничение на 100 шагов
     }
 }
 
-document.addEventListener('DOMContentLoaded', (event) => {
     document.getElementById('undo-button').addEventListener('click', undo());
     document.getElementById('redo-button').addEventListener('click', redo());
-});
 
 function undo() {
     if (undoStack.length > 0) {
@@ -49,7 +46,6 @@ function undo() {
         redoStack.push(currentState);
         const prevState = undoStack.pop();
         restoreState(prevState);
-        redoStack = [];
     }
 }
 
@@ -68,7 +64,6 @@ function redo() {
         undoStack.push(currentState);
         const nextState = redoStack.pop();
         restoreState(nextState);
-        undoStack = [];
     }
 }
 
