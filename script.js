@@ -9,6 +9,86 @@ let isLocked = localStorage.getItem('isLocked') === 'true';
 let currentNumber = parseInt(localStorage.getItem('currentNumber')) || 1;
 let cellTexts = JSON.parse(localStorage.getItem('cellTexts')) || Array(100).fill('');
 
+let history = [];
+let redoStack = [];
+
+// Функция для сохранения текущего состояния
+function saveState() {
+    history.push({
+        cellColors: [...cellColors],
+        cellTexts: [...cellTexts],
+        acceptCount: acceptCount,
+        declineCount: declineCount,
+        currentNumber: currentNumber
+    });
+
+    // Ограничение истории до 100 шагов
+    if (history.length > 100) {
+        history.shift();
+    }
+
+    // Очистка стека redo
+    redoStack = [];
+}
+
+// Функция для шаг назад
+function undo() {
+    if (history.length > 0) {
+        const prevState = history.pop();
+        redoStack.push({
+            cellColors: [...cellColors],
+            cellTexts: [...cellTexts],
+            acceptCount: acceptCount,
+            declineCount: declineCount,
+            currentNumber: currentNumber
+        });
+
+        cellColors = prevState.cellColors;
+        cellTexts = prevState.cellTexts;
+        acceptCount = prevState.acceptCount;
+        declineCount = prevState.declineCount;
+        currentNumber = prevState.currentNumber;
+
+        updateDisplay();
+    }
+}
+
+// Функция для шаг вперёд
+function redo() {
+    if (redoStack.length > 0) {
+        const nextState = redoStack.pop();
+        history.push({
+            cellColors: [...cellColors],
+            cellTexts: [...cellTexts],
+            acceptCount: acceptCount,
+            declineCount: declineCount,
+            currentNumber: currentNumber
+        });
+
+        cellColors = nextState.cellColors;
+        cellTexts = nextState.cellTexts;
+        acceptCount = nextState.acceptCount;
+        declineCount = nextState.declineCount;
+        currentNumber = nextState.currentNumber;
+
+        updateDisplay();
+    }
+}
+
+// Функция для обновления отображения
+function updateDisplay() {
+    for (let i = 0; i < cellColors.length; i++) {
+        document.getElementById(`cell-${i}`).style.backgroundColor = cellColors[i];
+        document.getElementById(`cell-${i}`).textContent = cellTexts[i];
+    }
+    updateDisplayCounts();
+    updateAcceptanceRate();
+}
+
+// Обработка событий для кнопок undo и redo
+document.getElementById('undo-button').addEventListener('click', undo);
+document.getElementById('redo-button').addEventListener('click', redo);
+
 function updateAcceptanceRate() {
     const acceptanceRate = (acceptedCount / 100) * 100;
     document.getElementById('acceptance-rate').textContent = `Acceptance Rate: ${acceptanceRate.toFixed(2)}%`;
@@ -22,6 +102,7 @@ function updateDisplayCounts() {
 }
 
 function paint(color) {
+    saveState();
     const colorCode = color === 'red' ? '#FF0000' : '#00FF00';
 
     if (cellColors[99] === '#00FF00') {
@@ -67,6 +148,7 @@ function paint(color) {
     }
 
        function toggleCellColor(cellIndex) {
+           saveState();
        if (!isLocked) {
            const currentColor = cellColors[cellIndex];
            const newColor = currentColor === '#00FF00' ? '#FF0000' : '#00FF00';
@@ -95,6 +177,7 @@ function paint(color) {
    }
                 
         function resetCount(type) {
+            saveState();
             if (type === 'accept') {
                 acceptCount = 0;
                 currentNumber = 1;
