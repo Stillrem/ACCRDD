@@ -43,6 +43,38 @@ function restoreState(state) {
     updateAcceptanceRate();
 }
 
+document.getElementById('undo-button').addEventListener('click', () => {
+    if (undoStack.length > 0) {
+        const lastState = undoStack.pop();
+        redoStack.push({
+            acceptCount,
+            declineCount,
+            cellColors: [...cellColors],
+            acceptedCount,
+            declinedCount,
+            currentNumber,
+            cellTexts: [...cellTexts]
+        });
+        restoreState(lastState);
+    }
+});
+
+document.getElementById('redo-button').addEventListener('click', () => {
+    if (redoStack.length > 0) {
+        const nextState = redoStack.pop();
+        undoStack.push({
+            acceptCount,
+            declineCount,
+            cellColors: [...cellColors],
+            acceptedCount,
+            declinedCount,
+            currentNumber,
+            cellTexts: [...cellTexts]
+        });
+        restoreState(nextState);
+    }
+});
+
 function updateAcceptanceRate() {
     const acceptanceRate = (acceptedCount / 100) * 100;
     document.getElementById('acceptance-rate').textContent = `Acceptance Rate: ${acceptanceRate.toFixed(2)}%`;
@@ -152,38 +184,6 @@ function paint(color) {
     localStorage.setItem('cellTexts', JSON.stringify(Array(100).fill('')));
          
    }
-
-document.getElementById('undo-button').addEventListener('click', () => {
-    if (undoStack.length > 0) {
-        const lastState = undoStack.pop();
-        redoStack.push({
-            acceptCount,
-            declineCount,
-            cellColors: [...cellColors],
-            acceptedCount,
-            declinedCount,
-            currentNumber,
-            cellTexts: [...cellTexts]
-        });
-        restoreState(lastState);
-    }
-});
-
-document.getElementById('redo-button').addEventListener('click', () => {
-    if (redoStack.length > 0) {
-        const nextState = redoStack.pop();
-        undoStack.push({
-            acceptCount,
-            declineCount,
-            cellColors: [...cellColors],
-            acceptedCount,
-            declinedCount,
-            currentNumber,
-            cellTexts: [...cellTexts]
-        });
-        restoreState(nextState);
-    }
-});
 
 window.onload = function() {
     const cellsContainer = document.querySelector('.cells');
