@@ -81,13 +81,11 @@ document.addEventListener('DOMContentLoaded', (event) => {
     document.getElementById('redo-button').addEventListener('click', redo);
     
 function updateAcceptanceRate() {
-    saveState();
     const acceptanceRate = (acceptedCount / 100) * 100;
     document.getElementById('acceptance-rate').textContent = `Acceptance Rate: ${acceptanceRate.toFixed(2)}%`;
 }
 
 function updateDisplayCounts() {
-    saveState();
     document.getElementById('accept-count').textContent = acceptCount;
     document.getElementById('decline-count').textContent = declineCount;
     localStorage.setItem('acceptCount', acceptCount);
@@ -117,7 +115,6 @@ function paint(color) {
 
     // Пропуск нумерации красной ячейки
     if (colorCode === '#00FF00') {
-        saveState();
         document.getElementById('cell-0').textContent = currentNumber;
         acceptCount++;
         acceptedCount++;
@@ -129,7 +126,6 @@ function paint(color) {
     }
 
     if (currentNumber > 100) {
-        saveState();
         currentNumber = 1;
     }
  
@@ -176,7 +172,6 @@ function paint(color) {
    }
                 
         function resetCount(type) {
-            saveState();
             if (type === 'accept') {
                 acceptCount = 0;
                 currentNumber = 1;
@@ -245,7 +240,6 @@ window.onload = function() {
             }, { passive: false });
 
         function toggleLock() {
-            saveState();
             isLocked = true;
             localStorage.setItem('isLocked', 'true');
 
@@ -258,7 +252,6 @@ window.onload = function() {
             }
 
         function toggleUnLock() {
-            saveState();
             isLocked = false;
             localStorage.setItem('isLocked', 'false');
 
