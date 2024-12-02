@@ -25,6 +25,7 @@ function saveState() {
     undoStack.push(state);
     if (undoStack.length > 100) {
         undoStack.shift(); // Ограничение на 100 шагов
+        redoStack = [];
     }
 }
 
