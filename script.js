@@ -130,6 +130,31 @@ function paint(color) {
        }
    }
 
+        function resetCount(type) {
+            if (type === 'accept') {
+                acceptCount = 0;
+                currentNumber = 1;
+            } else if (type === 'decline') {
+                //declineCount = 0;
+                acceptCount = 0;
+                currentNumber = 1;
+                declineCount = cellColors.filter(color => color === '#FF0000').length;
+            }
+            updateDisplayCounts();
+    // Очистка всех ячеек от текста
+    const cells = document.querySelectorAll('.cell');
+    cells.forEach((cell) => {
+        cell.textContent = '';
+    });
+
+    // Сохранение изменений в localStorage
+    localStorage.setItem('acceptCount', acceptCount);
+    localStorage.setItem('declineCount', declineCount);
+    localStorage.setItem('currentNumber', currentNumber);
+    localStorage.setItem('cellTexts', JSON.stringify(Array(100).fill('')));
+         
+   }
+
 document.getElementById('undo-button').addEventListener('click', () => {
     if (undoStack.length > 0) {
         const lastState = undoStack.pop();
@@ -161,31 +186,6 @@ document.getElementById('redo-button').addEventListener('click', () => {
         restoreState(nextState);
     }
 });
-
-        function resetCount(type) {
-            if (type === 'accept') {
-                acceptCount = 0;
-                currentNumber = 1;
-            } else if (type === 'decline') {
-                //declineCount = 0;
-                acceptCount = 0;
-                currentNumber = 1;
-                declineCount = cellColors.filter(color => color === '#FF0000').length;
-            }
-            updateDisplayCounts();
-    // Очистка всех ячеек от текста
-    const cells = document.querySelectorAll('.cell');
-    cells.forEach((cell) => {
-        cell.textContent = '';
-    });
-
-    // Сохранение изменений в localStorage
-    localStorage.setItem('acceptCount', acceptCount);
-    localStorage.setItem('declineCount', declineCount);
-    localStorage.setItem('currentNumber', currentNumber);
-    localStorage.setItem('cellTexts', JSON.stringify(Array(100).fill('')));
-         
-   }
 
 window.onload = function() {
     const cellsContainer = document.querySelector('.cells');
