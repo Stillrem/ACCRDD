@@ -47,7 +47,6 @@ function undo() {
         redoStack.push(currentState);
         const prevState = undoStack.pop();
         restoreState(prevState);
-        redoStack = [];
     }
 }
 
