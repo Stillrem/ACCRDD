@@ -9,53 +9,79 @@ let isLocked = localStorage.getItem('isLocked') === 'true';
 let currentNumber = parseInt(localStorage.getItem('currentNumber')) || 1;
 let cellTexts = JSON.parse(localStorage.getItem('cellTexts')) || Array(100).fill('');
 
-let history = [];
-let historyIndex = -1;
+let undoStack = [];
+let redoStack = [];
 
 function saveState() {
-    // Удаляем все состояния после текущего, если они есть
-    history = history.slice(0, historyIndex + 1);
-    // Добавляем текущее состояние
-    history.push({
-        acceptCount: acceptCount,
-        declineCount: declineCount,
+    const state = {
         cellColors: [...cellColors],
-        currentNumber: currentNumber,
-        cellTexts: [...cellTexts]
-    });
-    // Обновляем индекс истории
-    historyIndex++;
+        cellTexts: [...cellTexts],
+        acceptCount,
+        declineCount,
+        currentNumber,
+        acceptedCount,
+        declinedCount
+    };
+    undoStack.push(state);
+    if (undoStack.length > 100) {
+        undoStack.shift(); // Ограничение на 100 шагов
+    }
 }
 
 function undo() {
-    if (historyIndex > 0) {
-        historyIndex--;
-        restoreState(history[historyIndex]);
+    if (undoStack.length > 0) {
+        const currentState = {
+            cellColors: [...cellColors],
+            cellTexts: [...cellTexts],
+            acceptCount,
+            declineCount,
+            currentNumber,
+            acceptedCount,
+            declinedCount
+        };
+        redoStack.push(currentState);
+        const prevState = undoStack.pop();
+        restoreState(prevState);
     }
 }
 
 function redo() {
-    if (historyIndex < history.length - 1) {
-        historyIndex++;
-        restoreState(history[historyIndex]);
+    if (redoStack.length > 0) {
+        const currentState = {
+            cellColors: [...cellColors],
+            cellTexts: [...cellTexts],
+            acceptCount,
+            declineCount,
+            currentNumber,
+            acceptedCount,
+            declinedCount
+        };
+        undoStack.push(currentState);
+        const nextState = redoStack.pop();
+        restoreState(nextState);
     }
 }
 
 function restoreState(state) {
+    cellColors = state.cellColors;
+    cellTexts = state.cellTexts;
     acceptCount = state.acceptCount;
     declineCount = state.declineCount;
-    cellColors = [...state.cellColors];
     currentNumber = state.currentNumber;
-    cellTexts = [...state.cellTexts];
+    acceptedCount = state.acceptedCount;
+    declinedCount = state.declinedCount;
 
-    // Обновляем отображение
+    for (let i = 0; i < cellColors.length; i++) {
+        const cell = document.getElementById(`cell-${i}`);
+        cell.style.backgroundColor = cellColors[i];
+        cell.textContent = cellTexts[i];
+    }
+
     updateDisplayCounts();
     updateAcceptanceRate();
-
 }
 
-document.getElementById('undo-button').addEventListener('click', undo);
-document.getElementById('redo-button').addEventListener('click', redo);
+// Добавьте вызов saveState() в начало функции paint и toggleCellColor
 
 function updateAcceptanceRate() {
     const acceptanceRate = (acceptedCount / 100) * 100;
