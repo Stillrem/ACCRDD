@@ -9,77 +9,6 @@ let isLocked = localStorage.getItem('isLocked') === 'true';
 let currentNumber = parseInt(localStorage.getItem('currentNumber')) || 1;
 let cellTexts = JSON.parse(localStorage.getItem('cellTexts')) || Array(100).fill('');
 
-let undoStack = [];
-let redoStack = [];
-
-// Функция для сохранения текущего состояния
-function saveState() {
-    const state = {
-        cellColors: [...cellColors],
-        cellTexts: [...cellTexts],
-        acceptCount,
-        declineCount,
-        currentNumber,
-        acceptedCount,
-        declinedCount
-    };
-    undoStack.push(state);
-    if (undoStack.length > 100) {
-        undoStack.shift(); // Ограничение на 100 шагов
-    }
-    redoStack = []; // Очистка стека redo при новом изменении
-}
-
-// Функция обновления UI
-function updateUI() {
-    for (let i = 0; i < cellColors.length; i++) {
-        const cell = document.getElementById(`cell-${i}`);
-        cell.style.backgroundColor = cellColors[i];
-        cell.textContent = cellTexts[i];
-    }
-
-    updateDisplayCounts();
-    updateAcceptanceRate();
-
-    // Сохранение состояния
-    localStorage.setItem('cellColors', JSON.stringify(cellColors));
-    localStorage.setItem('cellTexts', JSON.stringify(cellTexts));
-    localStorage.setItem('acceptCount', acceptCount);
-    localStorage.setItem('declineCount', declineCount);
-    localStorage.setItem('currentNumber', currentNumber);
-}
-
-// Функция для отмены действия
-function undo() {
-    if (undoStack.length > 1) {
-        const currentState = undoStack.pop();
-        redoStack.push(currentState);
-        const prevState = undoStack[undoStack.length - 1];
-        restoreState(prevState);
-    }
-}
-
-// Функция для повтора действия
-function redo() {
-    if (redoStack.length > 0) {
-        const nextState = redoStack.pop();
-        undoStack.push(nextState);
-        restoreState(nextState);
-    }
-}
-
-// Восстановление состояния из стека
-function restoreState(state) {
-    Object.assign({ acceptCount, declineCount, currentNumber, acceptedCount, declinedCount }, state);
-    cellColors = [...state.cellColors];
-    cellTexts = [...state.cellTexts];
-    updateUI();
-}
-
-document.addEventListener('DOMContentLoaded', (event) => {
-    document.getElementById('undo-button').addEventListener('click', undo);
-    document.getElementById('redo-button').addEventListener('click', redo);
-    
 function updateAcceptanceRate() {
     const acceptanceRate = (acceptedCount / 100) * 100;
     document.getElementById('acceptance-rate').textContent = `Acceptance Rate: ${acceptanceRate.toFixed(2)}%`;
@@ -93,9 +22,8 @@ function updateDisplayCounts() {
 }
 
 function paint(color) {
-    saveState();
     const colorCode = color === 'red' ? '#FF0000' : '#00FF00';
-    
+
     if (cellColors[99] === '#00FF00') {
         acceptedCount--;
         //acceptCount--;
@@ -136,12 +64,9 @@ function paint(color) {
     const cellTexts = Array.from(document.querySelectorAll('.cell')).map(cell => cell.textContent);
     localStorage.setItem('cellTexts', JSON.stringify(cellTexts));
     updateAcceptanceRate();
-    redoStack = [];
-    updateUI();
     }
 
        function toggleCellColor(cellIndex) {
-           saveState();
        if (!isLocked) {
            const currentColor = cellColors[cellIndex];
            const newColor = currentColor === '#00FF00' ? '#FF0000' : '#00FF00';
@@ -165,8 +90,6 @@ function paint(color) {
                updateDisplayCounts();
                localStorage.setItem('cellColors', JSON.stringify(cellColors));
                updateAcceptanceRate();
-               redoStack = [];
-               updateUI();
            }
        }
    }
@@ -197,7 +120,6 @@ function paint(color) {
    }
 
 window.onload = function() {
-    saveState();
     const cellsContainer = document.querySelector('.cells');
     const cellTexts = JSON.parse(localStorage.getItem('cellTexts')) || Array(100).fill('');
     for (let i = 0; i < cellColors.length; i++) {
