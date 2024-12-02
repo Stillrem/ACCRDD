@@ -53,9 +53,7 @@ function undo() {
 
 function redo() {
     if (redoStack.length > 0) {
-        //const currentState = {
-        const nextState = redoStack.pop();
-        undoStack.push({
+        const currentState = {
             cellColors: [...cellColors],
             cellTexts: [...cellTexts],
             acceptCount,
@@ -63,9 +61,9 @@ function redo() {
             currentNumber,
             acceptedCount,
             declinedCount
-        });
-        //undoStack.push(currentState);
-        //const nextState = redoStack.pop();
+        };
+        undoStack.push(currentState);
+        const nextState = redoStack.pop();
         restoreState(nextState);
     }
 }
