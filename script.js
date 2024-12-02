@@ -10,7 +10,7 @@ let currentNumber = parseInt(localStorage.getItem('currentNumber')) || 1;
 let cellTexts = JSON.parse(localStorage.getItem('cellTexts')) || Array(100).fill('');
 
 let undoStack = [];
-let redoStack = [];  
+let redoStack = [];
 
 function saveState() {
     const state = {
@@ -28,62 +28,61 @@ function saveState() {
     }
 }
 
-javascript
-   function undo() {
-       if (undoStack.length > 0) {
-           const currentState = {
-               cellColors: [...cellColors],
-               acceptCount: acceptCount,
-               declineCount: declineCount,
-               currentNumber: currentNumber,
-               cellTexts: [...cellTexts]
-           };
-           redoStack.push(currentState);
+function undo() {
+    if (undoStack.length > 0) {
+        const currentState = {
+            cellColors: [...cellColors],
+            cellTexts: [...cellTexts],
+            acceptCount,
+            declineCount,
+            currentNumber,
+            acceptedCount,
+            declinedCount
+        };
+        redoStack.push(currentState);
+        const prevState = undoStack.pop();
+        restoreState(prevState);
+    }
+}
 
-           const previousState = undoStack.pop();
-           cellColors = [...previousState.cellColors];
-           acceptCount = previousState.acceptCount;
-           declineCount = previousState.declineCount;
-           currentNumber = previousState.currentNumber;
-           cellTexts = [...previousState.cellTexts];
+function redo() {
+    if (redoStack.length > 0) {
+        const currentState = {
+            cellColors: [...cellColors],
+            cellTexts: [...cellTexts],
+            acceptCount,
+            declineCount,
+            currentNumber,
+            acceptedCount,
+            declinedCount
+        };
+        undoStack.push(currentState);
+        const nextState = redoStack.pop();
+        restoreState(nextState);
+    }
+}
 
-           applyState();
-       }
-   }
+function restoreState(state) {
+    cellColors = state.cellColors;
+    cellTexts = state.cellTexts;
+    acceptCount = state.acceptCount;
+    declineCount = state.declineCount;
+    currentNumber = state.currentNumber;
+    acceptedCount = state.acceptedCount;
+    declinedCount = state.declinedCount;
 
-   function redo() {
-       if (redoStack.length > 0) {
-           const currentState = {
-               cellColors: [...cellColors],
-               acceptCount: acceptCount,
-               declineCount: declineCount,
-               currentNumber: currentNumber,
-               cellTexts: [...cellTexts]
-           };
-           undoStack.push(currentState);
+    for (let i = 0; i < cellColors.length; i++) {
+        const cell = document.getElementById(`cell-${i}`);
+        cell.style.backgroundColor = cellColors[i];
+        cell.textContent = cellTexts[i];
+    }
 
-           const nextState = redoStack.pop();
-           cellColors = [...nextState.cellColors];
-           acceptCount = nextState.acceptCount;
-           declineCount = nextState.declineCount;
-           currentNumber = nextState.currentNumber;
-           cellTexts = [...nextState.cellTexts];
-
-           applyState();
-       }
-   }
+    updateDisplayCounts();
+    updateAcceptanceRate();
+}
 
    document.getElementById('undo-button').addEventListener('click', undo);
-   document.getElementById('redo-button').addEventListener('click', redo);   
-
-function applyState() {
-       for (let i = 0; i < cellColors.length; i++) {
-           document.getElementById(`cell-${i}`).style.backgroundColor = cellColors[i];
-           document.getElementById(`cell-${i}`).textContent = cellTexts[i];
-       }
-       updateDisplayCounts();
-       updateAcceptanceRate();
-   }
+   document.getElementById('redo-button').addEventListener('click', redo);
 
 function updateAcceptanceRate() {
     const acceptanceRate = (acceptedCount / 100) * 100;
