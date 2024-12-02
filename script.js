@@ -9,35 +9,19 @@ let isLocked = localStorage.getItem('isLocked') === 'true';
 let currentNumber = parseInt(localStorage.getItem('currentNumber')) || 1;
 let cellTexts = JSON.parse(localStorage.getItem('cellTexts')) || Array(100).fill('');
 
-let undoStack = [JSON.parse(localStorage.getItem('initialState')) || { cellColors, cellTexts, acceptCount, declineCount, currentNumber, acceptedCount, declinedCount }];
+let undoStack = [JSON.parse(JSON.stringify(state))];
 let redoStack = [];
 
 function saveState() {
-    const state = {
-        cellColors: [...cellColors],
-        cellTexts: [...cellTexts],
-        acceptCount,
-        declineCount,
-        currentNumber,
-        acceptedCount,
-        declinedCount
-    };
-    
-    if (undoStack.length === 0 || JSON.stringify(state) !== JSON.stringify(undoStack[undoStack.length - 1])) {
-        undoStack.push(state);
+    if (JSON.stringify(state) !== JSON.stringify(undoStack[undoStack.length - 1])) {
+        undoStack.push(JSON.parse(JSON.stringify(state)));
         if (undoStack.length > 100) {
-            undoStack.shift(); // Ограничение на 100 шагов
+            undoStack.shift();
         }
-        redoStack = []; // Очистка redo стека при новом действии
-        // Сохранение текущего состояния в локальное хранилище
+        redoStack = [];
         localStorage.setItem('initialState', JSON.stringify(state));
     }
 }
-
-document.addEventListener('DOMContentLoaded', (event) => {
-    document.getElementById('undo-button').addEventListener('click', undo);
-    document.getElementById('redo-button').addEventListener('click', redo);
-});
 
 function undo() {
     if (undoStack.length > 1) {
@@ -53,31 +37,40 @@ function redo() {
     }
 }
 
-function restoreState(state) {
-    cellColors = state.cellColors;
-    cellTexts = state.cellTexts;
-    acceptCount = state.acceptCount;
-    declineCount = state.declineCount;
-    currentNumber = state.currentNumber;
-    acceptedCount = state.acceptedCount;
-    declinedCount = state.declinedCount;
-
-    for (let i = 0; i < cellColors.length; i++) {
-        const cell = document.getElementById(`cell-${i}`);
-        cell.style.backgroundColor = cellColors[i];
-        cell.textContent = cellTexts[i];
-    }
-
-    updateDisplayCounts();
-    updateAcceptanceRate();
-
-    // Обновление локального хранилища
-    localStorage.setItem('cellColors', JSON.stringify(cellColors));
-    localStorage.setItem('cellTexts', JSON.stringify(cellTexts));
-    localStorage.setItem('acceptCount', acceptCount);
-    localStorage.setItem('declineCount', declineCount);
-    localStorage.setItem('currentNumber', currentNumber);
+function restoreState(newState) {
+    state = newState;
+    updateCells();
+    updateCounters();
+    updateLocalStorage();
 }
+
+function updateCells() {
+    for (let i = 0; i < state.cellColors.length; i++) {
+        const cell = document.getElementById(`cell-${i}`);
+        if (cell) {
+            cell.style.backgroundColor = state.cellColors[i];
+            cell.textContent = state.cellTexts[i];
+        }
+    }
+}
+
+function updateCounters() {
+    document.getElementById('acceptedCount').textContent = state.acceptedCount;
+    document.getElementById('declinedCount').textContent = state.declinedCount;
+    document.getElementById('currentNumber').textContent = state.currentNumber;
+}
+
+function updateLocalStorage() {
+    localStorage.setItem('acceptCount', state.acceptCount);
+    localStorage.setItem('declineCount', state.declineCount);
+    localStorage.setItem('cellColors', JSON.stringify(state.cellColors));
+    localStorage.setItem('cellTexts', JSON.stringify(state.cellTexts));
+    localStorage.setItem('currentNumber', state.currentNumber);
+}
+
+document.addEventListener('DOMContentLoaded', (event) => {
+    document.getElementById('undo-button').addEventListener('click', undo);
+    document.getElementById('redo-button').addEventListener('click', redo);
     
 function updateAcceptanceRate() {
     saveState();
