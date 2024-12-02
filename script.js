@@ -56,7 +56,6 @@ function updateDisplayCounts() {
 }
 
 function paint(color) {
-    saveState();
     const colorCode = color === 'red' ? '#FF0000' : '#00FF00';
 
     if (cellColors[99] === '#00FF00') {
@@ -102,7 +101,6 @@ function paint(color) {
     }
 
        function toggleCellColor(cellIndex) {
-           saveState();
        if (!isLocked) {
            const currentColor = cellColors[cellIndex];
            const newColor = currentColor === '#00FF00' ? '#FF0000' : '#00FF00';
