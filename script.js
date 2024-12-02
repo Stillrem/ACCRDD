@@ -9,31 +9,64 @@ let isLocked = localStorage.getItem('isLocked') === 'true';
 let currentNumber = parseInt(localStorage.getItem('currentNumber')) || 1;
 let cellTexts = JSON.parse(localStorage.getItem('cellTexts')) || Array(100).fill('');
 
-// Стеки для операций undo и redo
-let undoStack = [];
-let redoStack = [];
+javascript
+let history = [];
+let historyIndex = -1;
 
 function saveState() {
     const state = {
-        acceptCount,
-        declineCount,
+        acceptCount: acceptCount,
+        declineCount: declineCount,
         cellColors: [...cellColors],
-        currentNumber,
+        currentNumber: currentNumber,
         cellTexts: [...cellTexts]
     };
-    undoStack.push(state);
-    if (undoStack.length > 100) undoStack.shift(); // Ограничение на 100 действий
-    redoStack = []; // Сбрасываем redoStack после нового действия
+
+    if (historyIndex < history.length - 1) {
+        history.splice(historyIndex + 1);
+    }
+
+    history.push(state);
+    if (history.length > 100) {
+        history.shift(); // Удаляем самый старый элемент, если превышен лимит
+    } else {
+        historyIndex++;
+    }
+}
+
+function undo() {
+    if (historyIndex > 0) {
+        historyIndex--;
+        restoreState(history[historyIndex]);
+    }
+}
+
+function redo() {
+    if (historyIndex < history.length - 1) {
+        historyIndex++;
+        restoreState(history[historyIndex]);
+    }
 }
 
 function restoreState(state) {
     acceptCount = state.acceptCount;
     declineCount = state.declineCount;
+    cellColors = [...state.cellColors];
     currentNumber = state.currentNumber;
-    cellColors.splice(0, cellColors.length, ...state.cellColors);
-    cellTexts.splice(0, cellTexts.length, ...state.cellTexts);
-    updateDisplay();
+    cellTexts = [...state.cellTexts];
+
+    cellColors.forEach((color, index) => {
+        document.getElementById(`cell-${index}`).style.backgroundColor = color;
+        document.getElementById(`cell-${index}`).textContent = cellTexts[index];
+    });
+
+    updateDisplayCounts();
+    updateAcceptanceRate();
 }
+
+// Добавьте обработчики для кнопок undo и redo
+document.getElementById('undo-button').addEventListener('click', undo);
+document.getElementById('redo-button').addEventListener('click', redo);
 
 function updateAcceptanceRate() {
     const acceptanceRate = (acceptedCount / 100) * 100;
@@ -93,52 +126,6 @@ function paint(color) {
     updateAcceptanceRate();
     }
 
-function updateDisplay() {
-    for (let i = 0; i < cellColors.length; i++) {
-        const cell = document.getElementById(`cell-${i}`);
-        cell.style.backgroundColor = cellColors[i];
-        cell.textContent = cellTexts[i];
-    }
-    updateDisplayCounts();
-    updateAcceptanceRate();
-}
-
-function undo() {
-    if (undoStack.length > 0) {
-        const currentState = {
-            acceptCount,
-            declineCount,
-            cellColors: [...cellColors],
-            currentNumber,
-            cellTexts: [...cellTexts]
-        };
-        redoStack.push(currentState); // Сохраняем текущее состояние в redoStack
-        const previousState = undoStack.pop(); // Извлекаем предыдущее состояние из undoStack
-        restoreState(previousState);
-    }
-}
-
-function redo() {
-    if (redoStack.length > 0) {
-        const currentState = {
-            acceptCount,
-            declineCount,
-            cellColors: [...cellColors],
-            currentNumber,
-            cellTexts: [...cellTexts]
-        };
-        undoStack.push(currentState); // Сохраняем текущее состояние в undoStack
-        const nextState = redoStack.pop(); // Извлекаем следующее состояние из redoStack
-        restoreState(nextState);
-    }
-}
-
-document.getElementById('undo-button').addEventListener('click', undo);
-document.getElementById('redo-button').addEventListener('click', redo);
-
-// Инициализация дисплея
-updateDisplay();
-
        function toggleCellColor(cellIndex) {
            saveState();
        if (!isLocked) {
@@ -169,7 +156,6 @@ updateDisplay();
    }
                 
         function resetCount(type) {
-            saveState();
             if (type === 'accept') {
                 acceptCount = 0;
                 currentNumber = 1;
@@ -207,6 +193,7 @@ window.onload = function() {
         //cell.onclick = () => toggleCellColor(i); // Установка обработчика клика
         cell.addEventListener('click', () => toggleCellColor(i));
         cellsContainer.appendChild(cell);
+        saveState();
     }
                       
     updateDisplayCounts();
