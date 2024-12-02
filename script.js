@@ -28,42 +28,53 @@ function saveState() {
     }
 }
 
-function undo() {
-    if (undoStack.length > 0) {
-        const currentState = {
-            cellColors: [...cellColors],
-            cellTexts: [...cellTexts],
-            acceptCount,
-            declineCount,
-            currentNumber,
-            acceptedCount,
-            declinedCount
-        };
-        redoStack.push(currentState);
-        const prevState = undoStack.pop();
-        restoreState(prevState);
-        document.getElementById('undo-button').addEventListener('click', undo);
-    }
-}
+javascript
+   function undo() {
+       if (undoStack.length > 0) {
+           const currentState = {
+               cellColors: [...cellColors],
+               acceptCount: acceptCount,
+               declineCount: declineCount,
+               currentNumber: currentNumber,
+               cellTexts: [...cellTexts]
+           };
+           redoStack.push(currentState);
 
-function redo() {
-    if (redoStack.length > 0) {
-        const currentState = {
-            cellColors: [...cellColors],
-            cellTexts: [...cellTexts],
-            acceptCount,
-            declineCount,
-            currentNumber,
-            acceptedCount,
-            declinedCount
-        };
-        undoStack.push(currentState);
-        const nextState = redoStack.pop();
-        restoreState(nextState);
-        document.getElementById('redo-button').addEventListener('click', redo);
-   
-    }
-}
+           const previousState = undoStack.pop();
+           cellColors = [...previousState.cellColors];
+           acceptCount = previousState.acceptCount;
+           declineCount = previousState.declineCount;
+           currentNumber = previousState.currentNumber;
+           cellTexts = [...previousState.cellTexts];
+
+           applyState();
+       }
+   }
+
+   function redo() {
+       if (redoStack.length > 0) {
+           const currentState = {
+               cellColors: [...cellColors],
+               acceptCount: acceptCount,
+               declineCount: declineCount,
+               currentNumber: currentNumber,
+               cellTexts: [...cellTexts]
+           };
+           undoStack.push(currentState);
+
+           const nextState = redoStack.pop();
+           cellColors = [...nextState.cellColors];
+           acceptCount = nextState.acceptCount;
+           declineCount = nextState.declineCount;
+           currentNumber = nextState.currentNumber;
+           cellTexts = [...nextState.cellTexts];
+
+           applyState();
+       }
+   }
+
+   document.getElementById('undo-button').addEventListener('click', undo);
+   document.getElementById('redo-button').addEventListener('click', redo);   
 
 function restoreState(state) {
     cellColors = state.cellColors;
@@ -83,8 +94,6 @@ function restoreState(state) {
     updateDisplayCounts();
     updateAcceptanceRate();
 }
-
-// Добавьте вызов saveState() в начало функции paint и toggleCellColor
 
 function updateAcceptanceRate() {
     const acceptanceRate = (acceptedCount / 100) * 100;
