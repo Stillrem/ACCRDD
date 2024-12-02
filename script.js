@@ -23,6 +23,7 @@ function saveState() {
         declinedCount
     };
     undoStack.push(state);
+    redoStack = [];
     if (undoStack.length > 100) {
         undoStack.shift(); // Ограничение на 100 шагов
     }
@@ -48,7 +49,6 @@ function undo() {
         redoStack.push(currentState);
         const prevState = undoStack.pop();
         restoreState(prevState);
-        redoStack = [];
     }
 }
 
@@ -67,7 +67,6 @@ function redo() {
         undoStack.push(currentState);
         const nextState = redoStack.pop();
         restoreState(nextState);
-        undoStack = [];
     }
 }
 
