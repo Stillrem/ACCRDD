@@ -30,6 +30,7 @@ function saveState() {
 
 function undo() {
     if (undoStack.length > 0) {
+        saveState();
         const currentState = {
             cellColors: [...cellColors],
             cellTexts: [...cellTexts],
@@ -47,6 +48,7 @@ function undo() {
 
 function redo() {
     if (redoStack.length > 0) {
+        saveState();
         const currentState = {
             cellColors: [...cellColors],
             cellTexts: [...cellTexts],
