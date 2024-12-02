@@ -47,6 +47,7 @@ function undo() {
         redoStack.push(currentState);
         const prevState = undoStack.pop();
         restoreState(prevState);
+        redoStack = [];
     }
 }
 
@@ -84,6 +85,14 @@ function restoreState(state) {
 
     updateDisplayCounts();
     updateAcceptanceRate();
+}
+
+    // Сохранение состояния после восстановления
+    localStorage.setItem('cellColors', JSON.stringify(cellColors));
+    localStorage.setItem('cellTexts', JSON.stringify(cellTexts));
+    localStorage.setItem('acceptCount', acceptCount);
+    localStorage.setItem('declineCount', declineCount);
+    localStorage.setItem('currentNumber', currentNumber);
 }
 
 function updateAcceptanceRate() {
