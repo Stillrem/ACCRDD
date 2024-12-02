@@ -9,7 +9,7 @@ let isLocked = localStorage.getItem('isLocked') === 'true';
 let currentNumber = parseInt(localStorage.getItem('currentNumber')) || 1;
 let cellTexts = JSON.parse(localStorage.getItem('cellTexts')) || Array(100).fill('');
 
-let undoStack = [];
+let undoStack = [JSON.parse(localStorage.getItem('initialState')) || { cellColors, cellTexts, acceptCount, declineCount, currentNumber, acceptedCount, declinedCount }];
 let redoStack = [];
 
 function saveState() {
@@ -22,12 +22,16 @@ function saveState() {
         acceptedCount,
         declinedCount
     };
-    undoStack.push(state);
-    if (undoStack.length > 100) {
-        undoStack.shift(); // Ограничение на 100 шагов
+    
+    if (undoStack.length === 0 || JSON.stringify(state) !== JSON.stringify(undoStack[undoStack.length - 1])) {
+        undoStack.push(state);
+        if (undoStack.length > 100) {
+            undoStack.shift(); // Ограничение на 100 шагов
+        }
+        redoStack = []; // Очистка redo стека при новом действии
+        // Сохранение текущего состояния в локальное хранилище
+        localStorage.setItem('initialState', JSON.stringify(state));
     }
-    // Очистка redo стека при новом действии
-    redoStack = [];
 }
 
 document.addEventListener('DOMContentLoaded', (event) => {
@@ -37,36 +41,15 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
 function undo() {
     if (undoStack.length > 1) {
-        const currentState = {
-            cellColors: [...cellColors],
-            cellTexts: [...cellTexts],
-            acceptCount,
-            declineCount,
-            currentNumber,
-            acceptedCount,
-            declinedCount
-        };
-        redoStack.push(currentState);
-        undoStack.pop();
-        const prevState = undoStack[undoStack.length - 1];
-        restoreState(prevState);
+        redoStack.push(undoStack.pop());
+        restoreState(undoStack[undoStack.length - 1]);
     }
 }
 
 function redo() {
     if (redoStack.length > 0) {
-        const currentState = {
-            cellColors: [...cellColors],
-            cellTexts: [...cellTexts],
-            acceptCount,
-            declineCount,
-            currentNumber,
-            acceptedCount,
-            declinedCount
-        };
-        undoStack.push(currentState);
-        const nextState = redoStack.pop();
-        restoreState(nextState);
+        undoStack.push(redoStack.pop());
+        restoreState(undoStack[undoStack.length - 1]);
     }
 }
 
@@ -88,7 +71,7 @@ function restoreState(state) {
     updateDisplayCounts();
     updateAcceptanceRate();
 
-    // Сохранение состояния после восстановления
+    // Обновление локального хранилища
     localStorage.setItem('cellColors', JSON.stringify(cellColors));
     localStorage.setItem('cellTexts', JSON.stringify(cellTexts));
     localStorage.setItem('acceptCount', acceptCount);
