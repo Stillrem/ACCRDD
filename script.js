@@ -81,9 +81,6 @@ function restoreState(state) {
     updateAcceptanceRate();
 }
 
-   document.getElementById('undo-button').addEventListener('click', undo);
-   document.getElementById('redo-button').addEventListener('click', redo);
-
 function updateAcceptanceRate() {
     const acceptanceRate = (acceptedCount / 100) * 100;
     document.getElementById('acceptance-rate').textContent = `Acceptance Rate: ${acceptanceRate.toFixed(2)}%`;
