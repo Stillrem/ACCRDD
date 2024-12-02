@@ -11,6 +11,14 @@ let cellTexts = JSON.parse(localStorage.getItem('cellTexts')) || Array(100).fill
 
 let undoStack = [];
 let redoStack = [];
+   let cellColors = [];
+   let cellTexts = [];
+   let acceptCount = 0;
+   let declineCount = 0;
+   let currentNumber = 0;
+   let acceptedCount = 0;
+   let declinedCount = 0;
+   
 
 function saveState() {
     const state = {
