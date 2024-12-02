@@ -196,6 +196,7 @@ function paint(color) {
    }
 
 window.onload = function() {
+    saveState();
     const cellsContainer = document.querySelector('.cells');
     const cellTexts = JSON.parse(localStorage.getItem('cellTexts')) || Array(100).fill('');
     for (let i = 0; i < cellColors.length; i++) {
