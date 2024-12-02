@@ -85,7 +85,6 @@ function restoreState(state) {
 
     updateDisplayCounts();
     updateAcceptanceRate();
-}
 
     // Сохранение состояния после восстановления
     localStorage.setItem('cellColors', JSON.stringify(cellColors));
@@ -94,7 +93,7 @@ function restoreState(state) {
     localStorage.setItem('declineCount', declineCount);
     localStorage.setItem('currentNumber', currentNumber);
 }
-
+    
 function updateAcceptanceRate() {
     saveState();
     const acceptanceRate = (acceptedCount / 100) * 100;
