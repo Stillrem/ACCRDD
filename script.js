@@ -125,6 +125,7 @@ function paint(color) {
 
     // Пропуск нумерации красной ячейки
     if (colorCode === '#00FF00') {
+        saveState();
         document.getElementById('cell-0').textContent = currentNumber;
         acceptCount++;
         acceptedCount++;
@@ -136,6 +137,7 @@ function paint(color) {
     }
 
     if (currentNumber > 100) {
+        saveState();
         currentNumber = 1;
     }
  
