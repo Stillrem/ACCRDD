@@ -28,8 +28,10 @@ function saveState() {
     }
 }
 
+    document.addEventListener('DOMContentLoaded', (event) => {
     document.getElementById('undo-button').addEventListener('click', undo());
     document.getElementById('redo-button').addEventListener('click', redo());
+});
 
 function undo() {
     if (undoStack.length > 0) {
