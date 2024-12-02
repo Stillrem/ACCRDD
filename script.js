@@ -42,6 +42,7 @@ function undo() {
         redoStack.push(currentState);
         const prevState = undoStack.pop();
         restoreState(prevState);
+        document.getElementById('undo-button').addEventListener('click', undo);
     }
 }
 
@@ -59,6 +60,7 @@ function redo() {
         undoStack.push(currentState);
         const nextState = redoStack.pop();
         restoreState(nextState);
+        document.getElementById('redo-button').addEventListener('click', redo);
     }
 }
 
