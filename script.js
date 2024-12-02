@@ -52,12 +52,6 @@ function restoreState(state) {
     updateDisplayCounts();
     updateAcceptanceRate();
 
-    // Обновляем отображение ячеек
-    for (let i = 0; i < cellColors.length; i++) {
-        const cell = document.getElementById(`cell-${i}`);
-        cell.style.backgroundColor = cellColors[i];
-        cell.textContent = cellTexts[i];
-    }
 }
 
 document.getElementById('undo-button').addEventListener('click', undo);
