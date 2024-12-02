@@ -62,8 +62,8 @@ function redo() {
             acceptedCount,
             declinedCount
         };
-        undoStack.push(currentState);
-        const nextState = redoStack.pop();
+        //undoStack.push(currentState);
+        //const nextState = redoStack.pop();
         restoreState(nextState);
     }
 }
