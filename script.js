@@ -9,71 +9,59 @@ let isLocked = localStorage.getItem('isLocked') === 'true';
 let currentNumber = parseInt(localStorage.getItem('currentNumber')) || 1;
 let cellTexts = JSON.parse(localStorage.getItem('cellTexts')) || Array(100).fill('');
 
-let undoStack = [];
-let redoStack = [];
+let history = [];
+let historyIndex = -1;
 
 function saveState() {
-    undoStack.push({
-        acceptCount,
-        declineCount,
+    // Удаляем все состояния после текущего, если они есть
+    history = history.slice(0, historyIndex + 1);
+    // Добавляем текущее состояние
+    history.push({
+        acceptCount: acceptCount,
+        declineCount: declineCount,
         cellColors: [...cellColors],
-        acceptedCount,
-        declinedCount,
-        currentNumber,
+        currentNumber: currentNumber,
         cellTexts: [...cellTexts]
     });
-    redoStack = []; // Очистить redoStack при каждом новом действии
+    // Обновляем индекс истории
+    historyIndex++;
+}
+
+function undo() {
+    if (historyIndex > 0) {
+        historyIndex--;
+        restoreState(history[historyIndex]);
+    }
+}
+
+function redo() {
+    if (historyIndex < history.length - 1) {
+        historyIndex++;
+        restoreState(history[historyIndex]);
+    }
 }
 
 function restoreState(state) {
     acceptCount = state.acceptCount;
     declineCount = state.declineCount;
     cellColors = [...state.cellColors];
-    acceptedCount = state.acceptedCount;
-    declinedCount = state.declinedCount;
     currentNumber = state.currentNumber;
     cellTexts = [...state.cellTexts];
 
-    // Обновить UI
-    for (let i = 0; i < cellColors.length; i++) {
-        document.getElementById(`cell-${i}`).style.backgroundColor = cellColors[i];
-        document.getElementById(`cell-${i}`).textContent = cellTexts[i];
-    }
+    // Обновляем отображение
     updateDisplayCounts();
     updateAcceptanceRate();
+
+    // Обновляем отображение ячеек
+    for (let i = 0; i < cellColors.length; i++) {
+        const cell = document.getElementById(`cell-${i}`);
+        cell.style.backgroundColor = cellColors[i];
+        cell.textContent = cellTexts[i];
+    }
 }
 
-document.getElementById('undo-button').addEventListener('click', () => {
-    if (undoStack.length > 0) {
-        const lastState = undoStack.pop();
-        redoStack.push({
-            acceptCount,
-            declineCount,
-            cellColors: [...cellColors],
-            acceptedCount,
-            declinedCount,
-            currentNumber,
-            cellTexts: [...cellTexts]
-        });
-        restoreState(lastState);
-    }
-});
-
-document.getElementById('redo-button').addEventListener('click', () => {
-    if (redoStack.length > 0) {
-        const nextState = redoStack.pop();
-        undoStack.push({
-            acceptCount,
-            declineCount,
-            cellColors: [...cellColors],
-            acceptedCount,
-            declinedCount,
-            currentNumber,
-            cellTexts: [...cellTexts]
-        });
-        restoreState(nextState);
-    }
-});
+document.getElementById('undo-button').addEventListener('click', undo);
+document.getElementById('redo-button').addEventListener('click', redo);
 
 function updateAcceptanceRate() {
     const acceptanceRate = (acceptedCount / 100) * 100;
@@ -159,7 +147,7 @@ function paint(color) {
            }
        }
    }
-
+                
         function resetCount(type) {
             if (type === 'accept') {
                 acceptCount = 0;
