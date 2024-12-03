@@ -11,8 +11,6 @@ let cellTexts = JSON.parse(localStorage.getItem('cellTexts')) || Array(100).fill
 
 let undoStack = [];
 let redoStack = [];
-let cellColors = Array(100).fill('#00FF00');
-let cellTexts = Array(100).fill('');
 
 function saveState() {
     const state = {
