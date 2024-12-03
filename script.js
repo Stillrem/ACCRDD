@@ -35,10 +35,19 @@ document.addEventListener('DOMContentLoaded', (event) => {
 });
 
 function undo() {
-    if (undoStack.length > 1) { // Проверка на длину стека
-        const currentState = undoStack.pop();
+    if (undoStack.length > 0) {
+        const currentState = {
+            cellColors: [...cellColors],
+            cellTexts: [...cellTexts],
+            acceptCount,
+            declineCount,
+            currentNumber,
+            acceptedCount,
+            declinedCount
+        };
         redoStack.push(currentState);
-        const prevState = undoStack[undoStack.length - 1];
+
+        const prevState = undoStack.pop();
         restoreState(prevState);
     }
 }
@@ -46,7 +55,17 @@ function undo() {
 function redo() {
     if (redoStack.length > 0) {
         const nextState = redoStack.pop();
-        saveState(); // Сохранить текущее состояние перед откатом
+        const currentState = {
+            cellColors: [...cellColors],
+            cellTexts: [...cellTexts],
+            acceptCount,
+            declineCount,
+            currentNumber,
+            acceptedCount,
+            declinedCount
+        };
+        undoStack.push(currentState);
+
         restoreState(nextState);
     }
 }
