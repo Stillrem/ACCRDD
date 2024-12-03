@@ -11,27 +11,36 @@ let cellTexts = JSON.parse(localStorage.getItem('cellTexts')) || Array(100).fill
 
 let undoStack = [];
 let redoStack = [];
+let cellColors = Array(100).fill('#00FF00'); // Начальные цвета
+let cellTexts = Array(100).fill(''); // Начальные тексты
 
 function saveState() {
     const state = {
         cellColors: [...cellColors],
-        cellTexts: [...cellTexts],
+        cellTexts: [...cellTexts]
     };
     undoStack.push(state);
-    if (undoStack.length > 100) {
-        undoStack.shift(); // Ограничение размера стека
+    redoStack = []; // Очищаем стек повторов при новом действии
+}
+
+function restoreState(state) {
+    cellColors = state.cellColors;
+    cellTexts = state.cellTexts;
+
+    for (let i = 0; i < cellColors.length; i++) {
+        const cell = document.getElementById(`cell-${i}`);
+        cell.style.backgroundColor = cellColors[i];
+        cell.textContent = cellTexts[i];
     }
-    redoStack = []; // Очистка redoStack при сохранении нового состояния
 }
 
 function undo() {
     if (undoStack.length > 0) {
         const currentState = {
             cellColors: [...cellColors],
-            cellTexts: [...cellTexts],
+            cellTexts: [...cellTexts]
         };
         redoStack.push(currentState);
-
         const prevState = undoStack.pop();
         restoreState(prevState);
     }
@@ -41,27 +50,41 @@ function redo() {
     if (redoStack.length > 0) {
         const currentState = {
             cellColors: [...cellColors],
-            cellTexts: [...cellTexts],
+            cellTexts: [...cellTexts]
         };
         undoStack.push(currentState);
-
         const nextState = redoStack.pop();
         restoreState(nextState);
     }
 }
 
-function restoreState(state) {
-    cellColors = state.cellColors;
-    cellTexts = state.cellTexts;
-
-    for (let i = 0; i < cellColors.length; i++) {
-        const cell = document.getElementById(`cell-${i}`);
-        if (cell) {
-            cell.style.backgroundColor = cellColors[i];
-            cell.textContent = cellTexts[i];
-        }
-    }
+// Пример функции изменения цвета ячейки
+function changeCellColor(index, color) {
+    saveState();
+    cellColors[index] = color;
+    document.getElementById(`cell-${index}`).style.backgroundColor = color;
 }
+
+// Пример функции изменения текста ячейки
+function changeCellText(index, text) {
+    saveState();
+    cellTexts[index] = text;
+    document.getElementById(`cell-${index}`).textContent = text;
+}
+
+document.addEventListener('DOMContentLoaded', (event) => {
+    document.getElementById('undo-button').addEventListener('click', undo);
+    document.getElementById('redo-button').addEventListener('click', redo);
+
+    // Инициализация ячеек
+    for (let i = 0; i < cellColors.length; i++) {
+        const cell = document.createElement('div');
+        cell.id = `cell-${i}`;
+        cell.style.backgroundColor = cellColors[i];
+        cell.textContent = cellTexts[i];
+        document.body.appendChild(cell);
+    }
+});
 
 function updateAcceptanceRate() {
     const acceptanceRate = (acceptedCount / 100) * 100;
@@ -120,16 +143,6 @@ function paint(color) {
     localStorage.setItem('cellTexts', JSON.stringify(cellTexts));
     updateAcceptanceRate();
     }
-
-// Пример использования:
-document.getElementById('undo-button').addEventListener('click', undo);
-document.getElementById('redo-button').addEventListener('click', redo);
-
-// Пример изменения цвета и текста ячейки
-function changeCell(index, color, text) {
-    paintCell(index, color, text);
-}
-
 
        function toggleCellColor(cellIndex) {
            saveState();
