@@ -11,39 +11,26 @@ let cellTexts = JSON.parse(localStorage.getItem('cellTexts')) || Array(100).fill
 
 let undoStack = [];
 let redoStack = [];
+let cellColors = Array(100).fill('#00FF00');
+let cellTexts = Array(100).fill('');
 
 function saveState() {
     const state = {
         cellColors: [...cellColors],
         cellTexts: [...cellTexts],
-        acceptCount,
-        declineCount,
-        currentNumber,
-        acceptedCount,
-        declinedCount
     };
     undoStack.push(state);
-    redoStack = []; // Очистить стек redo при сохранении нового состояния
     if (undoStack.length > 100) {
-        undoStack.shift();
+        undoStack.shift(); // Ограничение размера стека
     }
+    redoStack = []; // Очистка redoStack при сохранении нового состояния
 }
-
-document.addEventListener('DOMContentLoaded', (event) => {
-    document.getElementById('undo-button').addEventListener('click', undo);
-    document.getElementById('redo-button').addEventListener('click', redo);
-});
 
 function undo() {
     if (undoStack.length > 0) {
         const currentState = {
             cellColors: [...cellColors],
             cellTexts: [...cellTexts],
-            acceptCount,
-            declineCount,
-            currentNumber,
-            acceptedCount,
-            declinedCount
         };
         redoStack.push(currentState);
 
@@ -54,18 +41,13 @@ function undo() {
 
 function redo() {
     if (redoStack.length > 0) {
-        const nextState = redoStack.pop();
         const currentState = {
             cellColors: [...cellColors],
             cellTexts: [...cellTexts],
-            acceptCount,
-            declineCount,
-            currentNumber,
-            acceptedCount,
-            declinedCount
         };
         undoStack.push(currentState);
 
+        const nextState = redoStack.pop();
         restoreState(nextState);
     }
 }
@@ -73,11 +55,6 @@ function redo() {
 function restoreState(state) {
     cellColors = state.cellColors;
     cellTexts = state.cellTexts;
-    acceptCount = state.acceptCount;
-    declineCount = state.declineCount;
-    currentNumber = state.currentNumber;
-    acceptedCount = state.acceptedCount;
-    declinedCount = state.declinedCount;
 
     for (let i = 0; i < cellColors.length; i++) {
         const cell = document.getElementById(`cell-${i}`);
@@ -86,15 +63,6 @@ function restoreState(state) {
             cell.textContent = cellTexts[i];
         }
     }
-
-    updateDisplayCounts();
-    updateAcceptanceRate();
-
-    localStorage.setItem('cellColors', JSON.stringify(cellColors));
-    localStorage.setItem('cellTexts', JSON.stringify(cellTexts));
-    localStorage.setItem('acceptCount', acceptCount);
-    localStorage.setItem('declineCount', declineCount);
-    localStorage.setItem('currentNumber', currentNumber);
 }
 
 function updateAcceptanceRate() {
