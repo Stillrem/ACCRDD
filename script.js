@@ -123,6 +123,16 @@ function paint(color) {
     updateAcceptanceRate();
     }
 
+// Пример использования:
+document.getElementById('undo-button').addEventListener('click', undo);
+document.getElementById('redo-button').addEventListener('click', redo);
+
+// Пример изменения цвета и текста ячейки
+function changeCell(index, color, text) {
+    paintCell(index, color, text);
+}
+
+
        function toggleCellColor(cellIndex) {
            saveState();
        if (!isLocked) {
