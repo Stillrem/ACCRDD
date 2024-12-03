@@ -84,7 +84,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
         cell.textContent = cellTexts[i];
         document.body.appendChild(cell);
     }
-});
+};
 
 function updateAcceptanceRate() {
     const acceptanceRate = (acceptedCount / 100) * 100;
