@@ -9,6 +9,75 @@ let isLocked = localStorage.getItem('isLocked') === 'true';
 let currentNumber = parseInt(localStorage.getItem('currentNumber')) || 1;
 let cellTexts = JSON.parse(localStorage.getItem('cellTexts')) || Array(100).fill('');
 
+let undoStack = [];
+let redoStack = [];
+
+function saveState() {
+    const state = {
+        cellColors: [...cellColors],
+        cellTexts: [...cellTexts],
+        acceptCount,
+        declineCount,
+        currentNumber,
+        acceptedCount,
+        declinedCount
+    };
+    undoStack.push(state);
+    redoStack = []; // Очистить стек redo при сохранении нового состояния
+    if (undoStack.length > 100) {
+        undoStack.shift();
+    }
+}
+
+document.addEventListener('DOMContentLoaded', (event) => {
+    document.getElementById('undo-button').addEventListener('click', undo);
+    document.getElementById('redo-button').addEventListener('click', redo);
+});
+
+function undo() {
+    if (undoStack.length > 1) { // Проверка на длину стека
+        const currentState = undoStack.pop();
+        redoStack.push(currentState);
+        const prevState = undoStack[undoStack.length - 1];
+        restoreState(prevState);
+    }
+}
+
+function redo() {
+    if (redoStack.length > 0) {
+        const nextState = redoStack.pop();
+        saveState(); // Сохранить текущее состояние перед откатом
+        restoreState(nextState);
+    }
+}
+
+function restoreState(state) {
+    cellColors = state.cellColors;
+    cellTexts = state.cellTexts;
+    acceptCount = state.acceptCount;
+    declineCount = state.declineCount;
+    currentNumber = state.currentNumber;
+    acceptedCount = state.acceptedCount;
+    declinedCount = state.declinedCount;
+
+    for (let i = 0; i < cellColors.length; i++) {
+        const cell = document.getElementById(`cell-${i}`);
+        if (cell) {
+            cell.style.backgroundColor = cellColors[i];
+            cell.textContent = cellTexts[i];
+        }
+    }
+
+    updateDisplayCounts();
+    updateAcceptanceRate();
+
+    localStorage.setItem('cellColors', JSON.stringify(cellColors));
+    localStorage.setItem('cellTexts', JSON.stringify(cellTexts));
+    localStorage.setItem('acceptCount', acceptCount);
+    localStorage.setItem('declineCount', declineCount);
+    localStorage.setItem('currentNumber', currentNumber);
+}
+
 function updateAcceptanceRate() {
     const acceptanceRate = (acceptedCount / 100) * 100;
     document.getElementById('acceptance-rate').textContent = `Acceptance Rate: ${acceptanceRate.toFixed(2)}%`;
