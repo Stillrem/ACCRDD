@@ -9,93 +9,73 @@ let isLocked = localStorage.getItem('isLocked') === 'true';
 let currentNumber = parseInt(localStorage.getItem('currentNumber')) || 1;
 let cellTexts = JSON.parse(localStorage.getItem('cellTexts')) || Array(100).fill('');
 
-let undoStack = [];
-let redoStack = [];
-let cellColors = Array(100).fill('#00FF00'); // Начальные цвета
-let cellTexts = Array(100).fill(''); // Начальные тексты
+// Инициализация стеков
+const undoStack = [];
+const redoStack = [];
 
+// Функция для сохранения состояния
 function saveState() {
     const state = {
+        // Сохраняем необходимые данные
         cellColors: [...cellColors],
-        cellTexts: [...cellTexts]
+        cellTexts: [...cellTexts],
+        acceptCount,
+        declineCount,
     };
     undoStack.push(state);
-    redoStack = []; // Очищаем стек повторов при новом действии
+    redoStack.length = 0; // Очищаем стек повторного выполнения при сохранении нового состояния
 }
 
+// Функция для восстановления состояния
 function restoreState(state) {
-    cellColors = state.cellColors;
-    cellTexts = state.cellTexts;
-
-    for (let i = 0; i < cellColors.length; i++) {
-        const cell = document.getElementById(`cell-${i}`);
-        cell.style.backgroundColor = cellColors[i];
-        cell.textContent = cellTexts[i];
+    if (state) {
+        // Восстановление данных
+        cellColors = [...state.cellColors];
+        cellTexts = [...state.cellTexts];
+        acceptCount = state.acceptCount;
+        declineCount = state.declineCount;
+        
+        // Обновление интерфейса
+        updateUI();
     }
 }
 
+// Функция отмены действия
 function undo() {
     if (undoStack.length > 0) {
         const currentState = {
             cellColors: [...cellColors],
-            cellTexts: [...cellTexts]
+            cellTexts: [...cellTexts],
+            acceptCount,
+            declineCount,
         };
         redoStack.push(currentState);
+        
         const prevState = undoStack.pop();
         restoreState(prevState);
     }
 }
 
+// Функция повторного выполнения действия
 function redo() {
     if (redoStack.length > 0) {
         const currentState = {
             cellColors: [...cellColors],
-            cellTexts: [...cellTexts]
+            cellTexts: [...cellTexts],
+            acceptCount,
+            declineCount,
         };
         undoStack.push(currentState);
+        
         const nextState = redoStack.pop();
         restoreState(nextState);
     }
 }
 
-// Пример функции изменения цвета ячейки
-function changeCellColor(index, color) {
-    saveState();
-    cellColors[index] = color;
-    document.getElementById(`cell-${index}`).style.backgroundColor = color;
-}
-
-// Пример функции изменения текста ячейки
-function changeCellText(index, text) {
-    saveState();
-    cellTexts[index] = text;
-    document.getElementById(`cell-${index}`).textContent = text;
-}
-
-document.addEventListener('DOMContentLoaded', (event) => {
-    document.getElementById('undo-button').addEventListener('click', undo);
-    document.getElementById('redo-button').addEventListener('click', redo);
-
-    // Инициализация ячеек
-    for (let i = 0; i < cellColors.length; i++) {
-        const cell = document.createElement('div');
-        cell.id = `cell-${i}`;
-        cell.style.backgroundColor = cellColors[i];
-        cell.textContent = cellTexts[i];
-        document.body.appendChild(cell);
-    }
-};
-
-function updateAcceptanceRate() {
-    const acceptanceRate = (acceptedCount / 100) * 100;
-    document.getElementById('acceptance-rate').textContent = `Acceptance Rate: ${acceptanceRate.toFixed(2)}%`;
-}
-
-function updateDisplayCounts() {
-    document.getElementById('accept-count').textContent = acceptCount;
-    document.getElementById('decline-count').textContent = declineCount;
-    localStorage.setItem('acceptCount', acceptCount);
-    localStorage.setItem('declineCount', declineCount);
+// Функция для обновления интерфейса
+function updateUI() {
+    // Обновление элементов интерфейса на основе текущих данных
+    // Например, обновление цвета ячеек и текста
 }
 
 function paint(color) {
