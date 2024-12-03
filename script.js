@@ -9,77 +9,19 @@ let isLocked = localStorage.getItem('isLocked') === 'true';
 let currentNumber = parseInt(localStorage.getItem('currentNumber')) || 1;
 let cellTexts = JSON.parse(localStorage.getItem('cellTexts')) || Array(100).fill('');
 
-// Инициализация стеков
-const undoStack = [];
-const redoStack = [];
-
-// Функция для сохранения состояния
-function saveState() {
-    const state = {
-        // Сохраняем необходимые данные
-        cellColors: [...cellColors],
-        cellTexts: [...cellTexts],
-        acceptCount,
-        declineCount,
-    };
-    undoStack.push(state);
-    redoStack.length = 0; // Очищаем стек повторного выполнения при сохранении нового состояния
+function updateAcceptanceRate() {
+    const acceptanceRate = (acceptedCount / 100) * 100;
+    document.getElementById('acceptance-rate').textContent = `Acceptance Rate: ${acceptanceRate.toFixed(2)}%`;
 }
 
-// Функция для восстановления состояния
-function restoreState(state) {
-    if (state) {
-        // Восстановление данных
-        cellColors = [...state.cellColors];
-        cellTexts = [...state.cellTexts];
-        acceptCount = state.acceptCount;
-        declineCount = state.declineCount;
-        
-        // Обновление интерфейса
-        updateUI();
-    }
-}
-
-// Функция отмены действия
-function undo() {
-    if (undoStack.length > 0) {
-        const currentState = {
-            cellColors: [...cellColors],
-            cellTexts: [...cellTexts],
-            acceptCount,
-            declineCount,
-        };
-        redoStack.push(currentState);
-        
-        const prevState = undoStack.pop();
-        restoreState(prevState);
-    }
-}
-
-// Функция повторного выполнения действия
-function redo() {
-    if (redoStack.length > 0) {
-        const currentState = {
-            cellColors: [...cellColors],
-            cellTexts: [...cellTexts],
-            acceptCount,
-            declineCount,
-        };
-        undoStack.push(currentState);
-        
-        const nextState = redoStack.pop();
-        restoreState(nextState);
-    }
-}
-
-// Функция для обновления интерфейса
-function updateUI() {
-    // Обновление элементов интерфейса на основе текущих данных
-    // Например, обновление цвета ячеек и текста
+function updateDisplayCounts() {
+    document.getElementById('accept-count').textContent = acceptCount;
+    document.getElementById('decline-count').textContent = declineCount;
+    localStorage.setItem('acceptCount', acceptCount);
+    localStorage.setItem('declineCount', declineCount);
 }
 
 function paint(color) {
-    saveState();
     const colorCode = color === 'red' ? '#FF0000' : '#00FF00';
 
     if (cellColors[99] === '#00FF00') {
@@ -125,7 +67,6 @@ function paint(color) {
     }
 
        function toggleCellColor(cellIndex) {
-           saveState();
        if (!isLocked) {
            const currentColor = cellColors[cellIndex];
            const newColor = currentColor === '#00FF00' ? '#FF0000' : '#00FF00';
